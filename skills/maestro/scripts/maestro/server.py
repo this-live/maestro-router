@@ -572,6 +572,13 @@ class App:
             except Exception as e:   # the decision layer never breaks a request: the ladder's order stands
                 notes.append("the utility decider failed (%s); used the ladder" % e.__class__.__name__)
         ladder_pick = ranked[0]["m"]["id"]
+        if not utility and kind in ("auto", "job") and len(ranked) > 1:
+            demoted = self.outcome_demotions(cls.job)
+            if demoted:
+                bad = [c for c in ranked if c["m"]["id"] in demoted]
+                if bad and len(bad) < len(ranked):
+                    ranked = [c for c in ranked if c["m"]["id"] not in demoted] + bad
+                    notes.append("demoted %s: recorded failures on %s" % (", ".join(sorted(demoted)), cls.job))
         if utility and s1d and s1d["order"]:
             ranked = s1d["order"]
         elif utility:
@@ -772,6 +779,21 @@ class App:
         except sqlite3.DatabaseError:
             return []
         return got
+
+    def outcome_demotions(self, job):
+        """Models with >=2 explicit failure outcomes and no explicit success for this job.
+        The ladder used to record outcomes but never act on them; this is the smallest
+        ladder-visible learning step: such models sort after their peers (never removed,
+        so a demoted model still answers when it is the only candidate)."""
+        try:
+            with self.db_lock:
+                rows = self.db.execute(
+                    "select d.chosen, sum(case when o.value = 0 then 1 else 0 end), sum(case when o.value > 0 then 1 else 0 end) "
+                    "from outcomes o join decisions d on d.id = o.decision_id "
+                    "where o.signal = 'explicit' and d.job = ? and d.chosen is not null group by d.chosen", (job,)).fetchall()
+        except Exception:
+            return set()
+        return {m for m, fails, oks in rows if fails >= 2 and not oks}
 
     def feedback(self, body):
         """POST /api/feedback {id, value} and the X-Maestro-Feedback header: (status, JSON)."""

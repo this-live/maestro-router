@@ -107,6 +107,23 @@ class Signals(Case):
         self.assertEqual(L.parse_feedback_header("12=good, 13=bad,x=good, 14=partial"), [(12, 1.0), (13, 0.0), (14, 0.5)])
         db.close()
 
+    def test_outcome_demotions_need_two_fails_and_no_success(self):
+        import threading
+        from maestro import server as S
+        db = S.open_db(self.home)
+        app = S.App.__new__(S.App)
+        app.db, app.db_lock = db, threading.Lock()
+        for i, chosen in enumerate(["local:x/a", "local:x/a", "local:x/b", "local:x/a"]):
+            db.execute("insert into decisions (ts, job, chosen) values (?, 'code', ?)", (NOW + i, chosen))
+        L.record(None, 1, "explicit", 0.0, db=db)
+        L.record(None, 2, "explicit", 0.0, db=db)
+        L.record(None, 3, "explicit", 0.0, db=db)
+        self.assertEqual(app.outcome_demotions("code"), {"local:x/a"})
+        L.record(None, 4, "explicit", 1.0, db=db)   # a later success on a lifts the demotion
+        self.assertEqual(app.outcome_demotions("code"), set())
+        self.assertEqual(app.outcome_demotions("write"), set())
+        db.close()
+
     def test_implicit_proxy_signals(self):
         prev = {"ts": NOW, "sig": [1] * 16, "rank": 2}
         self.assertEqual(L.implicit(prev, {"ts": NOW + 60, "text": "use the frontier model", "rank": 4}), [("escalate", 0.0)])
