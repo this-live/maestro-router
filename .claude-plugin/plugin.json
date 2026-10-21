@@ -1,6 +1,6 @@
 {
   "name": "maestro",
-  "version": "3.1.1",
+  "version": "3.2.0",
   "description": "Route each task to the right model you already have. A skill plus a single-file, zero-dependency router.",
   "author": {"name": "Bryce Murad"},
   "license": "Apache-2.0"

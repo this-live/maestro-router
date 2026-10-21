@@ -97,6 +97,37 @@ class Names(unittest.TestCase):
         self.assertEqual(catalog.strip_quant("org/Model-Instruct"), "org/model-instruct")
 
 
+class HarnessEndpoints(unittest.TestCase):
+    def test_seeds_from_pi_hermes_codex_and_claude_configs(self):
+        import tempfile
+        home = tempfile.mkdtemp()
+        os.makedirs(os.path.join(home, ".pi", "agent"))
+        with open(os.path.join(home, ".pi", "agent", "models.json"), "w") as f:
+            json.dump({"providers": {"sparky": {"baseUrl": "http://10.0.0.1:8000/v1", "apiKey": "local"},
+                                     "bad": {"baseUrl": 42}}}, f)
+        os.makedirs(os.path.join(home, ".hermes"))
+        with open(os.path.join(home, ".hermes", "config.yaml"), "w") as f:
+            f.write("model:\n  base_url: http://10.0.0.2:4000/v1\n  api_key: SECRET\n")
+        os.makedirs(os.path.join(home, ".codex"))
+        with open(os.path.join(home, ".codex", "config.toml"), "w") as f:
+            f.write('[model_providers.x]\nbase_url = "http://10.0.0.3:9000/v1"\n')
+        os.makedirs(os.path.join(home, ".claude"))
+        with open(os.path.join(home, ".claude", "settings.json"), "w") as f:
+            json.dump({"env": {"ANTHROPIC_BASE_URL": "https://example.invalid/anthropic"}}, f)
+        eps = core.harness_endpoints({"HOME": home})
+        urls = [u for u, _, _ in eps]
+        self.assertIn("http://10.0.0.1:8000", urls)
+        self.assertIn("http://10.0.0.2:4000", urls)
+        self.assertIn("http://10.0.0.3:9000", urls)
+        self.assertIn("https://example.invalid/anthropic", urls)
+        self.assertNotIn("SECRET", json.dumps(eps))   # URLs only, never keys
+        names = [n for _, n, _ in eps]
+        self.assertIn("pi-sparky", names)
+
+    def test_missing_configs_are_empty(self):
+        self.assertEqual(core.harness_endpoints({"HOME": "/nonexistent-home-xyz"}), [])
+
+
 class Snapshot(unittest.TestCase):
     def test_the_bundled_snapshot_loads_and_is_small(self):
         cat = catalog.load_snapshot()

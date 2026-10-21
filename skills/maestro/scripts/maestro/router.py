@@ -27,7 +27,7 @@ import sys
 import time
 import zlib
 
-VERSION = "3.1.1"
+VERSION = "3.2.0"
 TIERS = ("fast", "standard", "strong", "frontier")        # the cloud ladder, weakest first
 CELLS = ("local",) + TIERS                                # what a ladder cell can hold
 CATEGORIES = CELLS + ("specialist",)                      # what a decision's `category` can be
@@ -887,8 +887,53 @@ def _host_of(url):
     return re.sub(r"^\w+://", "", url).split("/")[0].split(":")[0]
 
 
+def harness_endpoints(env=None):
+    """Endpoints other harnesses on this machine already use, so a machine where a harness
+    already works needs no separate Maestro setup: Pi (~/.pi/agent/models.json providers),
+    Hermes (~/.hermes/config.yaml base_url lines), Codex (~/.codex/config.toml model_providers
+    base_url), Claude Code (~/.claude/settings.json env.ANTHROPIC_BASE_URL). URLs only —
+    keys are never read."""
+    env = os.environ if env is None else env
+    home = env.get("HOME")
+    if not home:
+        return []   # an explicit env without HOME names no machine's harnesses
+    out = []
+
+    def strip_v1(url):
+        return re.sub(r"/v1$", "", url.strip().rstrip("/"))
+
+    try:
+        pi = json.load(open(os.path.join(home, ".pi", "agent", "models.json")))
+        for name, prov in (pi.get("providers") or {}).items():
+            if isinstance(prov, dict) and isinstance(prov.get("baseUrl"), str) and prov["baseUrl"].strip():
+                out.append((strip_v1(prov["baseUrl"]), "pi-%s" % name, "openai"))
+    except (OSError, ValueError):
+        pass
+    try:
+        with open(os.path.join(home, ".hermes", "config.yaml")) as f:
+            for url in re.findall(r"^\s*base_url:\s*(\S+)\s*$", f.read(), re.M):
+                out.append((strip_v1(url), "hermes", "openai"))
+    except OSError:
+        pass
+    try:
+        with open(os.path.join(home, ".codex", "config.toml")) as f:
+            for url in re.findall(r"^\s*base_url\s*=\s*\"([^\"]+)\"", f.read(), re.M):
+                out.append((strip_v1(url), "codex", "openai"))
+    except OSError:
+        pass
+    try:
+        claude = json.load(open(os.path.join(home, ".claude", "settings.json")))
+        url = (claude.get("env") or {}).get("ANTHROPIC_BASE_URL")
+        if isinstance(url, str) and url.strip():
+            out.append((url.strip().rstrip("/"), "claude-settings", None))
+    except (OSError, ValueError):
+        pass
+    return out
+
+
 def local_endpoints(cfg, env=None):
-    """Every endpoint to probe, first-wins by URL: config `local_endpoints`, $OLLAMA_HOST, then the built-in ports."""
+    """Every endpoint to probe, first-wins by URL: config `local_endpoints`, $OLLAMA_HOST,
+    harness-derived endpoints (Pi/Hermes/Codex/Claude configs), then the built-in ports."""
     env = os.environ if env is None else env
     eps, seen = [], set()
 
@@ -909,6 +954,8 @@ def local_endpoints(cfg, env=None):
                 e.get("api_key_env") if isinstance(e.get("api_key_env"), str) else None)
     if env.get("OLLAMA_HOST"):
         add(_norm_url(env["OLLAMA_HOST"], 11434), kind="ollama")
+    for url, name, kind in harness_endpoints(env):
+        add(url, name=name, kind=kind)
     for port, kind in BUILTIN_PORTS:
         add("http://127.0.0.1:%d" % port, kind=kind, builtin=True)
     return eps
