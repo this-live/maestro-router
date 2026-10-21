@@ -13,6 +13,7 @@ import unittest
 
 import helpers  # noqa: F401  (puts the maestro package on sys.path)
 from maestro import onboard
+from maestro.router import VERSION
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 SITE = os.path.join(ROOT, "site")
@@ -21,9 +22,9 @@ serve = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(serve)
 PAGES = sorted(f for f in os.listdir(SITE) if f.endswith(".html"))
 INSTALL = ["npx skills add this-live/maestro-router", "claude plugin marketplace add this-live/maestro-router", "claude plugin install maestro@maestro",
-           "pip install https://github.com/this-live/maestro-router/releases/download/v3.1.0/maestro_router-3.1.0-py3-none-any.whl",
-           "pip install git+https://github.com/this-live/maestro-router@v3.1.0",
-           'uvx --from git+https://github.com/this-live/maestro-router@v3.1.0 maestro-router route "fix the failing test"',
+           f"pip install https://github.com/this-live/maestro-router/releases/download/v{VERSION}/maestro_router-{VERSION}-py3-none-any.whl",
+           f"pip install git+https://github.com/this-live/maestro-router@v{VERSION}",
+           f'uvx --from git+https://github.com/this-live/maestro-router@v{VERSION} maestro-router route "fix the failing test"',
            "maestro-router setup", "maestro-router serve --open", "maestro-router hermes --install"]
 
 
