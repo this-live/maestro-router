@@ -40,8 +40,8 @@ jobs:
       - name: Rules eval (test split)
         run: >
           python evals/run.py --classifier rules --split test
-          --min-job-acc 0.75 --min-category-acc 0.60 --min-category-within1 0.94
-          --max-under 0.11 --max-severe-under 0.03
+          --min-job-acc 0.78 --min-category-acc 0.62 --min-category-within1 0.96
+          --max-under 0.10 --max-severe-under 0.02
       # S1 (spec §6.2, §9.5): frozen split manifest and leakage checks; the alpha replay gate (stdlib, no network,
       # under 60 s). Both pass with a note until evals/manifest.json and evals/alpha/outcomes.jsonl exist.
       - name: Split manifest check
