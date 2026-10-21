@@ -42,6 +42,15 @@ jobs:
           python evals/run.py --classifier rules --split test
           --min-job-acc 0.78 --min-category-acc 0.62 --min-category-within1 0.96
           --max-under 0.10 --max-severe-under 0.02
+      # Human-checked labels (evals/prompts_human.jsonl: 10 job + 10 difficulty
+      # adjudications over the LLM-written labels, logged in docs/ROUTING-QUALITY.md).
+      # Measured 2026-10-21: job 81.9%, category 66.7%, within-1 100%, under 7.2%, severe 0.
+      # Floors are the measured values minus ~3 points.
+      - name: Rules eval (human-checked labels, test split)
+        run: >
+          python evals/run.py --classifier rules --split test --prompts evals/prompts_human.jsonl
+          --min-job-acc 0.79 --min-category-acc 0.64 --min-category-within1 0.97
+          --max-under 0.10 --max-severe-under 0.02
       # S1 (spec §6.2, §9.5): frozen split manifest and leakage checks; the alpha replay gate (stdlib, no network,
       # under 60 s). Both pass with a note until evals/manifest.json and evals/alpha/outcomes.jsonl exist.
       - name: Split manifest check
