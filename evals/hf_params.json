@@ -1,0 +1,320 @@
+{
+ "_note": "Parameter counts in billions read from the Hugging Face Hub (model page 'Parameters', i.e. safetensors total) on 2026-09-30, used by build_catalog.py when the HF API is unreachable. Second value: active parameters per token, only where a model card or the repo name states it; null = unknown. Repos absent here fall back to name parsing (120b, 30b-a3b, 8x7b) or stay null.",
+ "openai/gpt-oss-120b": [
+  116.83,
+  5.1
+ ],
+ "CohereLabs/c4ai-command-a-03-2025": [
+  111.06,
+  null
+ ],
+ "CohereLabs/c4ai-command-r-08-2024": [
+  32.3,
+  null
+ ],
+ "CohereLabs/c4ai-command-r-plus-08-2024": [
+  103.81,
+  null
+ ],
+ "CohereLabs/c4ai-command-r7b-12-2024": [
+  8.03,
+  null
+ ],
+ "CohereLabs/c4ai-command-r7b-arabic-02-2025": [
+  8.03,
+  null
+ ],
+ "MiniMaxAI/MiniMax-M2": [
+  228.69,
+  10
+ ],
+ "MiniMaxAI/MiniMax-M2.1": [
+  228.69,
+  10
+ ],
+ "MiniMaxAI/MiniMax-M2.5": [
+  228.7,
+  10
+ ],
+ "MiniMaxAI/MiniMax-M2.7": [
+  228.69,
+  10
+ ],
+ "MiniMaxAI/MiniMax-M3": [
+  427.04,
+  null
+ ],
+ "Motif-Technologies/Motif-3": [
+  314.84,
+  null
+ ],
+ "Qwen/Qwen3-Coder-Next": [
+  79.67,
+  3
+ ],
+ "Qwen/Qwen3.8-Flash-Next": [
+  180.0,
+  null
+ ],
+ "XiaomiMiMo/MiMo-V2-Flash": [
+  309.79,
+  15
+ ],
+ "XiaomiMiMo/MiMo-V2.5": [
+  310.78,
+  null
+ ],
+ "XiaomiMiMo/MiMo-V2.5-Pro": [
+  1023.18,
+  null
+ ],
+ "XiaomiMiMo/MiMo-V2.5-Pro-FP4-DFlash": [
+  1023.18,
+  null
+ ],
+ "XiaomiMiMo/MiMo-V2.6-Flash-RL": [
+  310.76,
+  null
+ ],
+ "XiaomiMiMo/MiMo-V2.6-Pro-RL": [
+  1024.22,
+  null
+ ],
+ "ai21labs/AI21-Jamba-Large-1.6": [
+  398.56,
+  94
+ ],
+ "ai21labs/AI21-Jamba-Mini-1.6": [
+  51.57,
+  12
+ ],
+ "arcee-ai/Trinity-Large-Preview": [
+  398.64,
+  13
+ ],
+ "arcee-ai/Trinity-Large-Thinking": [
+  398.64,
+  13
+ ],
+ "arcee-ai/Trinity-Mini": [
+  26.12,
+  null
+ ],
+ "arcee-ai/Trinity-Nano-Preview": [
+  6.12,
+  null
+ ],
+ "deepseek-ai/DeepSeek-R1": [
+  684.49,
+  37
+ ],
+ "deepseek-ai/DeepSeek-V3": [
+  684.53,
+  37
+ ],
+ "deepseek-ai/DeepSeek-V3-0324": [
+  684.53,
+  37
+ ],
+ "deepseek-ai/DeepSeek-V3.1": [
+  684.53,
+  37
+ ],
+ "deepseek-ai/DeepSeek-V3.2": [
+  685.36,
+  37
+ ],
+ "deepseek-ai/DeepSeek-V4-Flash": [
+  290.94,
+  13
+ ],
+ "deepseek-ai/DeepSeek-V4-Flash-0731": [
+  304.18,
+  null
+ ],
+ "deepseek-ai/DeepSeek-V4-Flash-Vision-Exp": [
+  304.65,
+  null
+ ],
+ "deepseek-ai/DeepSeek-V4-Pro": [
+  1598.84,
+  49
+ ],
+ "deepseek-ai/DeepSeek-V4-Pro-0813": [
+  1650.5,
+  null
+ ],
+ "deepseek-ai/DeepSeek-V4.1-Flash": [
+  763.21,
+  null
+ ],
+ "google/gemma-4-E2B-it": [
+  5.12,
+  null
+ ],
+ "google/gemma-4-E4B-it": [
+  8.0,
+  null
+ ],
+ "ibm-granite/granite-4.0-h-micro": [
+  3.19,
+  null
+ ],
+ "ibm-granite/granite-4.0-h-small": [
+  32.21,
+  9
+ ],
+ "mistralai/Devstral-Small-2507": [
+  23.57,
+  null
+ ],
+ "mistralai/Magistral-Small-2506": [
+  23.57,
+  null
+ ],
+ "mistralai/Magistral-Small-2509": [
+  24.01,
+  null
+ ],
+ "mistralai/Mistral-Large-Instruct-2411": [
+  122.61,
+  null
+ ],
+ "mistralai/Mistral-Nemo-Instruct-2407": [
+  12.25,
+  null
+ ],
+ "moonshotai/Kimi-K2-Thinking": [
+  1026.41,
+  32
+ ],
+ "moonshotai/Kimi-K2.5": [
+  1026.88,
+  32
+ ],
+ "moonshotai/Kimi-K2.6": [
+  1026.88,
+  32
+ ],
+ "moonshotai/Kimi-K2.7-Code": [
+  1026.88,
+  32
+ ],
+ "moonshotai/Kimi-K3": [
+  2779.93,
+  null
+ ],
+ "nex-agi/Nex-N2-Pro": [
+  396.8,
+  null
+ ],
+ "stepfun-ai/Step-3.5-Flash": [
+  199.38,
+  11
+ ],
+ "stepfun-ai/Step-3.7-Flash": [
+  201.37,
+  null
+ ],
+ "tencent/Hy3": [
+  298.79,
+  21
+ ],
+ "tencent/Hy3-preview": [
+  298.79,
+  21
+ ],
+ "thinkingmachines/Inkling": [
+  952.38,
+  41
+ ],
+ "thinkingmachines/Inkling-Small": [
+  265.96,
+  null
+ ],
+ "zai-org/GLM-4.5": [
+  358.34,
+  32
+ ],
+ "zai-org/GLM-4.5-Air": [
+  110.47,
+  12
+ ],
+ "zai-org/GLM-4.5V": [
+  107.71,
+  12
+ ],
+ "zai-org/GLM-4.6": [
+  356.79,
+  32
+ ],
+ "zai-org/GLM-4.6V": [
+  107.71,
+  12
+ ],
+ "zai-org/GLM-4.6V-Flash": [
+  10.29,
+  null
+ ],
+ "zai-org/GLM-4.7": [
+  358.34,
+  32
+ ],
+ "zai-org/GLM-4.7-Flash": [
+  31.22,
+  null
+ ],
+ "zai-org/GLM-5": [
+  753.86,
+  null
+ ],
+ "zai-org/GLM-5.1": [
+  753.86,
+  null
+ ],
+ "zai-org/GLM-5.2": [
+  753.33,
+  null
+ ],
+ "zai-org/GLM-5.3": [
+  753.33,
+  null
+ ],
+ "zai-org/GLM-5.3-Flash": [
+  321.32,
+  null
+ ],
+ "meta-llama/Llama-4-Scout-17B-16E-Instruct": [
+  108.64,
+  17
+ ],
+ "meta-llama/Llama-4-Maverick-17B-128E-Instruct": [
+  401.58,
+  17
+ ],
+ "_repos": {
+  "moonshotai/kimi-k3": "moonshotai/Kimi-K3",
+  "zhipuai/glm-5.3": "zai-org/GLM-5.3",
+  "zhipuai/glm-5.3-flash": "zai-org/GLM-5.3-Flash",
+  "nvidia/nemotron-3-nano-30b-a3b": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+  "nvidia/nemotron-3-super-120b-a12b": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+  "nvidia/nemotron-3.5-lightning": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+  "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16"
+ },
+ "google/gemma-4-26B-A4B-it": [
+  25.2,
+  3.8
+ ],
+ "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16": [
+  120.0,
+  12
+ ],
+ "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16": [
+  30.0,
+  3.5
+ ],
+ "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16": [
+  30.0,
+  3
+ ]
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy policy · Maestro</title>
+<meta name="description" content="Maestro's website sets no cookies and runs no analytics; the Maestro software runs on your machine and keeps your keys there.">
+<meta name="theme-color" content="#0A0F2E">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/static/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/static/icon-180.png">
+<link rel="manifest" href="/static/manifest.json">
+<link rel="stylesheet" href="/static/site.css">
+<script src="/static/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="content">
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Maestro home"><img src="/static/icon-64.png" alt="" width="30" height="30"><span class="wordmark">MAESTRO</span></a>
+    <nav class="links" aria-label="Main">
+      <a class="opt" href="/#how">How it works</a>
+      <a href="/docs">Docs</a>
+      <a class="gh" href="https://github.com/this-live/maestro-router" aria-label="Maestro on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5.5 3.5 1 8l4.5 4.5 1.1-1.1L3.2 8l3.4-3.4zm5 0-1.1 1.1L12.8 8l-3.4 3.4 1.1 1.1L15 8z"/></svg><span>GitHub</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="page legal">
+  <div class="wrap narrow">
+    <div class="page-head">
+      <div class="kicker">Privacy</div>
+      <h1>Privacy policy</h1>
+      <p>Last updated: October 5, 2026</p>
+    </div>
+    <article class="prose">
+      <div class="note info" style="margin-top:0"><b>In short:</b> Maestro is free, open-source software that runs on your own machine. There are no accounts. This website sets no cookies, runs no analytics and loads nothing from third parties, and the Maestro software sends nothing to us.</div>
+
+      <h2>This website</h2>
+      <ul>
+        <li><strong>No cookies, no analytics, no trackers.</strong> The site does not set cookies, does not use analytics or advertising scripts, and loads no fonts, scripts or images from other servers.</li>
+        <li><strong>No accounts or forms.</strong> There is nothing to sign up for and nothing you type on this site is sent anywhere.</li>
+        <li><strong>Server logs.</strong> The site's own server prints the method, path and status of each request to its console, without IP addresses or browser details. The site is hosted on Railway, whose infrastructure may keep its own request logs under its own privacy policy.</li>
+        <li><strong>Browser storage.</strong> None. The site keeps nothing in your browser's storage.</li>
+      </ul>
+
+      <h2>The Maestro software</h2>
+      <p>Maestro runs on your computer. It has no account system, no telemetry and no server of ours to talk to.</p>
+      <ul>
+        <li><strong>API keys</strong> that you add are stored only in <code>~/.maestro/keys.env</code> on your machine (file mode 600). A key is used only to authenticate to its own provider and is never printed, logged or returned by Maestro's local API.</li>
+        <li><strong>Subscription logins</strong> (Claude Code, Codex, Gemini CLI) are checked for presence only and used through their official command-line tools. Maestro never reads or forwards their tokens.</li>
+        <li><strong>Prompts</strong> go only to the model provider Maestro routes them to, or to a model server you run. Maestro's local request log (<code>~/.maestro/maestro.db</code>) records the model, job, category, timings and token counts, and stores prompt text (the first 120 characters) only if you turn on <code>log_prompts</code>.</li>
+        <li><strong>Optional Jev classifier.</strong> Only if you set <code>TYPESAFE_API_KEY</code>, Maestro sends each routed task's text (up to 4,000 characters) and the names and descriptions of your candidate models to TypeSafe to choose a model. Without that key, or with <code>--classifier rules</code>, every routing decision stays on your machine.</li>
+        <li><strong>Network scans</strong> of your local subnet happen only when you run <code>maestro-router detect --scan</code>.</li>
+      </ul>
+      <p>Your use of each model provider is governed by that provider's own terms and privacy policy.</p>
+
+      <h2>Changes and contact</h2>
+      <p>Changes to this page are published in the open, in the project's <a href="https://github.com/this-live/maestro-router">GitHub repository</a>. Questions or concerns: open an issue there.</p>
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Maestro home"><img src="/static/icon-64.png" alt="" width="24" height="24"><span class="wordmark">MAESTRO</span></a>
+    <nav aria-label="Footer">
+      <a href="https://github.com/this-live/maestro-router">GitHub</a>
+      <a href="/docs">Docs</a>
+      <a href="https://github.com/this-live/maestro-router/blob/main/LICENSE">Apache-2.0 License</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="https://this.live/">this.live</a>
+    </nav>
+    <span>Free and open source, made by <a href="https://this.live/">this.live</a>. No cookies, no analytics.</span>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

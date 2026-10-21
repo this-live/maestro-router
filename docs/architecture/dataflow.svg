@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 520" width="1080" height="520" role="img" lang="en" aria-labelledby="diagram-title diagram-desc">
+  <title id="diagram-title">Maestro — routing data flow</title>
+  <desc id="diagram-desc">How Maestro 3.1.0 turns task text into a chosen seat in five stages: rules (or optional JEV) classify the prompt, the ladder maps job and difficulty to a routing category, the inventory of models you can run supplies the candidates, and the decision JSON names the seat.</desc>
+  <style>
+    svg { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', 'Liberation Mono', monospace; }
+    .bg { fill: #090f21; }
+    .dot { fill: rgba(148,163,184,0.16); }
+    .plate { fill: #0f172a; stroke: none; }
+    .box-frontend { fill: rgba(8,51,68,0.4); stroke: #22d3ee; }
+    .icon-frontend { color: #22d3ee; }
+    .box-backend { fill: rgba(6,78,59,0.4); stroke: #34d399; }
+    .icon-backend { color: #34d399; }
+    .box-database { fill: rgba(76,29,149,0.4); stroke: #a78bfa; }
+    .icon-database { color: #a78bfa; }
+    .box-cloud { fill: rgba(120,53,15,0.3); stroke: #fbbf24; }
+    .icon-cloud { color: #fbbf24; }
+    .lane { fill: rgba(15,23,42,0.22); stroke: #334155; stroke-dasharray: 6,6; }
+    .label { fill: #ffffff; }
+    .sublabel { fill: #94a3b8; }
+    .note { fill: #475569; }
+    .tag-cloud { fill: #fbbf24; }
+    .edge-label { fill: #64748b; }
+    .edge-label-main { fill: #34d399; }
+    .edge-label-optional { fill: #a78bfa; }
+    .edge { stroke: #64748b; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .edge-main { stroke: #34d399; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .edge-optional { stroke: #a78bfa; fill: none; stroke-dasharray: 4,4; stroke-linecap: round; stroke-linejoin: round; }
+    .arrow { fill: #64748b; }
+    .arrow-main { fill: #34d399; }
+    .arrow-optional { fill: #a78bfa; }
+    .icon { fill: none; stroke: currentColor; stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; opacity: 0.76; }
+    .icon > * { vector-effect: non-scaling-stroke; }
+    .icon-fill { fill: currentColor; stroke: none; }
+  </style>
+  <!-- Definitions -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="arrow" />
+    </marker>
+    <marker id="arrowhead-emphasis" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="arrow-main" />
+    </marker>
+    <marker id="arrowhead-dashed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="arrow-optional" />
+    </marker>
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" class="dot" />
+    </pattern>
+  </defs>
+
+  <!-- Background Grid -->
+  <rect width="100%" height="100%" class="bg" />
+  <rect width="100%" height="100%" fill="url(#dots)" />
+
+  <!-- Data Stages -->
+  <rect x="16" y="46" width="168" height="400" rx="10" class="lane" stroke-width="1"/>
+  <text x="100" y="68" class="note" font-size="9" font-weight="600" text-anchor="middle">01 / Input</text>
+
+  <rect x="231" y="46" width="168" height="400" rx="10" class="lane" stroke-width="1"/>
+  <text x="315" y="68" class="note" font-size="9" font-weight="600" text-anchor="middle">02 / Classify</text>
+
+  <rect x="446" y="46" width="168" height="400" rx="10" class="lane" stroke-width="1"/>
+  <text x="530" y="68" class="note" font-size="9" font-weight="600" text-anchor="middle">03 / Policy</text>
+
+  <rect x="661" y="46" width="168" height="400" rx="10" class="lane" stroke-width="1"/>
+  <text x="745" y="68" class="note" font-size="9" font-weight="600" text-anchor="middle">04 / Inventory</text>
+
+  <rect x="876" y="46" width="168" height="400" rx="10" class="lane" stroke-width="1"/>
+  <text x="960" y="68" class="note" font-size="9" font-weight="600" text-anchor="middle">05 / Seat</text>
+
+  <!-- Flow paths -->
+  <path d="M 156 264 L 207.5 264 L 207.5 157 L 259 157" class="edge-main" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+  <path d="M 156 278 L 207.5 278 L 207.5 385 L 259 385" class="edge-optional" stroke-width="1.4" marker-end="url(#arrowhead-dashed)"/>
+  <path d="M 371 157 L 422.5 157 L 422.5 264 L 474 264" class="edge" stroke-width="1.4" marker-end="url(#arrowhead)"/>
+  <path d="M 371 385 L 422.5 385 L 422.5 278 L 474 278" class="edge-optional" stroke-width="1.4" marker-end="url(#arrowhead-dashed)"/>
+  <path d="M 586 271 L 689 271" class="edge" stroke-width="1.4" marker-end="url(#arrowhead)"/>
+  <path d="M 801 271 L 904 271" class="edge-main" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+
+  <!-- Nodes -->
+  <g id="node-task">
+    <title>Task text · operator prompt · 01 / Input</title>
+    <rect x="44" y="242" width="112" height="58" rx="6" class="plate"/>
+    <rect x="44" y="242" width="112" height="58" rx="6" class="box-frontend" stroke-width="1.5"/>
+    <g aria-hidden="true" class="icon icon-frontend" transform="translate(50 248) scale(0.6875)">
+      <rect x="2" y="3" width="12" height="10" rx="2"/>
+      <path d="M2 6.5h12"/>
+      <circle cx="4.1" cy="4.8" r=".7" class="icon-fill"/>
+      <circle cx="6.3" cy="4.8" r=".7" class="icon-fill"/>
+    </g>
+    <text x="100" y="263" class="label" font-size="10" font-weight="600" text-anchor="middle">Task text</text>
+    <text x="100" y="279" class="sublabel" font-size="7" text-anchor="middle">operator prompt</text>
+  </g>
+
+  <g id="node-rules">
+    <title>Rules · offline classify · 02 / Classify</title>
+    <rect x="259" y="128" width="112" height="58" rx="6" class="plate"/>
+    <rect x="259" y="128" width="112" height="58" rx="6" class="box-backend" stroke-width="1.5"/>
+    <g aria-hidden="true" class="icon icon-backend" transform="translate(265 134) scale(0.6875)">
+      <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+    </g>
+    <text x="315" y="149" class="label" font-size="10" font-weight="600" text-anchor="middle">Rules</text>
+    <text x="315" y="165" class="sublabel" font-size="7" text-anchor="middle">offline classify</text>
+  </g>
+
+  <g id="node-jev">
+    <title>JEV · optional · 02 / Classify · opt</title>
+    <rect x="259" y="356" width="112" height="58" rx="6" class="plate"/>
+    <rect x="259" y="356" width="112" height="58" rx="6" class="box-cloud" stroke-width="1.5"/>
+    <g aria-hidden="true" class="icon icon-cloud" transform="translate(265 362) scale(0.6875)">
+      <path d="M4.3 12.5h7.3a2.4 2.4 0 0 0 .2-4.8 4 4 0 0 0-7.5-1.3A3.1 3.1 0 0 0 4.3 12.5Z"/>
+    </g>
+    <text x="315" y="377" class="label" font-size="10" font-weight="600" text-anchor="middle">JEV</text>
+    <text x="315" y="393" class="sublabel" font-size="7" text-anchor="middle">optional</text>
+  </g>
+
+  <g id="node-ladder">
+    <title>Ladder · job×difficulty · 03 / Policy</title>
+    <rect x="474" y="242" width="112" height="58" rx="6" class="plate"/>
+    <rect x="474" y="242" width="112" height="58" rx="6" class="box-backend" stroke-width="1.5"/>
+    <g aria-hidden="true" class="icon icon-backend" transform="translate(480 248) scale(0.6875)">
+      <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+    </g>
+    <text x="530" y="263" class="label" font-size="10" font-weight="600" text-anchor="middle">Ladder</text>
+    <text x="530" y="279" class="sublabel" font-size="7" text-anchor="middle">job×difficulty</text>
+  </g>
+
+  <g id="node-inv">
+    <title>Inventory · models you can run · 04 / Inventory</title>
+    <rect x="689" y="242" width="112" height="58" rx="6" class="plate"/>
+    <rect x="689" y="242" width="112" height="58" rx="6" class="box-database" stroke-width="1.5"/>
+    <g aria-hidden="true" class="icon icon-database" transform="translate(695 248) scale(0.6875)">
+      <ellipse cx="8" cy="4" rx="5" ry="2"/>
+      <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
+    </g>
+    <text x="745" y="263" class="label" font-size="10" font-weight="600" text-anchor="middle">Inventory</text>
+    <text x="745" y="279" class="sublabel" font-size="7" text-anchor="middle">models you can run</text>
+  </g>
+
+  <g id="node-seat">
+    <title>Chosen seat · decision JSON · 05 / Seat</title>
+    <rect x="904" y="242" width="112" height="58" rx="6" class="plate"/>
+    <rect x="904" y="242" width="112" height="58" rx="6" class="box-backend" stroke-width="1.5"/>
+    <g aria-hidden="true" class="icon icon-backend" transform="translate(910 248) scale(0.6875)">
+      <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+    </g>
+    <text x="960" y="263" class="label" font-size="10" font-weight="600" text-anchor="middle">Chosen seat</text>
+    <text x="960" y="279" class="sublabel" font-size="7" text-anchor="middle">decision JSON</text>
+  </g>
+
+  <!-- Flow labels -->
+  <g>
+    <rect x="181.9" y="189.5" width="51.2" height="27" rx="4" class="plate"/>
+    <text x="207.5" y="200.5" class="edge-label-main" font-size="8" text-anchor="middle">classify</text>
+    <text x="207.5" y="211.5" class="note" font-size="7" text-anchor="middle">prompt</text>
+  </g>
+  <g>
+    <rect x="181.9" y="310.5" width="51.2" height="27" rx="4" class="plate"/>
+    <text x="207.5" y="321.5" class="edge-label-optional" font-size="8" text-anchor="middle">if keyed</text>
+    <text x="207.5" y="332.5" class="note" font-size="7" text-anchor="middle">prompt</text>
+  </g>
+  <g>
+    <rect x="399.35" y="189.5" width="46.3" height="27" rx="4" class="plate"/>
+    <text x="422.5" y="200.5" class="edge-label" font-size="8" text-anchor="middle">job + d</text>
+    <text x="422.5" y="211.5" class="note" font-size="7" text-anchor="middle">routing</text>
+  </g>
+  <g>
+    <rect x="399.35" y="310.5" width="46.3" height="27" rx="4" class="plate"/>
+    <text x="422.5" y="321.5" class="edge-label-optional" font-size="8" text-anchor="middle">job + d</text>
+    <text x="422.5" y="332.5" class="note" font-size="7" text-anchor="middle">routing</text>
+  </g>
+  <g>
+    <rect x="611.9" y="250" width="51.2" height="27" rx="4" class="plate"/>
+    <text x="637.5" y="261" class="edge-label" font-size="8" text-anchor="middle">category</text>
+    <text x="637.5" y="272" class="note" font-size="7" text-anchor="middle">policy</text>
+  </g>
+  <g>
+    <rect x="824.45" y="250" width="56.1" height="27" rx="4" class="plate"/>
+    <text x="852.5" y="261" class="edge-label-main" font-size="8" text-anchor="middle">pick seat</text>
+    <text x="852.5" y="272" class="note" font-size="7" text-anchor="middle">inventory</text>
+  </g>
+
+  <!-- Legend -->
+  <g>
+    <text x="40" y="464" class="label" font-size="12" font-weight="650">Legend</text>
+    <g>
+      <path d="M 40 481 L 74 481" class="edge-main" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+      <text x="83" y="484" class="sublabel" font-size="10" font-weight="500">primary data</text>
+    </g>
+    <g>
+      <path d="M 165 481 L 199 481" class="edge-optional" stroke-width="1.4" marker-end="url(#arrowhead-dashed)"/>
+      <text x="208" y="484" class="sublabel" font-size="10" font-weight="500">optional</text>
+    </g>
+    <g>
+      <rect x="285" y="476" width="14" height="9" rx="2" class="box-database" stroke-width="1"/>
+      <text x="307" y="484" class="sublabel" font-size="10" font-weight="500">data store</text>
+    </g>
+    <g>
+      <path d="M 400 481 L 434 481" class="edge" stroke-width="1.4" marker-end="url(#arrowhead)"/>
+      <text x="443" y="484" class="sublabel" font-size="10" font-weight="500">data flow</text>
+    </g>
+  </g>
+</svg>

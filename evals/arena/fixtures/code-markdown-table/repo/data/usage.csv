@@ -1,0 +1,5 @@
+team,region,requests,cost_usd
+core,eu-west,1200,34.50
+web,us-east,98000,812.07
+data | ml,us-east,450,
+infra,ap-south,7,0.21

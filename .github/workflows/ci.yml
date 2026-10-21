@@ -1,0 +1,50 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  history:
+    # The public repository must never carry the private history (its root commit 4877a7f, or the old platform/ tree).
+    if: github.repository == 'this-live/maestro-router'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - name: Refuse the private history
+        run: sh scripts/check-history.sh
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install typesafe-sdk (Jev contract test; skipped if unavailable)
+        run: pip install typesafe-sdk==0.7.2 || echo "typesafe-sdk unavailable; contract test will be skipped"
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+      # Regression gate for the rules classifier on the held-out (odd-index) half of evals/prompts.jsonl.
+      # Measured on that half after the outcome-based ladder retune (DESIGN.md deviation 133): job accuracy 80.2%,
+      # category accuracy 65.0%, within +-1 99.6%, under-routed 8.0%, severely under-routed 0.0%. Floors are the measured value minus 5 points; the
+      # under-routing ceilings are the measured value plus 3 points (see CLAUDE.md).
+      - name: Rules eval (test split)
+        run: >
+          python evals/run.py --classifier rules --split test
+          --min-job-acc 0.75 --min-category-acc 0.60 --min-category-within1 0.94
+          --max-under 0.11 --max-severe-under 0.03
+      # S1 (spec §6.2, §9.5): frozen split manifest and leakage checks; the alpha replay gate (stdlib, no network,
+      # under 60 s). Both pass with a note until evals/manifest.json and evals/alpha/outcomes.jsonl exist.
+      - name: Split manifest check
+        run: python evals/split.py --check
+      - name: Alpha gate (test split)
+        run: python evals/alpha.py gate --split test

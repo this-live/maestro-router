@@ -1,0 +1,21 @@
+{"user": "u1", "ts": "2024-05-01T10:00:00Z", "event": "page_view", "path": "/"}
+{"user": "u1", "ts": "2024-05-01T10:05:00Z", "event": "page_view", "path": "/shoes"}
+{"user": "u2", "ts": "2024-05-01T09:59:30Z", "event": "page_view", "path": "/"}
+{"user": "u1", "ts": "2024-05-01T12:20:00+02:00", "event": "add_to_cart", "path": "/shoes"}
+{"user": "u1", "ts": "2024-05-01T10:05:00Z", "event": "page_view", "path": "/shoes"}
+{"user": "u1", "ts": "2024-05-01T10:50:00Z", "event": "page_view", "path": "/"}
+not json at all
+{"user": "u1", "ts": "2024-05-01T11:20:00Z", "event": "purchase", "path": "/checkout/done"}
+{"user": "u2", "ts": "2024-05-01T10:29:30Z", "event": "page_view", "path": "/sale"}
+{"user": "u2", "ts": "2024-05-01T10:59:31Z", "event": "page_view", "path": "/sale"}
+{"user": "u3", "event": "page_view", "path": "/"}
+{"user": "u2", "ts": "2024-05-01T06:10:00-05:00", "event": "page_view", "path": "/sale"}
+{"user": "u2", "ts": "2024-05-01T11:15:00Z", "event": "purchase"}
+{"user": "u3", "ts": "2024-05-02T00:00:00Z", "event": "page_view", "path": "/", "ref": "ad"}
+{"user": "u3", "ts": "2024-05-01T23:45:00+00:00", "event": "page_view", "path": "/about"}
+{"ts": "2024-05-01T23:46:00Z", "event": "page_view", "path": "/"}
+{"user": "u3", "ts": "2024-05-02T00:00:00Z", "event": "page_view", "path": "/"}
+{"user": "u3", "ts": "2024-05-02T00:10:00Z", "event": "search", "path": "/search"}
+{"user": "u1", "ts": "2024-05-01T11:20:00Z", "event": "page_view", "path": "/checkout/done"}
+{"user": "u10", "ts": "2024-05-01T08:00:00Z", "event": "page_view", "path": "/"}
+{"user": "u2", "ts": "2024-05-01T11:15:00Z", "event": "purchase", "path": null}

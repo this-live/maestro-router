@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maestro: route every task to the right model you already have</title>
+<meta name="description" content="Maestro is a free, open-source model router from this.live. It sends each task to the right model you already have, local or cloud: API keys, subscription logins and models you already serve. Runs on your machine; your keys never leave it.">
+<meta name="theme-color" content="#0A0F2E">
+<meta property="og:title" content="Maestro: the local-first model router">
+<meta property="og:description" content="Route every task to the right model you already have. Free, open source (Apache-2.0), runs on your machine.">
+<meta property="og:image" content="/static/icon-512.png">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/static/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/static/icon-180.png">
+<link rel="manifest" href="/static/manifest.json">
+<link rel="stylesheet" href="/static/site.css">
+<script src="/static/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="sparkle" aria-hidden="true"></canvas>
+<div class="content">
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Maestro home"><img src="/static/icon-64.png" alt="" width="30" height="30"><span class="wordmark">MAESTRO</span></a>
+    <nav class="links" aria-label="Main">
+      <a class="opt" href="#how">How it works</a>
+      <a class="opt" href="#privacy">Privacy</a>
+      <a class="opt" href="#start">Install</a>
+      <a href="/docs">Docs</a>
+      <a class="gh" href="https://github.com/this-live/maestro-router" aria-label="Maestro on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5.5 3.5 1 8l4.5 4.5 1.1-1.1L3.2 8l3.4-3.4zm5 0-1.1 1.1L12.8 8l-3.4 3.4 1.1 1.1L15 8z"/></svg><span>GitHub</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <img class="hero-mark" src="/static/logo.jpg" alt="The Maestro robot" width="176" height="176">
+    <h1 class="wordmark">MAESTRO</h1>
+    <div class="sep"></div>
+    <p class="tagline">Route every task to <em>the right model</em> you already have.</p>
+    <p class="lede">Local or cloud, Maestro finds the models you can use (API keys, subscription logins, and models already served on your machine or network), scores them against public benchmarks and picks one per task. <strong>Free and open source. It runs on your machine, and your keys never leave it.</strong></p>
+    <div class="cta">
+      <a class="btn btn-cyan" href="#start">Get started</a>
+      <a class="btn btn-ghost" href="https://github.com/this-live/maestro-router">View on GitHub</a>
+    </div>
+    <div class="badges">
+      <span class="badge"><i></i>Apache-2.0 licensed</span>
+      <span class="badge"><i></i>Python 3.9+, standard library only</span>
+      <span class="badge"><i></i>no account, no telemetry</span>
+    </div>
+    <div class="facts">
+      <div class="fact"><b>11</b><span>kinds of work it tells apart</span></div>
+      <div class="fact"><b>6</b><span>model categories, local to frontier</span></div>
+      <div class="fact"><b>0</b><span>dependencies to install</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Two ways -->
+<section class="block" id="use">
+  <div class="wrap">
+    <div class="center fade">
+      <div class="kicker">Two ways to use it</div>
+      <h2>In your coding agent, or as your model provider</h2>
+      <p class="intro">Same router, same model map. Use the skill when an agent splits up the work; use the endpoint when one client should talk to one URL and let Maestro choose.</p>
+    </div>
+    <div class="grid g2 fade">
+      <article class="card lift path-card">
+        <div class="label">As a skill</div>
+        <h3>Use it in your coding agent</h3>
+        <p>Claude Code, Codex, OpenCode, Gemini CLI, Cursor and other agents that support Agent Skills ask Maestro which model should take each subtask, then delegate to a subagent, another CLI or a local model.</p>
+        <ul class="ticks">
+          <li><strong>No daemon, no network</strong> on the routing path: the decision is made on your machine</li>
+          <li>Picks a <strong>category</strong> for each subtask, then the seat you have for it</li>
+          <li>Tells the agent exactly how to delegate: subagent, CLI, local model or inline</li>
+        </ul>
+        <div class="code-title">Any harness that supports Agent Skills</div>
+        <div class="code"><pre><span class="p">$ </span>npx skills add this-live/maestro-router</pre></div>
+        <div class="code-title">or the Claude Code plugin marketplace</div>
+        <div class="code"><pre><span class="p">$ </span>claude plugin marketplace add this-live/maestro-router
+<span class="p">$ </span>claude plugin install maestro@maestro</pre></div>
+        <p class="foot small">Then tell your agent: "use maestro", "route this" or "use the right model". These two installs track the repository's default branch; the skills installer has no option to pin a release.</p>
+      </article>
+      <article class="card lift path-card">
+        <div class="label">As an OpenAI-compatible endpoint</div>
+        <h3>Use it as a model provider</h3>
+        <p><code>maestro-router serve</code> runs a local endpoint with a web dashboard. Hermes Agent, or any OpenAI client, sends everything to <code>maestro/auto</code> and Maestro picks the model per request.</p>
+        <ul class="ticks">
+          <li><strong>Streaming, tool calls and images</strong> pass through; Anthropic models are translated both ways</li>
+          <li><strong>Falls back</strong> to the next model on a 429, 5xx or timeout before the first byte</li>
+          <li><strong>Agent loops stay on one model</strong> until a new user message arrives</li>
+        </ul>
+        <div class="code-title">Install from GitHub (not on PyPI yet)</div>
+        <div class="code"><pre><span class="p">$ </span>pip install https://github.com/this-live/maestro-router/releases/download/v3.1.1/maestro_router-3.1.1-py3-none-any.whl
+<span class="p">$ </span>maestro-router setup
+<span class="p">$ </span>maestro-router serve --open</pre></div>
+        <p class="foot small">Clients connect to <code>http://127.0.0.1:4545/v1</code>; <code>maestro-router hermes --install</code> sets up Hermes Agent.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="block" id="how">
+  <div class="wrap">
+    <div class="fade">
+      <div class="kicker">How it works</div>
+      <h2>Detect, score, route</h2>
+      <p class="intro">Maestro only routes to what you can actually run. It learns what you have once, scores it, and then makes each per-task decision locally, from a cached map.</p>
+    </div>
+    <div class="flow fade" role="img" aria-label="Diagram. Once, and when it goes stale: detect your keys, logins and served models, score them against benchmarks, and cache the model map. For every task: classify it into a job and difficulty, look up the category on the ladder, and pick the best seat from the map, with fallbacks.">
+      <svg class="h" viewBox="0 0 1000 300" aria-hidden="true">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#00D4FF"/></marker>
+          <linearGradient id="bx" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14204A"/><stop offset="1" stop-color="#0D1431"/></linearGradient>
+        </defs>
+        <text x="20" y="22" fill="#7D8CA3" font-size="12" font-weight="700" letter-spacing="2">ONCE, AND WHEN IT GOES STALE</text>
+        <text x="20" y="172" fill="#7D8CA3" font-size="12" font-weight="700" letter-spacing="2">EVERY TASK</text>
+        <g font-size="13" fill="#94A3B8">
+          <rect x="20" y="36" width="270" height="92" rx="12" fill="url(#bx)" stroke="#1E3A8A"/>
+          <text x="40" y="68" fill="#fff" font-size="18" font-weight="700">1 · Detect</text>
+          <text x="40" y="92">API keys, subscription logins,</text>
+          <text x="40" y="111">models already served</text>
+          <rect x="365" y="36" width="270" height="92" rx="12" fill="url(#bx)" stroke="#1E3A8A"/>
+          <text x="385" y="68" fill="#fff" font-size="18" font-weight="700">2 · Score</text>
+          <text x="385" y="92">models.dev benchmarks to a</text>
+          <text x="385" y="111">strength per job and a category</text>
+          <rect x="710" y="36" width="270" height="92" rx="12" fill="url(#bx)" stroke="#00D4FF" stroke-opacity=".6"/>
+          <text x="730" y="68" fill="#fff" font-size="18" font-weight="700">Your model map</text>
+          <text x="730" y="92" font-family="SF Mono, JetBrains Mono, monospace" font-size="12" fill="#00D4FF">~/.maestro/</text>
+          <text x="730" y="111">cached on disk, read per task</text>
+          <rect x="20" y="186" width="270" height="92" rx="12" fill="url(#bx)" stroke="#1E3A8A"/>
+          <text x="40" y="218" fill="#fff" font-size="18" font-weight="700">3 · Classify</text>
+          <text x="40" y="242">the task into a job and a</text>
+          <text x="40" y="261">difficulty 0-3, offline</text>
+          <rect x="365" y="186" width="270" height="92" rx="12" fill="url(#bx)" stroke="#1E3A8A"/>
+          <text x="385" y="218" fill="#fff" font-size="18" font-weight="700">4 · Ladder</text>
+          <text x="385" y="242">job × difficulty gives the</text>
+          <text x="385" y="261">category the task needs</text>
+          <rect x="710" y="186" width="270" height="92" rx="12" fill="url(#bx)" stroke="#00D4FF"/>
+          <text x="730" y="218" fill="#fff" font-size="18" font-weight="700">5 · Route</text>
+          <text x="730" y="242">the best model you have for</text>
+          <text x="730" y="261">it, with fallbacks</text>
+        </g>
+        <g stroke="#00D4FF" stroke-width="2" fill="none" marker-end="url(#ah)">
+          <path d="M294 82H360"/><path d="M639 82H705"/><path d="M294 232H360"/><path d="M639 232H705"/><path d="M845 131V181"/>
+        </g>
+      </svg>
+      <svg class="v" viewBox="0 0 340 664" aria-hidden="true">
+        <defs>
+          <marker id="av" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#00D4FF"/></marker>
+          <linearGradient id="bv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14204A"/><stop offset="1" stop-color="#0D1431"/></linearGradient>
+        </defs>
+        <text x="6" y="16" fill="#7D8CA3" font-size="12" font-weight="700" letter-spacing="2">ONCE, AND WHEN IT GOES STALE</text>
+        <text x="6" y="350" fill="#7D8CA3" font-size="12" font-weight="700" letter-spacing="2">EVERY TASK</text>
+        <g font-size="14" fill="#94A3B8">
+          <rect x="6" y="28" width="298" height="74" rx="12" fill="url(#bv)" stroke="#1E3A8A"/>
+          <text x="22" y="58" fill="#fff" font-size="18" font-weight="700">1 · Detect</text>
+          <text x="22" y="83">keys, logins, models already served</text>
+          <rect x="6" y="132" width="298" height="74" rx="12" fill="url(#bv)" stroke="#1E3A8A"/>
+          <text x="22" y="162" fill="#fff" font-size="18" font-weight="700">2 · Score</text>
+          <text x="22" y="187">benchmarks to strength per job</text>
+          <rect x="6" y="236" width="298" height="74" rx="12" fill="url(#bv)" stroke="#00D4FF" stroke-opacity=".6"/>
+          <text x="22" y="266" fill="#fff" font-size="18" font-weight="700">Your model map</text>
+          <text x="22" y="291" font-family="SF Mono, JetBrains Mono, monospace" font-size="13" fill="#00D4FF">~/.maestro/ (cached on disk)</text>
+          <rect x="6" y="362" width="298" height="74" rx="12" fill="url(#bv)" stroke="#1E3A8A"/>
+          <text x="22" y="392" fill="#fff" font-size="18" font-weight="700">3 · Classify</text>
+          <text x="22" y="417">job and difficulty 0-3, offline</text>
+          <rect x="6" y="466" width="298" height="74" rx="12" fill="url(#bv)" stroke="#1E3A8A"/>
+          <text x="22" y="496" fill="#fff" font-size="18" font-weight="700">4 · Ladder</text>
+          <text x="22" y="521">the category the task needs</text>
+          <rect x="6" y="570" width="298" height="74" rx="12" fill="url(#bv)" stroke="#00D4FF"/>
+          <text x="22" y="600" fill="#fff" font-size="18" font-weight="700">5 · Route</text>
+          <text x="22" y="625">best model you have, with fallbacks</text>
+        </g>
+        <g stroke="#00D4FF" stroke-width="2" fill="none" marker-end="url(#av)">
+          <path d="M156 104V128"/><path d="M156 208V232"/><path d="M156 438V462"/><path d="M156 542V566"/><path d="M306 273H326V607H310"/>
+        </g>
+      </svg>
+    </div>
+    <div class="steps3 fade">
+      <div class="card">
+        <div class="step-n">1</div>
+        <h3>Finds what you have</h3>
+        <p><code>maestro-router detect</code> and <code>maestro-router discover</code> look for API keys, subscription CLIs and model servers, and record what each can serve. Presence only: key values and login tokens are never read.</p>
+      </div>
+      <div class="card">
+        <div class="step-n">2</div>
+        <h3>Scores it honestly</h3>
+        <p>Benchmarks from a bundled <a href="https://models.dev">models.dev</a> snapshot become percentiles among recent models, blended with a prior from size, price and age, then a strength for each of the 11 jobs and a category.</p>
+      </div>
+      <div class="card">
+        <div class="step-n">3</div>
+        <h3>Routes each task</h3>
+        <p>The ladder maps job and difficulty to a category. Maestro picks a model you have that is good enough for that job, cheapest first by default, and says why in the decision.</p>
+      </div>
+    </div>
+    <div class="fade">
+      <div class="code-title">What a coding agent sees (output trimmed)</div>
+      <div class="code"><pre><span class="p">$ </span>maestro-router route --harness claude-code "why's the checkout test flaky"
+<span class="o">{"job": "debug", "difficulty": 2, "confidence": 0.95, "needs": ["tools"],
+ "category": "standard", "seat": "claude-code", "model": "sonnet",
+ "delegate": {"kind": "subagent", "harness": "claude-code", "model": "sonnet"},
+ "reason": "debug/d2 → standard; claude-code subagent available", ...}</span></pre></div>
+    </div>
+  </div>
+</section>
+
+<!-- What it finds -->
+<section class="block" id="finds">
+  <div class="wrap">
+    <div class="fade">
+      <div class="kicker">What it finds</div>
+      <h2>Every model you can already use</h2>
+      <p class="intro">Maestro does not sell you models. It uses the ones you are already paying for, logged in to, or running yourself.</p>
+    </div>
+    <div class="grid g3 fade">
+      <article class="card lift">
+        <div class="label">API keys</div>
+        <h3>Any provider in models.dev</h3>
+        <p>Any provider whose key is in your environment or in <code>~/.maestro/keys.env</code>: Anthropic, OpenAI, Google, DeepSeek, xAI, Mistral, OpenRouter, Groq and the rest. <code>maestro-router keys set</code> stores one with hidden input.</p>
+      </article>
+      <article class="card lift">
+        <div class="label">Subscription logins</div>
+        <h3>Claude Code, Codex, Gemini CLI</h3>
+        <p>Maestro checks that you are logged in and uses those seats only through their official CLIs. Login tokens are never read or forwarded. In provider mode they serve chat, never tool calls or images.</p>
+      </article>
+      <article class="card lift">
+        <div class="label">Models you already serve</div>
+        <h3>On this machine or your network</h3>
+        <p>vLLM, SGLang, llama.cpp, LM Studio and Ollama, on localhost or a box such as a DGX Spark. Maestro <strong>never downloads, loads or starts a model</strong>: it routes only to what a server has already loaded.</p>
+      </article>
+    </div>
+    <div class="legend-row fade">
+      <h3>Six categories</h3>
+      <div class="cats">
+        <div><span class="chip cat local">local</span>models you run yourself; free and private</div>
+        <div><span class="chip cat fast">fast</span>cheap, quick cloud models</div>
+        <div><span class="chip cat standard">standard</span>the everyday workhorse</div>
+        <div><span class="chip cat strong">strong</span>hard reasoning</div>
+        <div><span class="chip cat frontier">frontier</span>each vendor's very best</div>
+        <div><span class="chip cat specialist">specialist</span>tuned for a job, such as code or SQL</div>
+      </div>
+    </div>
+    <div class="legend-row fade">
+      <h3>Eleven jobs</h3>
+      <div class="chips">
+        <span class="chip">plan</span><span class="chip">code</span><span class="chip">debug</span><span class="chip">review</span><span class="chip">ops</span><span class="chip">research</span>
+        <span class="chip">data</span><span class="chip">write</span><span class="chip">edit</span><span class="chip">summarize</span><span class="chip">ask</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Measured -->
+<section class="block" id="measured">
+  <div class="wrap">
+    <div class="fade">
+      <div class="kicker">Measured, and you can rerun it</div>
+      <h2>How often it picks the right kind of model</h2>
+      <p class="intro">The offline classifier sorts a task into a job and a difficulty, and the ladder turns those into a model category. These are its scores on 237 held-out prompts that it was not tuned on. The script and the prompts are in the repository, and CI fails if the scores drop.</p>
+    </div>
+    <div class="card fade">
+      <div class="label">Router eval: 237 held-out test prompts</div>
+      <div class="tiles">
+        <div class="tile"><b>80.2%</b><span>job accuracy (11 jobs)</span></div>
+        <div class="tile"><b>65.0%</b><span>exact category</span></div>
+        <div class="tile"><b>99.6%</b><span>category within one step</span></div>
+        <div class="tile"><b>8.0%</b><span>under-routed (too weak)</span></div>
+        <div class="tile"><b>0.0%</b><span>severely under-routed</span></div>
+      </div>
+      <p class="small" style="margin:14px 0 0">Offline rules classifier on the odd lines of <code>evals/prompts.jsonl</code>, tuned only on the other half. Routing one step too weak costs more than one step too strong, so most misses lean strong. Reproduce: <code>python evals/run.py --classifier rules --split test</code>.</p>
+    </div>
+    <div class="note fade"><b>Read these numbers with care.</b> The prompts and their labels were written by an LLM and only partly checked by hand, and about 15% of them could fairly belong to two jobs, so a perfect router would not score 100%. They measure the classifier, not the quality of the answers you get back.</div>
+  </div>
+</section>
+
+<!-- S1 -->
+<section class="block" id="s1">
+  <div class="wrap">
+    <div class="card fade split s1card">
+      <div>
+        <div class="kicker">Coming next <span class="pill">In shadow</span></div>
+        <h2 style="font-size:clamp(24px,3vw,30px);margin-bottom:12px">Maestro S1, a tiny decision model</h2>
+        <p style="color:var(--muted)">A small local model in pure Python that estimates a task's job, difficulty, need for tools, stakes and output size, then picks the seat with the best expected value given each model's odds of success, its price, your quota and the wait.</p>
+      </div>
+      <div>
+        <ul class="ticks" style="margin:0">
+          <li><strong>Runs in shadow today.</strong> The ladder decides; S1 logs what it would have picked, so you can compare before switching (<code>decider: utility</code>).</li>
+          <li><strong>Quota-aware.</strong> A subscription window with slack costs nothing ("use it or lose it"); its price rises only when the burn rate would exhaust it.</li>
+          <li><strong>Learns locally</strong> from your pass and fail outcomes, with guards, and <code>maestro-router learn --reset</code> undoes it.</li>
+          <li><strong>Jev-compatible.</strong> <code>POST /v1/systemone</code> answers TypeSafe Jev's typed-decision format.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Privacy -->
+<section class="block" id="privacy">
+  <div class="wrap">
+    <div class="center fade">
+      <div class="kicker">Your machine, your keys</div>
+      <h2>Local-first, by design</h2>
+      <p class="intro">Maestro is a program on your computer, not a service. There is no account and nothing to sign up for.</p>
+    </div>
+    <div class="priv fade">
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+        <div><h3>Keys stay in one file</h3><p>Keys you add live in <code>~/.maestro/keys.env</code> (mode 600). A key is sent only to its own provider and is never printed, logged or returned by any endpoint.</p></div></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <div><h3>Logins are never read</h3><p>Subscription logins are checked for presence only and used through their own CLIs. Their tokens are never read or forwarded.</p></div></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h7"/><path d="m16 16 5 5m0-5-5 5"/></svg></div>
+        <div><h3>Prompts are not logged</h3><p>The request log keeps the model, job, category, latency and tokens. Prompt text is stored (first 120 characters) only if you set <code>log_prompts: true</code>.</p></div></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg></div>
+        <div><h3>Nothing phones home</h3><p>No telemetry. A request goes only to the provider you route it to. The optional Jev classifier sends task text to TypeSafe only if you set <code>TYPESAFE_API_KEY</code>.</p></div></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div>
+        <div><h3>The server stays local</h3><p><code>maestro-router serve</code> binds to 127.0.0.1. Serving beyond loopback requires <code>MAESTRO_API_KEY</code>, and the dashboard needs an admin token and same-origin requests.</p></div></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></div>
+        <div><h3>Your hardware, your call</h3><p>Maestro never downloads, loads or starts a model. On a box that serves nothing, <code>discover --local-fit</code> suggests models that would fit, as advice only.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Dashboard -->
+<section class="block" id="dashboard">
+  <div class="wrap split">
+    <div class="fade">
+      <div class="kicker">Dashboard</div>
+      <h2>See every decision, and why</h2>
+      <p style="color:var(--muted)"><code>maestro-router serve --open</code> opens a one-file web UI on your machine: no build step, no external requests.</p>
+      <ul class="ticks">
+        <li><strong>Overview:</strong> requests by category and spend saved versus always using the strongest model</li>
+        <li><strong>Providers and Models:</strong> status, quota bars, write-only keys, every model's score</li>
+        <li><strong>Routing and Activity:</strong> the ladder, live decisions with reasons and fallbacks</li>
+        <li><strong>Try it:</strong> a dry run that shows the decision without calling a model</li>
+      </ul>
+      <p class="small" style="margin-top:12px">Screenshot from a fresh install on a clean machine with one Ollama server and no API keys (October 6, 2026).</p>
+    </div>
+    <div class="shot fade">
+      <div class="chrome"><i></i><i></i><i></i><span>127.0.0.1:4545</span></div>
+      <img src="/static/dashboard.png" alt="The Maestro dashboard on a fresh install with one local model server" width="1280" height="800" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- Get started -->
+<section class="block" id="start">
+  <div class="wrap narrow">
+    <div class="center fade">
+      <div class="kicker">Get started</div>
+      <h2>Install, set up, serve</h2>
+      <p class="intro">Python 3.9 or newer. Nothing else to install, and no account.</p>
+    </div>
+    <ol class="start fade">
+      <li>
+        <h3>Install</h3>
+        <p>As a command, or as a skill for your coding agent (both use the same code):</p>
+        <div class="code"><pre><span class="p">$ </span>pip install https://github.com/this-live/maestro-router/releases/download/v3.1.1/maestro_router-3.1.1-py3-none-any.whl
+<span class="c"># or from source</span>
+<span class="p">$ </span>pip install git+https://github.com/this-live/maestro-router@v3.1.1
+<span class="c"># or run it without installing</span>
+<span class="p">$ </span>uvx --from git+https://github.com/this-live/maestro-router@v3.1.1 maestro-router route "fix the failing test"
+<span class="c"># or, as a skill</span>
+<span class="p">$ </span>npx skills add this-live/maestro-router</pre></div>
+        <p class="small">The command is <code>maestro-router</code> because mobile.dev's Maestro (mobile UI testing) already uses <code>maestro</code>; add <code>alias maestro=maestro-router</code> to your shell profile if you want the short name. The skill install tracks the repository's default branch; the skills installer has no option to pin a release.</p>
+      </li>
+      <li>
+        <h3>Try a decision</h3>
+        <p>Works before any setup. It says which kind of model the task needs and which of yours would take it.</p>
+        <div class="code"><pre><span class="p">$ </span>maestro-router route "fix the failing test"</pre></div>
+      </li>
+      <li>
+        <h3>Set up</h3>
+        <p>Detects your providers, adds keys with hidden input, asks about model servers you already run, and scores every model.</p>
+        <div class="code"><pre><span class="p">$ </span>maestro-router setup</pre></div>
+      </li>
+      <li>
+        <h3>Serve</h3>
+        <p>Starts an OpenAI-compatible endpoint at <code>http://127.0.0.1:4545/v1</code> and opens the dashboard. Any OpenAI client can then use the model name <code>maestro/auto</code>.</p>
+        <div class="code"><pre><span class="p">$ </span>maestro-router serve --open
+<span class="p">$ </span>curl -s http://127.0.0.1:4545/v1/chat/completions -H 'Content-Type: application/json' \
+    -d '{"model": "maestro/auto", "messages": [{"role": "user", "content": "what is a mutex?"}]}'</pre></div>
+        <p class="small">The response's <code>model</code> is the model Maestro chose, and the <code>x-maestro-decision</code> header says why. <code>maestro-router hermes --install</code> connects Hermes Agent.</p>
+      </li>
+    </ol>
+    <p class="center fade" style="margin-top:12px"><a class="btn btn-cyan" href="/docs">Read the docs</a></p>
+  </div>
+</section>
+
+<!-- Limits -->
+<section class="block" id="limits">
+  <div class="wrap narrow">
+    <div class="fade">
+      <div class="kicker">Straight answers</div>
+      <h2>What Maestro does not do</h2>
+    </div>
+    <ul class="ticks fade">
+      <li><strong>It is not a hosted service.</strong> There is no cloud version, account or paid plan. You run it on your own machine.</li>
+      <li><strong>It does not give you models.</strong> It routes to the keys, logins and model servers you already have. With none of them, it can only tell you what a task needs.</li>
+      <li><strong>It never downloads, loads or starts a model.</strong> A local model is used only if your server already has it loaded.</li>
+      <li><strong>It does not judge the answers.</strong> It picks a model before the request is sent. The router eval above measures that choice, not the reply.</li>
+      <li><strong>The decision model is still in shadow.</strong> S1 and expected-utility routing are off by default; the ladder decides.</li>
+      <li><strong>Subscription seats are chat only in provider mode.</strong> Claude Code, Codex and Gemini CLI logins never take tool calls or images through <code>maestro-router serve</code>.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- this.live -->
+<section class="block" id="thislive">
+  <div class="wrap narrow">
+    <div class="card fade center">
+      <div class="kicker">Made by this.live</div>
+      <h2 style="font-size:clamp(22px,2.6vw,28px)">Want it running on hardware you own?</h2>
+      <p class="intro">Maestro is free and you can run it yourself. If you would rather have local models, Maestro and the rest set up on your own machines, <a href="https://this.live/">this.live</a> does that as part of its Private AI work.</p>
+      <p style="margin-top:16px"><a class="btn btn-outline" href="https://this.live/">Visit this.live</a></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Maestro home"><img src="/static/icon-64.png" alt="" width="24" height="24"><span class="wordmark">MAESTRO</span></a>
+    <nav aria-label="Footer">
+      <a href="https://github.com/this-live/maestro-router">GitHub</a>
+      <a href="/docs">Docs</a>
+      <a href="https://github.com/this-live/maestro-router/blob/main/LICENSE">Apache-2.0 License</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="https://this.live/">this.live</a>
+    </nav>
+    <span>Free and open source, made by <a href="https://this.live/">this.live</a>. No cookies, no analytics.</span>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

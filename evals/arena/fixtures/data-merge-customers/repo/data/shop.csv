@@ -1,0 +1,7 @@
+email,name,phone,updated_at
+ANN+promo@example.com,Ann Lee-Park,,2024-03-10 18:45
+bob@example.com,Bob Fox,555-0202,2024-03-01T10:00:00Z
+carla@example.org,Carla D.,555-9999,2024-01-15
+frank@example.com,Frank Ho,555-0606,2024-02-20
+not-an-email,Ghost,555-0707,2024-02-21
+eve@example.com,Evelyn Stone,555-5050,2024-03-01 00:00

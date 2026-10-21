@@ -1,0 +1,1 @@
+The helpers in `textkit/strings.py` still use camelCase names from the old JS port. Rename them to snake_case: `toTitleCase` -> `to_title_case`, `countWords` -> `count_words`, `truncateText` -> `truncate_text`, `normalizeSpace` -> `normalize_space`. Update every caller and the tests. No compatibility aliases, I want the old names gone everywhere. Behaviour must not change.

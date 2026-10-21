@@ -1,0 +1,15 @@
+| name | default |
+| --- | --- |
+| ALLOWED_ORIGINS | * |
+| API_URL | https://api.example.com |
+| CACHE_TTL | 300 |
+| DATABASE_URL | (required) |
+| ENABLE_BETA | False |
+| LOG_LEVEL | info |
+| QUEUE_NAME | default |
+| REDIS_URL | redis://localhost:6379/0 |
+| SENTRY_DSN | (none) |
+| SMTP_HOST | localhost |
+| SMTP_PASSWORD_FILE | (none) |
+| SMTP_PORT | 25 |
+| WORKERS | 4 |

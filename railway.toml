@@ -1,0 +1,10 @@
+# Railway deploy of the Maestro website (site/serve.py): https://maestro.this.live
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "site/Dockerfile"
+
+[deploy]
+healthcheckPath = "/health"
+healthcheckTimeout = 30
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5

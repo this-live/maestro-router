@@ -1,0 +1,5 @@
+# Only site/ goes into the website image (see site/Dockerfile).
+*
+!site/
+**/__pycache__
+**/*.pyc

@@ -1,0 +1,18 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.env
+
+# S1 evals: answer texts, grades and subagent manifests (release assets, never committed)
+evals/work/
+
+# Arena runs: answers, diffs and results stay on this machine
+evals/arena/runs/

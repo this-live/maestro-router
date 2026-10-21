@@ -1,0 +1,3 @@
+# media
+
+Thumbnail service helpers.

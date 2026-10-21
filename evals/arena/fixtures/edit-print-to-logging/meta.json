@@ -1,0 +1,3 @@
+{"id": "edit-print-to-logging", "job": "edit", "difficulty_intent": 1, "language": "python", "timeout_s": 450,
+ "test_cmd": "python3 -m unittest discover -s hidden_tests -t . -q",
+ "visible_test_cmd": "python3 -m unittest discover -s tests -t . -q", "needs_tools": true}

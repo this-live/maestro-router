@@ -1,0 +1,280 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 592" width="1080" height="592" role="img" lang="en" aria-labelledby="diagram-title diagram-desc">
+  <title id="diagram-title">Maestro — model router runtime</title>
+  <desc id="diagram-desc">The Maestro 3.1.0 runtime: the command line and the HTTP server both send a task to the router, which classifies it, walks the policy ladder against the inventory of models you can run, and picks a local endpoint, a cloud seat or a specialist; an optional JEV classifier and local feedback learning sit alongside.</desc>
+  <style>
+    svg { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', 'Liberation Mono', monospace; }
+    .bg { fill: #030711; }
+    .grid-line { stroke: #15233a; fill: none; }
+    .plate { fill: #07101e; stroke: none; }
+    .halo { fill: none; stroke: #07101e; }
+    .box-backend { fill: rgba(16,185,129,0.14); stroke: #5eead4; }
+    .icon-backend { color: #5eead4; }
+    .box-database { fill: rgba(139,92,246,0.16); stroke: #c4b5fd; }
+    .icon-database { color: #c4b5fd; }
+    .box-cloud { fill: rgba(245,158,11,0.13); stroke: #fcd34d; }
+    .icon-cloud { color: #fcd34d; }
+    .box-external { fill: rgba(71,85,105,0.24); stroke: #a5b4c7; }
+    .icon-external { color: #a5b4c7; }
+    .region { fill: rgba(251,191,36,0.05); stroke: #fcd34d; stroke-dasharray: 8,4; }
+    .label { fill: #f5fbff; }
+    .sublabel { fill: #9eb0c7; }
+    .tag-backend { fill: #5eead4; }
+    .tag-cloud { fill: #fcd34d; }
+    .edge-label { fill: #7890ad; }
+    .edge-label-main { fill: #2dd4bf; }
+    .edge-label-optional { fill: #c4b5fd; }
+    .edge { stroke: #7890ad; fill: none; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 3px #2dd4bf); }
+    .edge-main { stroke: #2dd4bf; fill: none; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 3px #2dd4bf); }
+    .edge-optional { stroke: #c4b5fd; fill: none; stroke-dasharray: 4,4; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 3px #2dd4bf); }
+    .arrow { fill: #7890ad; }
+    .arrow-main { fill: #2dd4bf; }
+    .arrow-optional { fill: #c4b5fd; }
+    .icon { fill: none; stroke: currentColor; stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; opacity: 0.76; }
+    .icon > * { vector-effect: non-scaling-stroke; }
+  </style>
+  <!-- Definitions -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="arrow" />
+    </marker>
+    <marker id="arrowhead-emphasis" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="arrow-main" />
+    </marker>
+    <marker id="arrowhead-dashed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="arrow-optional" />
+    </marker>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" class="grid-line" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Background Grid -->
+  <rect width="100%" height="100%" class="bg" />
+  <rect width="100%" height="100%" fill="url(#grid)" />
+
+  <!-- Boundaries (behind everything) -->
+  <rect x="200" y="90" width="840" height="434" rx="12" class="region" stroke-width="1"/>
+
+  <!-- Connection paths (before components for correct z-order) -->
+  <g>
+    <path d="M 170 312 L 230 312" fill="none" class="halo" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 170 312 L 230 312" class="edge-main" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+  </g>
+  <g>
+    <path d="M 105 280 L 105 264 Q 105 256 113 256 L 198 256 Q 206 256 206 248 L 206 160 Q 206 152 214 152 L 230 152" fill="none" class="halo" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 105 280 L 105 264 Q 105 256 113 256 L 198 256 Q 206 256 206 248 L 206 160 Q 206 152 214 152 L 230 152" class="edge" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  </g>
+  <g>
+    <path d="M 295 184 L 295 222 Q 295 230 303 230 L 452 230 Q 460 230 460 238 L 460 280" fill="none" class="halo" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 295 184 L 295 222 Q 295 230 303 230 L 452 230 Q 460 230 460 238 L 460 280" class="edge" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  </g>
+  <g>
+    <path d="M 360 312 L 430 312" fill="none" class="halo" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 360 312 L 430 312" class="edge" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  </g>
+  <g>
+    <path d="M 500 280 L 500 184" fill="none" class="halo" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 500 280 L 500 184" class="edge" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  </g>
+  <g>
+    <path d="M 500 344 L 500 440" fill="none" class="halo" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 500 344 L 500 440" class="edge-optional" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
+  </g>
+  <g>
+    <path d="M 570 296 L 607 296 Q 615 296 615 288 L 615 160 Q 615 152 623 152 L 660 152" fill="none" class="halo" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 570 296 L 607 296 Q 615 296 615 288 L 615 160 Q 615 152 623 152 L 660 152" class="edge" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  </g>
+  <g>
+    <path d="M 515.05 344 L 515.05 360 Q 515.05 368 523.05 368 L 727 368 Q 735 368 735 360 L 735 344" fill="none" class="halo" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 515.05 344 L 515.05 360 Q 515.05 368 523.05 368 L 727 368 Q 735 368 735 360 L 735 344" class="edge-main" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+  </g>
+  <g>
+    <path d="M 486 344 L 486 429 Q 486 437 494 437 L 628 437 Q 636 437 636 445 L 636 464 Q 636 472 644 472 L 660 472" fill="none" class="halo" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 486 344 L 486 429 Q 486 437 494 437 L 628 437 Q 636 437 636 445 L 636 464 Q 636 472 644 472 L 660 472" class="edge-optional" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
+  </g>
+  <g>
+    <path d="M 570 317.3333333333333 L 586 317.3333333333333 Q 594 317.3333333333333 594 309.3333333333333 L 594 285 Q 594 277 602 277 L 848 277 Q 856 277 856 285 L 856 304 Q 856 312 864 312 L 880 312" fill="none" class="halo" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 570 317.3333333333333 L 586 317.3333333333333 Q 594 317.3333333333333 594 309.3333333333333 L 594 285 Q 594 277 602 277 L 848 277 Q 856 277 856 285 L 856 304 Q 856 312 864 312 L 880 312" class="edge" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  </g>
+
+  <!-- Components -->
+  <g id="node-user">
+    <title>Operator · CLI / Hermes / HTTP</title>
+    <rect x="40" y="280" width="130" height="64" rx="6" class="plate"/>
+    <rect x="40" y="280" width="130" height="64" rx="6" class="box-external" stroke-width="1.5"/>
+    <g aria-hidden="true" class="icon icon-external" transform="translate(46 286) scale(0.6875)">
+      <rect x="2.5" y="5" width="8.5" height="8" rx="1.5"/>
+      <path d="M8 2.5h5.5V8M13.5 2.5 7.5 8.5"/>
+    </g>
+    <text x="105" y="310" class="label" font-size="11" font-weight="600" text-anchor="middle">Operator</text>
+    <text x="105" y="326" class="sublabel" font-size="9" text-anchor="middle">CLI / Hermes / HTTP</text>
+  </g>
+
+  <g id="node-cli">
+    <title>maestro CLI · route and serve · Maestro runtime</title>
+    <rect x="230" y="280" width="130" height="64" rx="6" class="plate"/>
+    <rect x="230" y="280" width="130" height="64" rx="6" class="box-backend" stroke-width="1.5"/>
+    <g aria-hidden="true" class="icon icon-backend" transform="translate(236 286) scale(0.6875)">
+      <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+    </g>
+    <text x="295" y="310" class="label" font-size="11" font-weight="600" text-anchor="middle">maestro CLI</text>
+    <text x="295" y="326" class="sublabel" font-size="9" text-anchor="middle">route and serve</text>
+  </g>
+
+  <g id="node-decide">
+    <title>decide / router · classify → ladder · Maestro runtime · 11 jobs</title>
+    <rect x="430" y="280" width="140" height="64" rx="6" class="plate"/>
+    <rect x="430" y="280" width="140" height="64" rx="6" class="box-backend" stroke-width="1.5"/>
+    <g aria-hidden="true" class="icon icon-backend" transform="translate(436 286) scale(0.6875)">
+      <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+    </g>
+    <text x="500" y="310" class="label" font-size="11" font-weight="600" text-anchor="middle">decide / router</text>
+    <text x="500" y="326" class="sublabel" font-size="9" text-anchor="middle">classify → ladder</text>
+    <text x="500" y="336" class="tag-backend" font-size="7" text-anchor="middle">11 jobs</text>
+  </g>
+
+  <g id="node-catalog">
+    <title>inventory · models you can run · Maestro runtime</title>
+    <rect x="430" y="120" width="140" height="64" rx="6" class="plate"/>
+    <rect x="430" y="120" width="140" height="64" rx="6" class="box-database" stroke-width="1.5"/>
+    <g aria-hidden="true" class="icon icon-database" transform="translate(436 126) scale(0.6875)">
+      <ellipse cx="8" cy="4" rx="5" ry="2"/>
+      <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
+    </g>
+    <text x="500" y="150" class="label" font-size="11" font-weight="600" text-anchor="middle">inventory</text>
+    <text x="500" y="166" class="sublabel" font-size="9" text-anchor="middle">models you can run</text>
+  </g>
+
+  <g id="node-jev">
+    <title>JEV (optional) · when a key is set · Maestro runtime</title>
+    <rect x="430" y="440" width="140" height="64" rx="6" class="plate"/>
+    <rect x="430" y="440" width="140" height="64" rx="6" class="box-cloud" stroke-width="1.5"/>
+    <g aria-hidden="true" class="icon icon-cloud" transform="translate(436 446) scale(0.6875)">
+      <path d="M4.3 12.5h7.3a2.4 2.4 0 0 0 .2-4.8 4 4 0 0 0-7.5-1.3A3.1 3.1 0 0 0 4.3 12.5Z"/>
+    </g>
+    <text x="500" y="470" class="label" font-size="11" font-weight="600" text-anchor="middle">JEV (optional)</text>
+    <text x="500" y="486" class="sublabel" font-size="9" text-anchor="middle">when a key is set</text>
+  </g>
+
+  <g id="node-local">
+    <title>Local endpoints · vLLM / Ollama / …</title>
+    <rect x="660" y="120" width="150" height="64" rx="6" class="plate"/>
+    <rect x="660" y="120" width="150" height="64" rx="6" class="box-backend" stroke-width="1.5"/>
+    <g aria-hidden="true" class="icon icon-backend" transform="translate(666 126) scale(0.6875)">
+      <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+    </g>
+    <text x="735" y="150" class="label" font-size="11" font-weight="600" text-anchor="middle">Local endpoints</text>
+    <text x="735" y="166" class="sublabel" font-size="9" text-anchor="middle">vLLM / Ollama / …</text>
+  </g>
+
+  <g id="node-cloud">
+    <title>Cloud seats · fast→frontier</title>
+    <rect x="660" y="280" width="150" height="64" rx="6" class="plate"/>
+    <rect x="660" y="280" width="150" height="64" rx="6" class="box-cloud" stroke-width="1.5"/>
+    <g aria-hidden="true" class="icon icon-cloud" transform="translate(666 286) scale(0.6875)">
+      <path d="M4.3 12.5h7.3a2.4 2.4 0 0 0 .2-4.8 4 4 0 0 0-7.5-1.3A3.1 3.1 0 0 0 4.3 12.5Z"/>
+    </g>
+    <text x="735" y="310" class="label" font-size="11" font-weight="600" text-anchor="middle">Cloud seats</text>
+    <text x="735" y="326" class="sublabel" font-size="9" text-anchor="middle">fast→frontier</text>
+  </g>
+
+  <g id="node-specialist">
+    <title>Specialists · coder / SQL / …</title>
+    <rect x="660" y="440" width="150" height="64" rx="6" class="plate"/>
+    <rect x="660" y="440" width="150" height="64" rx="6" class="box-backend" stroke-width="1.5"/>
+    <g aria-hidden="true" class="icon icon-backend" transform="translate(666 446) scale(0.6875)">
+      <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+    </g>
+    <text x="735" y="470" class="label" font-size="11" font-weight="600" text-anchor="middle">Specialists</text>
+    <text x="735" y="486" class="sublabel" font-size="9" text-anchor="middle">coder / SQL / …</text>
+  </g>
+
+  <g id="node-server">
+    <title>HTTP server · web UI + API · Maestro runtime</title>
+    <rect x="230" y="120" width="130" height="64" rx="6" class="plate"/>
+    <rect x="230" y="120" width="130" height="64" rx="6" class="box-backend" stroke-width="1.5"/>
+    <g aria-hidden="true" class="icon icon-backend" transform="translate(236 126) scale(0.6875)">
+      <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+    </g>
+    <text x="295" y="150" class="label" font-size="11" font-weight="600" text-anchor="middle">HTTP server</text>
+    <text x="295" y="166" class="sublabel" font-size="9" text-anchor="middle">web UI + API</text>
+  </g>
+
+  <g id="node-learn">
+    <title>learn · local feedback · Maestro runtime</title>
+    <rect x="880" y="280" width="130" height="64" rx="6" class="plate"/>
+    <rect x="880" y="280" width="130" height="64" rx="6" class="box-database" stroke-width="1.5"/>
+    <g aria-hidden="true" class="icon icon-database" transform="translate(886 286) scale(0.6875)">
+      <ellipse cx="8" cy="4" rx="5" ry="2"/>
+      <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
+    </g>
+    <text x="945" y="310" class="label" font-size="11" font-weight="600" text-anchor="middle">learn</text>
+    <text x="945" y="326" class="sublabel" font-size="9" text-anchor="middle">local feedback</text>
+  </g>
+
+  <!-- Connection labels -->
+  <g>
+    <rect x="173.4" y="292" width="53.199999999999996" height="14" rx="3" class="plate"/>
+    <text x="200" y="302" class="edge-label-main" font-size="8" text-anchor="middle">task text</text>
+  </g>
+  <g>
+    <rect x="119.5" y="236" width="72" height="14" rx="3" class="plate"/>
+    <text x="155.5" y="246" class="edge-label" font-size="8" text-anchor="middle">chat and UI</text>
+  </g>
+
+  <g>
+    <rect x="345" y="210" width="70" height="14" rx="3" class="plate"/>
+    <text x="380" y="220" class="edge-label" font-size="8" text-anchor="middle">same ladder</text>
+  </g>
+  <g>
+    <rect x="473.4" y="260" width="53.199999999999996" height="14" rx="3" class="plate"/>
+    <text x="500" y="270" class="edge-label" font-size="8" text-anchor="middle">inventory</text>
+  </g>
+  <g>
+    <rect x="505.99999999999994" y="385" width="91.6" height="14" rx="3" class="plate"/>
+    <text x="551.8" y="395" class="edge-label-optional" font-size="8" text-anchor="middle">optional classify</text>
+  </g>
+  <g>
+    <rect x="586" y="204" width="58" height="14" rx="3" class="plate"/>
+    <text x="615" y="214" class="edge-label" font-size="8" text-anchor="middle">local cell</text>
+  </g>
+  <g>
+    <rect x="588.8249999999999" y="348" width="72.4" height="14" rx="3" class="plate"/>
+    <text x="625.025" y="358" class="edge-label-main" font-size="8" text-anchor="middle">policy ladder</text>
+  </g>
+  <g>
+    <rect x="534.4" y="417" width="53.199999999999996" height="14" rx="3" class="plate"/>
+    <text x="561" y="427" class="edge-label-optional" font-size="8" text-anchor="middle">job match</text>
+  </g>
+  <g>
+    <rect x="688.8" y="257" width="72.4" height="14" rx="3" class="plate"/>
+    <text x="725" y="267" class="edge-label" font-size="8" text-anchor="middle">decision JSON</text>
+  </g>
+
+  <!-- Boundary labels (foreground masks keep routes out of titles) -->
+  <g>
+    <rect x="204" y="100" width="226" height="16" rx="3" class="plate"/>
+    <text x="208" y="113" class="tag-cloud" font-size="9" font-weight="600">Maestro runtime</text>
+  </g>
+
+  <!-- Legend -->
+  <g>
+    <text x="40" y="556" class="label" font-size="12" font-weight="650">Legend</text>
+    <g>
+      <rect x="40" y="567" width="16" height="10" rx="2.5" class="box-backend" stroke-width="1"/>
+      <text x="62" y="576" class="sublabel" font-size="10" font-weight="500">Backend</text>
+    </g>
+    <g>
+      <rect x="140" y="567" width="16" height="10" rx="2.5" class="box-database" stroke-width="1"/>
+      <text x="162" y="576" class="sublabel" font-size="10" font-weight="500">Database</text>
+    </g>
+    <g>
+      <rect x="245" y="567" width="16" height="10" rx="2.5" class="box-cloud" stroke-width="1"/>
+      <text x="267" y="576" class="sublabel" font-size="10" font-weight="500">Cloud</text>
+    </g>
+    <g>
+      <rect x="335" y="567" width="16" height="10" rx="2.5" class="box-external" stroke-width="1"/>
+      <text x="357" y="576" class="sublabel" font-size="10" font-weight="500">External</text>
+    </g>
+  </g>
+</svg>

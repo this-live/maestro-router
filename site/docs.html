@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maestro docs: install, serve, Hermes and local models</title>
+<meta name="description" content="How to install Maestro, use it as a skill or as an OpenAI-compatible endpoint, connect Hermes Agent, add the models you already serve (vLLM on a DGX Spark, Ollama, ...), and the CLI reference.">
+<meta name="theme-color" content="#0A0F2E">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/static/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/static/icon-180.png">
+<link rel="manifest" href="/static/manifest.json">
+<link rel="stylesheet" href="/static/site.css">
+<script src="/static/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="content">
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Maestro home"><img src="/static/icon-64.png" alt="" width="30" height="30"><span class="wordmark">MAESTRO</span></a>
+    <nav class="links" aria-label="Main">
+      <a class="opt" href="/#how">How it works</a>
+      <a href="/docs" aria-current="page">Docs</a>
+      <a class="gh" href="https://github.com/this-live/maestro-router" aria-label="Maestro on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5.5 3.5 1 8l4.5 4.5 1.1-1.1L3.2 8l3.4-3.4zm5 0-1.1 1.1L12.8 8l-3.4 3.4 1.1 1.1L15 8z"/></svg><span>GitHub</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="page">
+  <div class="wrap">
+    <div class="page-head">
+      <div class="kicker">Documentation</div>
+      <h1>Maestro docs</h1>
+      <p>Everything here comes from the <a href="https://github.com/this-live/maestro-router#readme">README</a>, which is the full reference. Maestro is stdlib-only Python 3.9+ and runs entirely on your machine.</p>
+    </div>
+    <div class="docs">
+      <nav class="toc" aria-label="On this page">
+        <b>On this page</b>
+        <a href="#quick-start">Quick start</a>
+        <a href="#skill">Use it as a skill</a>
+        <a href="#provider">Use it as a provider</a>
+        <a href="#hermes">Hermes Agent</a>
+        <a href="#model-names">Model names</a>
+        <a href="#local">Spark, vLLM, Ollama</a>
+        <a href="#config">Config basics</a>
+        <a href="#cli">CLI reference</a>
+        <a href="#privacy">Privacy and security</a>
+      </nav>
+      <article class="prose">
+
+        <h2 id="quick-start">Quick start</h2>
+        <p>Install it one of three ways. All of them run the same code.</p>
+        <div class="code-title">Any harness that supports Agent Skills (Claude Code, Codex, OpenCode, Gemini CLI, Cursor and others)</div>
+        <div class="code"><pre><span class="p">$ </span>npx skills add this-live/maestro-router</pre></div>
+        <div class="code-title">Claude Code plugin marketplace</div>
+        <div class="code"><pre><span class="p">$ </span>claude plugin marketplace add this-live/maestro-router
+<span class="p">$ </span>claude plugin install maestro@maestro</pre></div>
+        <p class="small">The skills installer and the plugin marketplace track the repository's default branch; the skills installer has no option to pin a release.</p>
+        <div class="code-title">pip (gives you the <code>maestro-router</code> command; not on PyPI yet, so install from GitHub, pinned to the v3.1.1 release)</div>
+        <div class="code"><pre><span class="p">$ </span>pip install https://github.com/this-live/maestro-router/releases/download/v3.1.1/maestro_router-3.1.1-py3-none-any.whl
+<span class="c"># or from source:</span>
+<span class="p">$ </span>pip install git+https://github.com/this-live/maestro-router@v3.1.1
+<span class="c"># or, without installing:</span>
+<span class="p">$ </span>uvx --from git+https://github.com/this-live/maestro-router@v3.1.1 maestro-router route "fix the failing test"</pre></div>
+        <p class="small">The command is <code>maestro-router</code> because mobile.dev's Maestro (mobile UI testing) already uses <code>maestro</code>; add <code>alias maestro=maestro-router</code> to your shell profile if you want the short name.</p>
+        <p>Then, for provider mode, the web UI and Hermes:</p>
+        <div class="code"><pre><span class="c"># detect providers, add keys (hidden input), add model servers you already run, score every model, connect Hermes</span>
+<span class="p">$ </span>maestro-router setup
+<span class="c"># http://127.0.0.1:4545/v1 for clients, and the web UI</span>
+<span class="p">$ </span>maestro-router serve --open
+<span class="c"># or paste the output of `maestro-router hermes --print` into ~/.hermes/config.yaml</span>
+<span class="p">$ </span>maestro-router hermes --install</pre></div>
+        <p class="muted">Without pip, run any command as <code>python3 skills/maestro/scripts/maestro &lt;command&gt;</code> from a checkout. <code>maestro-router doctor</code> shows what Maestro detected.</p>
+
+        <h2 id="skill">Use it as a skill</h2>
+        <p>Inside a coding agent, tell it "use maestro", "route this" or "use the right model". For each real unit of work the agent runs <code>maestro-router route</code>, which classifies the subtask into one of eleven jobs and a difficulty from 0 to 3, picks a category from the ladder, and answers with JSON that says who should run it:</p>
+        <div class="code"><pre><span class="p">$ </span>maestro-router route --harness claude-code "why's the checkout test flaky"
+<span class="o">{"job": "debug", "difficulty": 2, "confidence": 0.95, "needs": ["tools"],
+ "category": "standard", "seat": "claude-code", "model": "sonnet",
+ "delegate": {"kind": "subagent", "harness": "claude-code", "model": "sonnet"},
+ "reason": "debug/d2 → standard; claude-code subagent available", ...}</span></pre></div>
+        <div class="tablewrap"><table>
+          <thead><tr><th><code>delegate.kind</code></th><th>What the agent does</th></tr></thead>
+          <tbody>
+            <tr><td><code>subagent</code></td><td>Uses its own subagent mechanism with that model (Claude Code: the Agent tool's <code>model</code> parameter).</td></tr>
+            <tr><td><code>local</code></td><td>Runs <code>argv</code>, which calls <code>maestro-router run</code> on a local or network model, and uses the printed reply.</td></tr>
+            <tr><td><code>cli</code></td><td>Runs another installed CLI headless (<code>claude -p</code>, <code>codex exec</code>, <code>gemini -p</code>, <code>opencode run</code>).</td></tr>
+            <tr><td><code>inline</code></td><td>Does it itself: it is already on the right tier, or no better seat exists.</td></tr>
+          </tbody>
+        </table></div>
+        <p>OpenCode and Gemini CLI delegate by category: run <code>maestro-router install</code> once to create their <code>maestro-&lt;category&gt;</code> subagents, and again after you change their models. <code>maestro-router route --explain</code> adds the classifier signals, the ladder cell and the tier walk.</p>
+
+        <h2 id="provider">Use it as a model provider</h2>
+        <p><code>maestro-router serve</code> runs a local OpenAI-compatible endpoint (default <code>http://127.0.0.1:4545/v1</code>) and the web UI. Point a client at it with the model name <code>maestro/auto</code>:</p>
+        <div class="code"><pre>from openai import OpenAI
+client = OpenAI(base_url="http://127.0.0.1:4545/v1", api_key="anything")
+r = client.chat.completions.create(model="maestro/auto", messages=[{"role": "user", "content": "why is my test flaky?"}])
+print(r.model)   <span class="c"># the model Maestro chose</span></pre></div>
+        <ul>
+          <li><strong>Per request</strong>, Maestro keeps the enabled models that can take it (tools, images, context window, quota), keeps those whose score for the job reaches the category's floor, and ranks them by expected cost, quota headroom and observed latency.</li>
+          <li><strong>Streaming, tool calls</strong>, <code>stream_options.include_usage</code> and images pass through; Anthropic models are translated both ways.</li>
+          <li><strong>Agent loops stay on one model.</strong> A request whose last message is a tool result reuses the model chosen for that conversation (keyed on <code>X-Session-Id</code>, or a hash of the system prompt and first user message; 30 minutes). A new user message is routed afresh.</li>
+          <li><strong>Fallback.</strong> On a 429, 5xx, timeout or connection error before the first byte, the next candidate is tried (three at most) and the failing model cools down. The <code>x-maestro-decision</code> response header says what was chosen and why.</li>
+          <li><strong>Subscription seats</strong> (Claude Code, Codex, Gemini CLI) serve chat only: never a request with tools or images.</li>
+          <li><strong>Binding.</strong> <code>127.0.0.1</code> needs nothing. <code>--host 0.0.0.0</code> requires <code>MAESTRO_API_KEY</code> in the server's environment; clients send it as <code>Authorization: Bearer ...</code>.</li>
+        </ul>
+        <p>The web UI link that <code>maestro-router serve</code> prints carries the admin token (kept in <code>~/.maestro/admin_token</code>, mode 600).</p>
+
+        <h2 id="hermes">Hermes Agent</h2>
+        <p><code>maestro-router hermes --install</code> appends the missing top-level blocks to <code>~/.hermes/config.yaml</code> after making a backup; if a block already exists it prints it for you to merge, because Maestro does not rewrite YAML it did not write. <code>maestro-router hermes --print</code> prints this:</p>
+        <div class="code"><pre><span class="c"># Maestro as a custom provider for Hermes Agent (merge into ~/.hermes/config.yaml)</span>
+model:
+  default: maestro/auto
+  provider: custom
+  base_url: http://127.0.0.1:4545/v1
+  api_key: maestro  <span class="c"># placeholder: Maestro ignores it unless MAESTRO_API_KEY is set</span>
+  context_length: 128000
+auxiliary:
+  compression:
+    provider: custom
+    base_url: http://127.0.0.1:4545/v1
+    api_key: maestro
+    model: maestro/fast
+  title_generation:
+    provider: custom
+    base_url: http://127.0.0.1:4545/v1
+    api_key: maestro
+    model: maestro/fast
+  session_search:
+    provider: custom
+    base_url: http://127.0.0.1:4545/v1
+    api_key: maestro
+    model: maestro/fast
+  vision:
+    provider: custom
+    base_url: http://127.0.0.1:4545/v1
+    api_key: maestro
+    model: maestro/auto
+delegation:
+  base_url: http://127.0.0.1:4545/v1
+  api_key: maestro
+  model: maestro/auto</pre></div>
+
+        <h2 id="model-names">Model names</h2>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Name</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><code>maestro/auto</code></td><td>Classifies the request and routes it.</td></tr>
+            <tr><td><code>maestro/&lt;category&gt;</code></td><td>Fixes the category: <code>maestro/local</code>, <code>fast</code>, <code>standard</code>, <code>strong</code> or <code>frontier</code>.</td></tr>
+            <tr><td><code>maestro/&lt;job&gt;</code></td><td>Fixes the job (<code>maestro/code</code>, <code>maestro/debug</code>, <code>maestro/plan</code>, ...); the difficulty still comes from the text.</td></tr>
+            <tr><td><code>&lt;provider&gt;/&lt;model&gt;</code></td><td>Goes straight to that model (see <code>GET /v1/models</code>), with fallback to the next-best of its category.</td></tr>
+          </tbody>
+        </table></div>
+        <p>The eleven jobs are <code>plan</code>, <code>code</code>, <code>debug</code>, <code>review</code>, <code>ops</code>, <code>research</code>, <code>data</code>, <code>write</code>, <code>edit</code>, <code>summarize</code> and <code>ask</code>.</p>
+
+        <h2 id="local">Models you already serve: DGX Spark, vLLM, Ollama</h2>
+        <p>Maestro never downloads, loads, starts or installs a model. It looks at what is already being served on this machine and on your network and uses exactly those models. Ollama (<code>:11434</code>), LM Studio (<code>:1234</code>), vLLM (<code>:8000</code>), SGLang (<code>:30000</code>) and llama.cpp (<code>:8080</code>) on localhost are found by themselves. For a box on your network, add it once:</p>
+        <div class="code"><pre><span class="c"># or answer the question in `maestro-router setup`; saved to local_endpoints</span>
+<span class="p">$ </span>maestro-router setup --endpoint http://spark.local:8000
+<span class="c"># scores what the Spark serves ("spark: serving 1 model (gpt-oss-120b) - using these")</span>
+<span class="p">$ </span>maestro-router discover</pre></div>
+        <p>The same thing in <code>~/.maestro/config.json</code> (vLLM has to listen beyond localhost, <code>--host 0.0.0.0</code>, for other machines to reach it; it serves one model per port, so add one entry per port):</p>
+        <div class="code"><pre>{"local_endpoints": [{"name": "spark", "url": "http://spark.local:8000", "kind": "openai"}]}</pre></div>
+        <ul>
+          <li><strong>Installed is not served.</strong> Ollama and LM Studio load models on demand, which can run a machine out of memory, so Maestro asks which models are <em>loaded</em> and routes only to those (unless you set <code>"local_allow_load": true</code>).</li>
+          <li><strong>Strength from size by default:</strong> under 10B serves <code>local</code> cells, 10B to 40B up to <code>fast</code>, 40B or more up to <code>standard</code>. Change it with <code>local_models</code> or pin models under <code>models.local</code>.</li>
+          <li><strong>Chat-only jobs.</strong> A plain local model takes <code>ask</code>, <code>summarize</code>, <code>write</code>, <code>plan</code> and <code>data</code> when the task needs no repo tools; repo jobs use it only when your harness runs it natively as a subagent.</li>
+          <li><strong>Suggestions only when nothing is served.</strong> <code>maestro-router discover --local-fit</code> lists open-weight models that would fit a box's memory, with a serve command. That is advice: Maestro prints a command and stops.</li>
+          <li><code>maestro-router detect --scan</code> probes your own /24 subnet for Ollama and OpenAI-compatible servers, only when you ask; <code>--save</code> adds what it finds. <code>MAESTRO_NO_SCAN=1</code> forbids it.</li>
+        </ul>
+
+        <h2 id="config">Config basics</h2>
+        <p>Optional <code>~/.maestro/config.json</code> (<code>MAESTRO_HOME</code> moves the directory). Every key is optional; <code>maestro-router config</code> prints the effective config. A few you are most likely to want:</p>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Key</th><th>Default</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><code>max_tier</code></td><td><code>"frontier"</code></td><td>Never route to a cloud model above this, e.g. <code>"strong"</code>.</td></tr>
+            <tr><td><code>prefer_local</code></td><td><code>true</code></td><td>Use local and network models for the jobs they can do.</td></tr>
+            <tr><td><code>local_endpoints</code></td><td><code>[]</code></td><td>Model servers on your network, as above.</td></tr>
+            <tr><td><code>objective</code></td><td><code>"balanced"</code></td><td><code>"cost"</code> (cheapest that works) or <code>"quality"</code>.</td></tr>
+            <tr><td><code>ladder</code></td><td><code>{}</code></td><td>Override rows of the job by difficulty table, e.g. <code>{"ask": ["local", "fast", "fast", "standard"]}</code>.</td></tr>
+            <tr><td><code>models</code></td><td><code>{}</code></td><td>The model per harness and category; <code>maestro-router models set codex.fast gpt-6-luna</code> edits one cell.</td></tr>
+            <tr><td><code>log_prompts</code></td><td><code>false</code></td><td>Keep the first 120 characters of each prompt in the request log.</td></tr>
+            <tr><td><code>private</code></td><td><code>false</code></td><td>Only local models (or the calling agent) see tasks.</td></tr>
+            <tr><td><code>decider</code></td><td><code>"ladder"</code></td><td><code>"utility"</code> lets Maestro S1 and the expected-utility ranking pick the seat (S1 runs in shadow otherwise).</td></tr>
+          </tbody>
+        </table></div>
+
+        <h2 id="cli">CLI reference</h2>
+        <div class="code"><pre>maestro-router route "&lt;task&gt;" [--harness H] [--current-tier T] [--classifier auto|rules|s1|jev] [--format json|text] [--explain]
+maestro-router setup [--yes] [--endpoint URL]   quick start: detect, add keys and model servers, discover, connect Hermes and the skill
+maestro-router serve [--host 127.0.0.1] [--port 4545] [--open]   OpenAI-compatible router + web UI
+maestro-router hermes [--print | --install]   the Hermes Agent config for Maestro
+maestro-router detect [--catalog] [--models] [--scan [--save]] [--json]
+maestro-router discover [--refresh-catalog] [--backtest] [--live N] [--local-fit] [--all] [--json]
+maestro-router models [--suggest | --save | --check | --seats] [--json]
+maestro-router models set &lt;harness&gt;.&lt;category&gt; &lt;model&gt; [--effort E]
+maestro-router keys set &lt;provider|ENV_VAR&gt; [value]     store an API key in ~/.maestro/keys.env (mode 600)
+maestro-router keys unset &lt;provider|ENV_VAR&gt;
+maestro-router keys list [--all | &lt;provider&gt;]          which providers have a key (values are never shown)
+maestro-router run &lt;model-id&gt; ["&lt;task&gt;"] [--system S] [--timeout SECONDS] [--allow-load]
+maestro-router install [--harness claude-code|opencode|gemini-cli|all] [--dry-run]
+maestro-router outcome &lt;decision_id|last&gt; pass|partial|fail [--tests P/T]
+maestro-router s1 "&lt;task&gt;" [--json]
+maestro-router learn [--report | --audit | --reset | --dry-run]
+maestro-router doctor [--jev]
+maestro-router config</pre></div>
+        <p class="muted">The full list, with every flag, is in the <a href="https://github.com/this-live/maestro-router#commands">README</a>.</p>
+
+        <h2 id="privacy">Privacy and security</h2>
+        <ul>
+          <li>Detection checks that API key variables, <code>keys.env</code> entries and login files <em>exist</em>; subscription logins are never read or forwarded.</li>
+          <li>A key is read only to authenticate to its own provider and is never printed, logged, returned by an API or stored anywhere but <code>~/.maestro/keys.env</code> (mode 600).</li>
+          <li>The request log (<code>~/.maestro/maestro.db</code>) keeps no prompt text unless you set <code>log_prompts: true</code>.</li>
+          <li>The only third party Maestro talks to on its own is the optional Jev classifier, and only when you set <code>TYPESAFE_API_KEY</code>: it sends the task text (up to 4,000 characters) and the names and descriptions of your candidate models. Use <code>--classifier rules</code> to keep every task local.</li>
+        </ul>
+        <p>This website's own policy is on the <a href="/privacy">privacy page</a>.</p>
+      </article>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Maestro home"><img src="/static/icon-64.png" alt="" width="24" height="24"><span class="wordmark">MAESTRO</span></a>
+    <nav aria-label="Footer">
+      <a href="https://github.com/this-live/maestro-router">GitHub</a>
+      <a href="/docs">Docs</a>
+      <a href="https://github.com/this-live/maestro-router/blob/main/LICENSE">Apache-2.0 License</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="https://this.live/">this.live</a>
+    </nav>
+    <span>Free and open source, made by <a href="https://this.live/">this.live</a>. No cookies, no analytics.</span>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

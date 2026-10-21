@@ -1,0 +1,2 @@
+# S1 weights (evals/train_s1.py): binary, never diffed or merged as text
+skills/maestro/scripts/maestro/data/*.bin binary

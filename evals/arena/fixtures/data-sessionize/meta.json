@@ -1,0 +1,2 @@
+{"id": "data-sessionize", "job": "data", "difficulty_intent": 2, "language": "python", "timeout_s": 900,
+ "test_cmd": "python3 -m unittest discover -s hidden_tests -t . -q", "needs_tools": true}

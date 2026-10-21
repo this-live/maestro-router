@@ -1,0 +1,65 @@
+name: site smoke test
+# After a push to main, wait until Railway serves that commit, then check the live site.
+on:
+  push:
+    branches: [main, "claude/**"]
+    paths: ["site/**", "railway.toml", ".dockerignore", ".github/workflows/site-smoke.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    # Railway deploys maestro.this.live from the public repository only.
+    if: github.repository == 'this-live/maestro-router'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      SITE: https://maestro.this.live
+      REF: ${{ github.ref }}
+    steps:
+      - name: wait for this commit to be live
+        run: |
+          diag() {
+            for p in / /health /version; do
+              code=$(curl -s -o /tmp/b -w '%{http_code}' --max-time 15 "$SITE$p" || echo "000")
+              body=$(head -c 160 /tmp/b 2>/dev/null | tr '\n\r' '  ' | tr -cd '[:print:]')
+              echo "::warning title=live $p::HTTP $code; body: ${body:-<empty>}"
+            done
+            hdrs=$(curl -sI --max-time 15 "$SITE/" | tr -d '\r' | grep -iE '^(HTTP|server|x-railway|content-type|location)' | tr '\n' '; ')
+            echo "::warning title=live headers::${hdrs:-<no response>}"
+          }
+          n=60; [ "$REF" = "refs/heads/main" ] || n=3
+          for i in $(seq 1 $n); do
+            live=$(curl -fsS --max-time 10 "$SITE/version" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("commit",""))' 2>/dev/null || true)
+            echo "attempt $i: live commit '${live}'"
+            if [ "$live" = "$GITHUB_SHA" ] || { [ "$REF" != "refs/heads/main" ] && [ -n "$live" ] && [ "$live" != "unknown" ]; }; then echo "::notice title=live commit::$live"; exit 0; fi
+            if [ "$live" = "unknown" ] && curl -fsS --max-time 10 "$SITE/" | grep -q "Route every task"; then
+              echo "::warning title=commit unknown::the new site is live but RAILWAY_GIT_COMMIT_SHA is not set, so the exact commit cannot be confirmed"
+              exit 0
+            fi
+            sleep 20
+          done
+          if [ "$REF" != "refs/heads/main" ]; then
+            echo "::notice title=branch run::diagnostics only; a branch commit is not deployed"
+            diag
+            exit 0
+          fi
+          echo "::error title=not live::Railway did not serve $GITHUB_SHA (attempts: $n)"
+          diag
+          exit 1
+      - name: check pages
+        if: github.ref == 'refs/heads/main'
+        run: |
+          set -e
+          check() { code=$(curl -s -o /tmp/body -w '%{http_code}' --max-time 15 "$SITE$1"); echo "$1 -> $code"; [ "$code" = "$2" ] || { head -c 400 /tmp/body; exit 1; }; [ -z "$3" ] || grep -q "$3" /tmp/body || { echo "missing: $3"; exit 1; }; }
+          check /health 200 ok
+          check / 200 "Route every task"
+          check / 200 "https://this.live/"
+          check /docs 200 "maestro-router setup"
+          check /privacy 200 ""
+          check /terms 200 "Apache License"
+          check /demo/ 404 ""
+          check /static/site.css 200 ""
+          check /no-such-page 404 ""
+          curl -sI "$SITE/" | grep -qi "content-security-policy" || { echo "missing CSP header"; exit 1; }
+          code=$(curl -s -o /dev/null -w '%{http_code}' -X POST -H 'Content-Type: application/json' -d '{}' "$SITE/"); echo "POST / -> $code"; [ "$code" = "405" ]

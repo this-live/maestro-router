@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Maestro</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A0F2E'/%3E%3Cpath d='M15 22V13M49 22V13' stroke='%233B82F6' stroke-width='2'/%3E%3Ccircle cx='15' cy='11' r='3' fill='%233B9BFF'/%3E%3Ccircle cx='49' cy='11' r='3' fill='%233B9BFF'/%3E%3Crect x='5' y='26' width='7' height='17' rx='3.5' fill='%231E7BEF'/%3E%3Crect x='52' y='26' width='7' height='17' rx='3.5' fill='%231E7BEF'/%3E%3Cpath d='M14 23Q32 13 50 23V41L32 56 14 41Z' fill='%239DB8F5'/%3E%3Cpath d='M19 28H45V39.5L32 50 19 39.5Z' fill='%230A0F2E'/%3E%3Ccircle cx='26.5' cy='34' r='3' fill='%237DE3FF'/%3E%3Ccircle cx='37.5' cy='34' r='3' fill='%237DE3FF'/%3E%3Cpath d='M28 41Q32 44 36 41' fill='none' stroke='%2300D4FF' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<style>
+:root {
+  --bg: #F3F6FC; --surface: #ffffff; --surface-2: #EDF1F9; --border: #DCE3F0; --border-strong: #C3CEE3;
+  --text: #0A0F2E; --muted: #4A5873; --faint: #66738C; --accent: #0077B6; --accent-ink: #ffffff; --accent-soft: #E0F2FB;
+  --good: #0F7B47; --good-soft: #DCF5E7; --warn: #9A5B00; --warn-soft: #FCEFD5; --bad: #C22F2F; --bad-soft: #FDE4E4; --info-soft: #E3EFFB;
+  --c-local: #0E8A7D; --c-fast: #2F7FC9; --c-standard: #4F5BD5; --c-strong: #8A4FD0; --c-frontier: #C23A86; --c-specialist: #B8681A;
+  --shadow: 0 1px 2px rgba(10,15,46,.05), 0 4px 16px rgba(10,15,46,.05); --glow: rgba(0,119,182,.06); --brand-a: #0A0F2E; --brand-b: #0077B6;
+  --mono: "SF Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0A0F2E; --surface: #111833; --surface-2: #18234D; --border: #1C2A5C; --border-strong: #1E3A8A;
+    --text: #E2E8F0; --muted: #94A3B8; --faint: #7D8CA3; --accent: #00D4FF; --accent-ink: #0A0F2E; --accent-soft: #0B2F4D;
+    --good: #34D399; --good-soft: #0E2B2C; --warn: #FBBF24; --warn-soft: #2E2612; --bad: #F87171; --bad-soft: #3A1625; --info-soft: #0F2547;
+    --c-local: #2DD4BF; --c-fast: #60A5FA; --c-standard: #818CF8; --c-strong: #C084FC; --c-frontier: #F472B6; --c-specialist: #FB923C;
+    --shadow: 0 1px 2px rgba(0,0,0,.35), 0 8px 24px rgba(2,6,23,.35); --glow: rgba(0,212,255,.07); --brand-a: #FFFFFF; --brand-b: #00D4FF;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0A0F2E; --surface: #111833; --surface-2: #18234D; --border: #1C2A5C; --border-strong: #1E3A8A;
+  --text: #E2E8F0; --muted: #94A3B8; --faint: #7D8CA3; --accent: #00D4FF; --accent-ink: #0A0F2E; --accent-soft: #0B2F4D;
+  --good: #34D399; --good-soft: #0E2B2C; --warn: #FBBF24; --warn-soft: #2E2612; --bad: #F87171; --bad-soft: #3A1625; --info-soft: #0F2547;
+  --c-local: #2DD4BF; --c-fast: #60A5FA; --c-standard: #818CF8; --c-strong: #C084FC; --c-frontier: #F472B6; --c-specialist: #FB923C;
+  --shadow: 0 1px 2px rgba(0,0,0,.35), 0 8px 24px rgba(2,6,23,.35); --glow: rgba(0,212,255,.07); --brand-a: #FFFFFF; --brand-b: #00D4FF;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg) radial-gradient(1200px 420px at 50% -120px, var(--glow), transparent 70%) no-repeat; color: var(--text); font: 14px/1.45 var(--sans); min-height: 100vh; }
+h1, h2, h3 { margin: 0; font-weight: 650; letter-spacing: -.01em; }
+h2 { font-size: 15px; } h3 { font-size: 13px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+code, .mono { font-family: var(--mono); font-size: .92em; }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+
+/* shell */
+header.top { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border); }
+.bar { max-width: 1280px; margin: 0 auto; padding: 10px 16px 0; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 15px; letter-spacing: .12em; text-transform: uppercase; }
+.brand svg { width: 30px; height: 30px; flex: none; }
+.brand .wm { background: linear-gradient(135deg, var(--brand-a), var(--brand-b)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.brand small { font-weight: 500; color: var(--faint); font-size: 12px; letter-spacing: 0; text-transform: none; }
+.spacer { flex: 1; }
+.live { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--muted); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); display: inline-block; flex: none; }
+.dot.good { background: var(--good); box-shadow: 0 0 0 3px var(--good-soft); } .dot.bad { background: var(--bad); } .dot.warn { background: var(--warn); }
+nav.tabs { max-width: 1280px; margin: 0 auto; padding: 0 8px; display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+nav.tabs::-webkit-scrollbar { display: none; }
+nav.tabs button { background: none; border: 0; padding: 10px 12px 11px; color: var(--muted); font-weight: 550; border-bottom: 2px solid transparent; white-space: nowrap; margin-bottom: -1px; }
+nav.tabs button:hover { color: var(--text); }
+nav.tabs button[aria-selected="true"] { color: var(--text); border-bottom-color: var(--accent); }
+nav.tabs .count { color: var(--faint); font-weight: 500; margin-left: 4px; font-size: 12px; }
+main { max-width: 1280px; margin: 0 auto; padding: 18px 16px 64px; }
+.panel { display: none; } .panel.on { display: block; animation: fade .15s ease-out; }
+@keyframes fade { from { opacity: 0; transform: translateY(2px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .panel.on { animation: none; } * { transition: none !important; } }
+
+/* primitives */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); }
+.card > .head { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.card > .body { padding: 14px 16px; }
+.grid { display: grid; gap: 14px; }
+.g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-bottom: 14px; }
+.stat { padding: 13px 16px; }
+.stat .k { color: var(--muted); font-size: 12px; font-weight: 550; }
+.stat .v { font-size: 26px; font-weight: 680; letter-spacing: -.03em; margin-top: 2px; font-variant-numeric: tabular-nums; }
+.stat .s { color: var(--faint); font-size: 12px; margin-top: 1px; }
+.btn { border: 1px solid var(--border-strong); background: var(--surface); border-radius: 8px; padding: 6px 11px; font-weight: 550; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.btn:hover { background: var(--surface-2); } .btn:disabled { opacity: .55; cursor: default; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { filter: brightness(1.07); }
+.btn.sm { padding: 3px 8px; font-size: 12px; border-radius: 6px; } .btn.ghost { border-color: transparent; background: none; color: var(--muted); }
+.spin { width: 12px; height: 12px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+input[type=search] { flex: 1 1 220px; max-width: 320px; }
+input[type=text], input[type=password], input[type=search], select, textarea {
+  background: var(--surface); border: 1px solid var(--border-strong); border-radius: 8px; padding: 6px 9px; min-width: 0; }
+textarea { width: 100%; resize: vertical; min-height: 92px; font-family: var(--sans); }
+select { padding: 4px 6px; border-radius: 6px; }
+input::placeholder, textarea::placeholder { color: var(--faint); }
+.muted { color: var(--muted); } .faint { color: var(--faint); } .small { font-size: 12px; } .right { text-align: right; } .nowrap { white-space: nowrap; }
+.row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.pill { display: inline-flex; align-items: center; gap: 5px; padding: 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 550; background: var(--surface-2); color: var(--muted); white-space: nowrap; }
+.pill.good { background: var(--good-soft); color: var(--good); } .pill.bad { background: var(--bad-soft); color: var(--bad); }
+.pill.warn { background: var(--warn-soft); color: var(--warn); } .pill.info { background: var(--info-soft); color: var(--accent); }
+.cat { --c: var(--faint); display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 12.5px; }
+.cat::before { content: ""; width: 9px; height: 9px; border-radius: 3px; background: var(--c); }
+.cat.local { --c: var(--c-local); } .cat.fast { --c: var(--c-fast); } .cat.standard { --c: var(--c-standard); }
+.cat.strong { --c: var(--c-strong); } .cat.frontier { --c: var(--c-frontier); } .cat.specialist { --c: var(--c-specialist); }
+.banner { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding: 10px 14px; border-radius: 10px; margin-bottom: 14px; background: var(--warn-soft); color: var(--text); border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent); }
+.banner.info { background: var(--info-soft); border-color: color-mix(in srgb, var(--accent) 30%, transparent); }
+.banner b { font-weight: 650; }
+.empty { padding: 28px 16px; text-align: center; color: var(--muted); }
+
+/* tables */
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th { text-align: left; font-weight: 600; color: var(--muted); font-size: 12px; padding: 8px 9px; border-bottom: 1px solid var(--border); white-space: nowrap; background: var(--surface); position: sticky; top: 0; }
+th.sort { cursor: pointer; user-select: none; } th.sort:hover { color: var(--text); }
+td { padding: 6px 9px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+tbody tr:last-child td { border-bottom: 0; }
+tbody tr:hover td { background: color-mix(in srgb, var(--surface-2) 60%, transparent); }
+tr.off td { opacity: .5; }
+td .pill { padding: 0 6px; }
+td.id { font-family: var(--mono); font-size: 12px; max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.num { font-variant-numeric: tabular-nums; text-align: right; }
+.bar-mini { display: inline-block; width: 44px; height: 6px; border-radius: 3px; background: var(--surface-2); vertical-align: middle; margin-right: 6px; overflow: hidden; }
+.bar-mini > i { display: block; height: 100%; background: var(--accent); border-radius: 3px; }
+.chip { display: inline-block; padding: 0 6px; border-radius: 5px; background: var(--surface-2); font-size: 11.5px; color: var(--muted); margin-right: 3px; white-space: nowrap; }
+.chip b { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
+.switch { position: relative; width: 30px; height: 18px; display: inline-block; }
+.switch input { opacity: 0; width: 100%; height: 100%; margin: 0; position: absolute; inset: 0; cursor: pointer; z-index: 1; }
+.switch i { position: absolute; inset: 0; border-radius: 9px; background: var(--border-strong); transition: background .15s; }
+.switch i::after { content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; transition: transform .15s; }
+.switch input:checked + i { background: var(--accent); } .switch input:checked + i::after { transform: translateX(12px); }
+.switch input:focus-visible + i { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* quota */
+.q { display: grid; gap: 3px; min-width: 150px; }
+.q .line { display: flex; align-items: center; gap: 7px; font-size: 11.5px; color: var(--muted); }
+.q .track { flex: 1; height: 6px; border-radius: 3px; background: var(--surface-2); overflow: hidden; min-width: 50px; }
+.q .track i { display: block; height: 100%; border-radius: 3px; background: var(--good); }
+.q .track i.low { background: var(--warn); } .q .track i.crit { background: var(--bad); }
+.q .lbl { width: 62px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.stack { display: flex; height: 14px; border-radius: 7px; overflow: hidden; background: var(--surface-2); gap: 2px; }
+.stack i { display: block; height: 100%; background: var(--c); min-width: 3px; } .stack i.local { --c: var(--c-local); } .stack i.fast { --c: var(--c-fast); }
+.stack i.standard { --c: var(--c-standard); } .stack i.strong { --c: var(--c-strong); } .stack i.frontier { --c: var(--c-frontier); } .stack i.specialist { --c: var(--c-specialist); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 10px; }
+
+/* code */
+.code { position: relative; background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; padding: 11px 12px; overflow: auto; max-height: 340px; }
+.code pre { margin: 0; font: 12px/1.55 var(--mono); white-space: pre; }
+.code .btn { position: absolute; top: 7px; right: 7px; }
+.seg { display: inline-flex; border: 1px solid var(--border-strong); border-radius: 8px; overflow: hidden; }
+.seg button { border: 0; background: var(--surface); padding: 5px 11px; font-weight: 550; font-size: 13px; color: var(--muted); border-right: 1px solid var(--border-strong); }
+.seg button:last-child { border-right: 0; } .seg button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); }
+.ladder td, .ladder th { padding: 5px 8px; } .ladder select { width: 100%; min-width: 92px; }
+.ladder select.changed { border-color: var(--accent); background: var(--accent-soft); }
+.field { display: grid; gap: 5px; } .field > label { font-weight: 600; font-size: 12.5px; }
+.hint { color: var(--faint); font-size: 12px; }
+.kv { display: grid; grid-template-columns: max-content 1fr; gap: 3px 14px; font-size: 13px; } .kv dt { color: var(--muted); } .kv dd { margin: 0; }
+details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; }
+#toasts { position: fixed; right: 16px; bottom: 16px; display: grid; gap: 8px; z-index: 50; max-width: min(420px, calc(100vw - 32px)); }
+.toast { background: var(--text); color: var(--bg); padding: 9px 13px; border-radius: 9px; font-size: 13px; box-shadow: var(--shadow); animation: fade .15s; }
+.toast.bad { background: var(--bad); color: #fff; }
+.gate { max-width: 520px; margin: 12vh auto; padding: 0 16px; }
+
+@media (max-width: 980px) { .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); } .g3 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 720px) {
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .g2, .g3 { grid-template-columns: 1fr; }
+  .stat .v { font-size: 22px; } main { padding-top: 12px; } .hide-sm { display: none; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="bar">
+    <div class="brand"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="mh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEF2FF"/><stop offset="1" stop-color="#3B82F6"/></linearGradient><linearGradient id="me" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1D4ED8"/><stop offset="1" stop-color="#00D4FF"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="#0A0F2E"/><path d="M15 22V13M49 22V13" stroke="#3B82F6" stroke-width="2"/><circle cx="15" cy="11" r="3" fill="#3B9BFF"/><circle cx="49" cy="11" r="3" fill="#3B9BFF"/><rect x="5" y="26" width="7" height="17" rx="3.5" fill="url(#me)"/><rect x="52" y="26" width="7" height="17" rx="3.5" fill="url(#me)"/><path d="M14 23Q32 13 50 23V41L32 56 14 41Z" fill="url(#mh)"/><path d="M19 28H45V39.5L32 50 19 39.5Z" fill="#0A0F2E"/><circle cx="26.5" cy="34" r="3" fill="#7DE3FF"/><circle cx="37.5" cy="34" r="3" fill="#7DE3FF"/><path d="M28 41Q32 44 36 41" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round"/></svg>
+      <span class="wm">Maestro</span> <small id="ver"></small></div>
+    <span class="spacer"></span>
+    <span class="live" id="live"><span class="dot"></span><span>connecting</span></span>
+    <button class="btn sm ghost" id="theme" title="Switch between light, dark and automatic">Theme</button>
+  </div>
+  <nav class="tabs" role="tablist" id="tabs"></nav>
+</header>
+<main id="main"></main>
+<div id="toasts" aria-live="polite"></div>
+
+<script>
+"use strict";
+const TABS = [["overview", "Overview"], ["providers", "Providers"], ["models", "Models"], ["routing", "Routing"], ["activity", "Activity"], ["try", "Try it"]];
+const CATS = ["local", "fast", "standard", "strong", "frontier"];
+const CAT_HINT = {local: "a model on your machine or network", fast: "cheap and quick", standard: "the everyday workhorse", strong: "top reasoning", frontier: "the very best"};
+let S = null, token = "", tab = "overview", timers = {};
+const ui = {alts: false, snip: "hermes", provFilter: "configured", provQuery: "", modelQuery: "", modelCat: "", modelAccess: "", modelSort: ["G", -1], showAllProviders: false,
+            activity: {paused: false, rows: [], open: null}, tryRes: null, ladderDraft: null, pinsDraft: null, showKeyFor: null};
+const store = {get(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }};
+
+/* ---------- tiny DOM helper (no innerHTML: every value is set as text) ---------- */
+function add(el, kids) { for (const k of kids.flat(Infinity)) { if (k == null || k === false) continue; el.append(k.nodeType ? k : document.createTextNode(String(k))); } return el; }
+function h(tag, attrs, ...kids) {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v == null || v === false) continue;
+    if (k === "class") el.className = v; else if (k === "style") el.style.cssText = v;
+    else if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+    else if (k === "for") el.htmlFor = v;
+    else if (["value", "checked", "disabled", "title", "type", "placeholder", "href", "selected", "rows", "colSpan", "name", "autocomplete", "spellcheck"].includes(k)) el[k] = v;
+    else el.setAttribute(k, v === true ? "" : v);
+  }
+  return add(el, kids);
+}
+const $ = (s, r) => (r || document).querySelector(s);
+function toast(msg, bad) { const t = h("div", {class: "toast" + (bad ? " bad" : "")}, msg); $("#toasts").append(t); setTimeout(() => t.remove(), bad ? 6500 : 3200); }
+
+/* ---------- formatting ---------- */
+const fmt = {
+  money(v) { if (v == null) return "–"; if (v === 0) return "$0"; const a = Math.abs(v); return "$" + (a < 0.01 ? v.toFixed(4) : a < 1 ? v.toFixed(3) : a < 100 ? v.toFixed(2) : v.toFixed(0)); },
+  price(v) { return v == null ? "–" : v === 0 ? "free" : "$" + (v < 1 ? v.toFixed(2) : v % 1 ? v.toFixed(2).replace(/0$/, "") : v); },
+  ctx(v) { return !v ? "–" : v >= 1e6 ? (v / 1e6).toFixed(v % 1e6 ? 1 : 0) + "M" : Math.round(v / 1e3) + "k"; },
+  score(v) { return v == null ? "–" : v.toFixed(2).replace(/^0/, ""); },
+  ago(ts) { if (!ts) return "–"; const s = Math.max(0, Date.now() / 1000 - ts); return s < 5 ? "just now" : s < 90 ? Math.round(s) + "s ago" : s < 5400 ? Math.round(s / 60) + "m ago" : s < 129600 ? Math.round(s / 3600) + "h ago" : Math.round(s / 86400) + "d ago"; },
+  until(ts) { if (!ts) return ""; const s = ts - Date.now() / 1000; if (s <= 0) return "now"; return s < 90 ? Math.round(s) + "s" : s < 5400 ? Math.round(s / 60) + "m" : s < 129600 ? (s / 3600).toFixed(s < 36000 ? 1 : 0) + "h" : Math.round(s / 86400) + "d"; },
+  tok(v) { return v == null ? "–" : v >= 1e4 ? (v / 1e3).toFixed(1) + "k" : String(v); },
+  ms(v) { return v == null ? "–" : v >= 1000 ? (v / 1000).toFixed(1) + " s" : Math.round(v) + " ms"; },
+  pct(v) { return v == null ? "–" : Math.round(v * 100) + "%"; },
+};
+const catPill = (c, extra) => c ? h("span", {class: "cat " + c, title: CAT_HINT[c] || ""}, c, extra || "") : h("span", {class: "faint"}, "–");
+const accessLabel = {"api": "API", "subscription-cli": "Subscription", "local": "Local"};
+
+/* ---------- api ---------- */
+async function api(path, method, body) {
+  const r = await fetch(path, {method: method || "GET", headers: Object.assign({"X-Maestro-Token": token}, body ? {"Content-Type": "application/json"} : {}), body: body ? JSON.stringify(body) : undefined});
+  let j = null; try { j = await r.json(); } catch (e) {}
+  if (r.status === 401) { showGate(true); throw new Error("unauthorized"); }
+  if (!r.ok) throw new Error((j && j.error && j.error.message) || ("HTTP " + r.status));
+  return j;
+}
+async function act(fn, okMsg) { try { const r = await fn(); if (okMsg) toast(okMsg); return r; } catch (e) { if (e.message !== "unauthorized") toast(e.message, true); return null; } }
+async function refresh(rerender) { S = await api("/api/state"); status(); if (rerender !== false) render(); }
+
+/* ---------- shell ---------- */
+function status() {
+  const live = $("#live"); live.replaceChildren();
+  if (!S) return;
+  const disc = S.discovering;
+  add(live, [h("span", {class: "dot " + (disc ? "warn" : "good")}), h("span", {}, disc ? "discovering…" : "serving on " + S.server.base_url.replace(/^https?:\/\//, ""))]);
+  $("#ver").textContent = "v" + S.version;
+  const c = S.counts;
+  document.querySelectorAll("nav.tabs button").forEach(b => { const n = {providers: c.providers, models: c.enabled}[b.dataset.tab]; const s = b.querySelector(".count"); if (s) s.textContent = n != null ? n : ""; });
+}
+function buildTabs() {
+  const nav = $("#tabs"); nav.replaceChildren();
+  TABS.forEach(([id, label]) => nav.append(h("button", {role: "tab", "data-tab": id, "aria-selected": id === tab ? "true" : "false", onclick: () => go(id)}, label, h("span", {class: "count"}))));
+}
+function go(id) {
+  tab = id; store.set("tab", id);
+  document.querySelectorAll("nav.tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === id ? "true" : "false"));
+  clearInterval(timers.act); if (id === "activity") { pollActivity(); timers.act = setInterval(pollActivity, 3000); }
+  render(); window.scrollTo(0, 0);
+}
+function render() {
+  const main = $("#main"); main.replaceChildren();
+  if (!S) return;
+  const fn = {overview, providers, models, routing, activity, try: tryit}[tab];
+  main.append(h("section", {class: "panel on", id: "p-" + tab}, fn()));
+  status();
+}
+function showGate(bad) {
+  clearInterval(timers.poll);
+  $("#main").replaceChildren(h("div", {class: "gate card"}, h("div", {class: "body", style: "display:grid;gap:12px"},
+    h("h2", {}, "Admin token needed"),
+    h("p", {class: "muted", style: "margin:0"}, bad ? "The server did not accept that token." : "The UI reads the token from the address the server printed, or you can paste it here."),
+    h("p", {class: "muted small", style: "margin:0"}, "Run ", h("code", {}, "maestro-router serve"), " and open the URL it prints (it ends in ", h("code", {}, "#token=…"), "), or print the token with ", h("code", {}, "cat ~/.maestro/admin_token"), "."),
+    (() => { const i = h("input", {type: "password", placeholder: "admin token", autocomplete: "off"}); const go = () => { token = i.value.trim(); store.set("token", token); boot(); };
+      i.addEventListener("keydown", e => { if (e.key === "Enter") go(); }); return h("div", {class: "row"}, i, h("button", {class: "btn primary", onclick: go}, "Connect")); })())));
+}
+
+/* ---------- shared pieces ---------- */
+function copyBtn(getText, label) {
+  return h("button", {class: "btn sm", onclick: async e => { const b = e.currentTarget, t = getText();
+    try { await navigator.clipboard.writeText(t); } catch (x) { const ta = h("textarea", {value: t, style: "position:fixed;opacity:0"}); document.body.append(ta); ta.select(); try { document.execCommand("copy"); } catch (y) {} ta.remove(); }
+    const o = b.textContent; b.textContent = "Copied"; setTimeout(() => b.textContent = o, 1200); }}, label || "Copy");
+}
+function codeBlock(text) { return h("div", {class: "code"}, copyBtn(() => text), h("pre", {}, text)); }
+function quotaBars(q) {
+  if (!q) return h("span", {class: "faint small"}, "–");
+  const rows = (q.windows || []).filter(w => w.fraction != null);
+  if (q.state === "cooldown") return h("span", {class: "pill warn"}, "cooling down", q.cooldown_until ? " · " + fmt.until(q.cooldown_until) : "");
+  if (q.state === "exhausted") return h("span", {class: "pill bad"}, "exhausted", q.reset_at ? " · resets in " + fmt.until(q.reset_at) : "");
+  if (!rows.length) return h("span", {class: "faint small"}, q.headroom != null ? fmt.pct(q.headroom) + " left" : "unknown");
+  return h("div", {class: "q"}, rows.slice(0, 3).map(w => { const f = w.fraction, cls = f < 0.1 ? "crit" : f < 0.3 ? "low" : "";
+    return h("div", {class: "line", title: w.reset_at ? "resets in " + fmt.until(w.reset_at) : ""}, h("span", {class: "lbl"}, w.name.replace(/_/g, " ")),
+      h("span", {class: "track"}, h("i", {class: cls, style: "width:" + Math.max(2, f * 100) + "%"})), h("span", {class: "nowrap"}, fmt.pct(f) + (w.reset_at ? " · " + fmt.until(w.reset_at) : ""))); }));
+}
+function miniQuota(q) {
+  if (!q || q.state === "unknown") return h("span", {class: "faint"}, "–");
+  const cls = {ok: "good", low: "warn", cooldown: "warn", exhausted: "bad"}[q.state];
+  return h("span", {class: "pill " + cls, title: q.reason || ""}, q.state === "ok" || q.state === "low" ? fmt.pct(q.headroom) : q.state);
+}
+const jobsTop = (m, n) => Object.entries(m.jobs || {}).sort((a, b) => b[1] - a[1]).slice(0, n || 3);
+const effCat = m => m.cat_override || (m.access === "local" ? "local" : m.category);
+
+/* ---------- Overview ---------- */
+function overview() {
+  const c = S.counts, st = S.stats, out = [];
+  if (S.models_source !== "models.json") out.push(h("div", {class: "banner"}, h("span", {}, h("b", {}, "No scores yet. "), "Models are listed from provider detection only, so categories are rough. Run discovery to score them against benchmarks."), discoverBtn(true)));
+  else if (S.generated_at && Date.now() / 1000 - S.generated_at > 7 * 86400) out.push(h("div", {class: "banner info"}, h("span", {}, "The model list is ", fmt.ago(S.generated_at).replace(" ago", ""), " old."), discoverBtn()));
+  if (S.last_discovery && !S.last_discovery.ok) out.push(h("div", {class: "banner"}, h("span", {}, h("b", {}, "Last discovery failed: "), S.last_discovery.message)));
+  const share = Math.max(0, st.baseline ? st.saved / st.baseline : 0);
+  out.push(h("div", {class: "stats"},
+    stat("Providers", c.providers, "connected or detected"), stat("Models", c.enabled, c.models - c.enabled ? (c.models - c.enabled) + " disabled" : "all enabled"),
+    stat("Local models", c.local, c.local ? "free and private" : "none found"), stat("Requests today", st.requests, st.errors ? st.errors + " failed · " + st.fallbacks + " fallbacks" : st.fallbacks + " fallbacks"),
+    stat("Saved today", fmt.money(st.saved), st.baseline ? Math.round(share * 100) + "% vs always-strongest" : "vs always-strongest")));
+  const cats = Object.entries(st.by_category).sort((a, b) => b[1] - a[1]), total = cats.reduce((a, x) => a + x[1], 0);
+  out.push(h("div", {class: "grid g2", style: "margin-bottom:14px"},
+    h("div", {class: "card"}, h("div", {class: "head"}, h("h2", {}, "Where requests went today")),
+      h("div", {class: "body"}, total ? [h("div", {class: "stack"}, cats.map(([k, n]) => h("i", {class: k, style: "flex:" + n, title: k + ": " + n}))),
+        h("div", {class: "legend"}, cats.map(([k, n]) => h("span", {class: "small"}, catPill(k), " ", h("span", {class: "muted"}, n + " (" + Math.round(n / total * 100) + "%)")))),
+        h("div", {style: "margin-top:16px"}, h("div", {class: "small muted", style: "margin-bottom:5px"}, "Estimated spend vs always using the strongest model"),
+          spendBar("Maestro", st.cost, st.baseline, "var(--accent)"), spendBar("Always-strongest", st.baseline, st.baseline, "var(--faint)"))]
+        : h("div", {class: "empty"}, "No requests yet today. Point a client at ", h("code", {}, S.server.base_url + "/v1"), " and they show up here."))),
+    h("div", {class: "card"}, h("div", {class: "head"}, h("h2", {}, "Router")), h("div", {class: "body"}, h("dl", {class: "kv"},
+      h("dt", {}, "Endpoint"), h("dd", {}, h("code", {}, S.server.base_url + "/v1")),
+      h("dt", {}, "Model names"), h("dd", {}, h("code", {}, "maestro/auto"), ", ", h("code", {}, "maestro/fast"), " … ", h("code", {}, "maestro/code"), ", ", h("code", {}, "provider/model")),
+      h("dt", {}, "Objective"), h("dd", {}, S.config.objective, S.config.prefer_local ? " · prefers local" : ""),
+      h("dt", {}, "Cap"), h("dd", {}, "up to ", S.config.max_tier),
+      h("dt", {}, "Access"), h("dd", {}, S.server.auth_required ? "API key required" : "open on this machine"),
+      h("dt", {}, "Models from"), h("dd", {}, S.models_source, S.generated_at ? " · " + fmt.ago(S.generated_at) : "", S.catalog_as_of ? " · catalog " + S.catalog_as_of : "")),
+      h("div", {class: "row", style: "margin-top:12px"}, discoverBtn(), S.last_discovery ? h("span", {class: "hint"}, S.last_discovery.message) : null)))));
+  out.push(connectCard());
+  out.push(localFit());
+  return out;
+}
+function stat(k, v, s) { return h("div", {class: "card stat"}, h("div", {class: "k"}, k), h("div", {class: "v"}, v), h("div", {class: "s"}, s)); }
+function spendBar(label, v, max, color) {
+  return h("div", {class: "row", style: "flex-wrap:nowrap;margin:3px 0"}, h("span", {class: "small muted", style: "width:118px;flex:none"}, label),
+    h("span", {class: "track", style: "flex:1;height:8px;border-radius:4px;background:var(--surface-2);overflow:hidden"}, h("i", {style: "display:block;height:100%;border-radius:4px;background:" + color + ";width:" + (max ? Math.max(1.5, v / max * 100) : 1.5) + "%"})),
+    h("span", {class: "small num", style: "width:64px"}, fmt.money(v)));
+}
+function discoverBtn(primary) {
+  const b = h("button", {class: "btn" + (primary ? " primary" : ""), onclick: async () => { b.disabled = true; b.replaceChildren(h("span", {class: "spin"}), "Discovering…");
+    const r = await act(() => api("/api/discover", "POST", {})); if (r) toast(r.message, !r.ok); await act(() => refresh()); b.disabled = false; }}, "Re-run discovery");
+  return b;
+}
+function connectCard() {
+  const opts = [["hermes", "Hermes Agent"], ["openai", "OpenAI client"], ["curl", "curl"], ["skill", "Claude Code, Codex, OpenCode"]];
+  const blurb = {hermes: ["Add this to ", h("code", {}, "~/.hermes/config.yaml"), " or run ", h("code", {}, "maestro-router hermes --install"), ". Hermes keeps calling one endpoint; Maestro picks the model per request and keeps a model for the whole tool loop."],
+    openai: ["Any OpenAI-compatible client works. The response's ", h("code", {}, "model"), " field tells you what was chosen; the ", h("code", {}, "x-maestro-decision"), " header says why."],
+    curl: ["Try it from a terminal."], skill: ["The skill mode needs no server: your agent calls ", h("code", {}, "maestro-router route"), " and delegates to a subagent or CLI."]}[ui.snip];
+  return h("div", {class: "card", style: "margin-bottom:14px"}, h("div", {class: "head"}, h("h2", {}, "Connect a client"), h("span", {class: "spacer"}),
+    h("div", {class: "seg", role: "group"}, opts.map(([k, l]) => h("button", {"aria-pressed": ui.snip === k ? "true" : "false", onclick: () => { ui.snip = k; render(); }}, l)))),
+    h("div", {class: "body", style: "display:grid;gap:10px"}, h("div", {class: "muted small"}, blurb), codeBlock(S.snippets[ui.snip])));
+}
+function fitTable(fit, boxes, replaces) {
+  return boxes.map(k => { const hw = (S.hardware || {})[k] || {}, rows = fit[k].slice(0, 8);
+    return h("div", {style: "margin-bottom:14px"}, h("div", {class: "row", style: "margin-bottom:6px"}, h("b", {}, hw.name || k), h("span", {class: "muted"}, hw.memory_gb ? hw.memory_gb + " GB" : ""), hw.assumed ? h("span", {class: "pill"}, "assumed") : null),
+      h("div", {class: "tablewrap"}, h("table", {}, h("thead", {}, h("tr", {}, ["Model", "Quant", "Memory", "Score", "Category", replaces ? "Serve it instead" : "Serve it"].map((t, i) => h("th", {class: i > 1 && i < 4 ? "right" : ""}, t)))),
+        h("tbody", {}, rows.map(r => h("tr", {}, h("td", {class: "id", title: r.hf_repo || ""}, r.model), h("td", {}, r.quant || "–"), h("td", {class: "num"}, r.mem_gb ? r.mem_gb + " GB" : "–"),
+          h("td", {class: "num"}, fmt.score(r.G)), h("td", {}, catPill(r.category)), h("td", {}, r.serve_cmd ? copyBtn(() => r.serve_cmd, "Copy command") : "–")))))));
+  });
+}
+function localFit() {
+  const fit = S.local_fit || {}, boxes = Object.keys(fit).filter(k => (fit[k] || []).length);
+  const local = (S.models || []).filter(m => m.access === "local"), served = local.filter(m => m.routable !== false), idle = local.filter(m => m.routable === false);
+  if (served.length) {   // Maestro uses exactly what is served; suggestions would replace it, so they stay folded away
+    const alts = boxes.length ? h("details", {open: ui.alts, ontoggle: e => { ui.alts = e.target.open; }, style: "margin-top:12px"},
+      h("summary", {}, "Alternatives (would replace what you serve)"),
+      h("div", {class: "muted small", style: "margin:8px 0"}, "A model server usually claims most of the memory (vLLM reserves --gpu-memory-utilization, 0.9 by default), so these do not run alongside what you serve. Stop the current server first; Maestro never does."),
+      fitTable(fit, boxes, true)) : null;
+    return h("div", {class: "card"}, h("div", {class: "head"}, h("h2", {}, "Local models"), h("span", {class: "hint"}, "Maestro uses what you already serve; it never downloads or starts models")),
+      h("div", {class: "body"}, h("div", {}, h("b", {}, "Using: "), served.map(m => m.model).join(", ")),
+        idle.length ? h("div", {class: "muted small", style: "margin-top:6px"}, idle.length + " installed but not loaded, so not used: " + idle.map(m => m.model).join(", ")) : null, alts));
+  }
+  const body = boxes.length ? fitTable(fit, boxes, false)
+    : h("div", {class: "empty"}, "Nothing to suggest yet. Run ", h("code", {}, "maestro-router discover --local-fit"), " to see the best open-weight models your hardware can run.");
+  return h("div", {class: "card"}, h("div", {class: "head"}, h("h2", {}, "Could run locally"), h("span", {class: "hint"}, "Nothing is served locally. Advice only: Maestro never downloads or starts models")),
+    h("div", {class: "body"}, idle.length ? h("div", {class: "muted small", style: "margin-bottom:8px"}, idle.length + " installed but not loaded, so not used: " + idle.map(m => m.model).join(", ")) : null, body));
+}
+
+/* ---------- Providers ---------- */
+function providers() {
+  const rows = S.providers, order = {connected: 0, detected: 1, error: 2, missing: 3};
+  const q = ui.provQuery.trim().toLowerCase(), configured = rows.filter(p => p.status !== "missing");
+  const list = h("tbody", {}), meta = h("span", {class: "hint"});
+  const draw = () => {
+    const src = (q || ui.provFilter === "all") ? rows : configured, want = ui.provQuery.trim().toLowerCase();
+    const shown = src.filter(p => !want || (p.id + " " + p.name).toLowerCase().includes(want)).sort((a, b) => (order[a.status] - order[b.status]) || a.name.localeCompare(b.name));
+    list.replaceChildren(...shown.slice(0, 300).map(providerRow));
+    meta.textContent = shown.length + " shown of " + rows.length;
+    if (!shown.length) list.append(h("tr", {}, h("td", {colSpan: 6, class: "empty"}, "No provider matches.")));
+  };
+  const search = h("input", {type: "search", placeholder: "Search providers (openai, groq, …)", value: ui.provQuery, oninput: e => { ui.provQuery = e.target.value; draw(); }});
+  const chips = h("div", {class: "seg"}, [["configured", "Configured (" + configured.length + ")"], ["all", "All (" + rows.length + ")"]].map(([k, l]) =>
+    h("button", {"aria-pressed": ui.provFilter === k ? "true" : "false", onclick: () => { ui.provFilter = k; render(); }}, l)));
+  draw();
+  return [h("div", {class: "card"}, h("div", {class: "head"}, h("h2", {}, "Providers"), chips, search, h("span", {class: "spacer"}), meta, discoverBtn()),
+    h("div", {class: "tablewrap"}, h("table", {}, h("thead", {}, h("tr", {}, ["Provider", "Access", "Status", "Models", "Quota", "Key"].map(t => h("th", {}, t)))), list))),
+    h("p", {class: "hint"}, "Keys are write-only: they are saved to ", h("code", {}, "~/.maestro/keys.env"), " (mode 600) and never shown again. A key set in the server's environment takes precedence.")];
+}
+function providerRow(p) {
+  const cls = {connected: "good", detected: "info", error: "bad", missing: ""}[p.status];
+  const keyCell = h("td", {});
+  if (p.access === "api") {
+    const inp = h("input", {type: "password", placeholder: p.status === "missing" ? "paste key" : "replace key", autocomplete: "off", spellcheck: false, name: "k-" + p.id, style: "width:150px"});
+    const save = async () => { if (!inp.value) return; const r = await act(() => api("/api/keys", "POST", {provider: p.id, value: inp.value}), "Saved " + p.key_env + " to keys.env"); inp.value = "";
+      if (r) { if (r.note) toast(r.note); const t = await act(() => api("/api/test", "POST", {provider: p.id})); if (t) toast(p.name + ": " + t.message, !t.ok); await act(() => refresh()); } };
+    inp.addEventListener("keydown", e => { if (e.key === "Enter") save(); });
+    add(keyCell, [h("div", {class: "row", style: "flex-wrap:nowrap"}, inp, h("button", {class: "btn sm", onclick: save}, "Save"),
+      p.key_source === "keys.env" ? h("button", {class: "btn sm ghost", title: "Remove the key from keys.env", onclick: async () => { if (await act(() => api("/api/keys", "POST", {provider: p.id, value: null}), "Removed key")) refresh(); }}, "Remove") : null),
+      p.key_source ? h("div", {class: "hint"}, p.key_env, " · set via ", p.key_source === "env" ? "environment" : "keys.env") : h("div", {class: "hint"}, p.key_env)]);
+  } else keyCell.append(h("span", {class: "faint small"}, p.access === "local" ? "no key" : "uses your login"));
+  const test = h("button", {class: "btn sm", onclick: async e => { const b = e.currentTarget; b.disabled = true; const r = await act(() => api("/api/test", "POST", {provider: p.id})); b.disabled = false; if (r) toast(p.name + ": " + r.message, !r.ok); }}, "Test");
+  return h("tr", {}, h("td", {}, h("div", {}, h("b", {}, p.name)), h("div", {class: "mono faint small"}, p.id)), h("td", {}, accessLabel[p.access] || p.access),
+    h("td", {}, h("span", {class: "pill " + cls, title: p.reason}, p.status), p.status === "error" || p.status === "detected" ? h("div", {class: "hint", style: "max-width:260px"}, p.reason) : null),
+    h("td", {class: "num"}, p.models || "–"), h("td", {}, quotaBars(p.quota)),
+    h("td", {}, p.status !== "missing" || p.access !== "api" ? h("div", {class: "row", style: "flex-wrap:nowrap"}, keyCell, test) : keyCell));
+}
+
+/* ---------- Models ---------- */
+function models() {
+  const provs = [...new Set(S.models.map(m => m.provider))].sort();
+  const tbody = h("tbody", {}), meta = h("span", {class: "hint"});
+  const cols = [["", null], ["Model", "id"], ["Category", "category"], ["Score", "G"], ["Best at", null], ["$/M in·out", "cost_out"], ["Context", "context"], ["Capabilities", null], ["Basis", "basis"], ["Quota", null]];
+  const head = h("tr", {});
+  const paintHead = () => head.replaceChildren(...cols.map(([t, k]) => h("th", {class: k ? "sort" : "", title: k ? "Sort" : "", onclick: k ? () => { ui.modelSort = ui.modelSort[0] === k ? [k, -ui.modelSort[1]] : [k, k === "id" || k === "access" ? 1 : -1]; draw(); } : null}, t, ui.modelSort[0] === k ? (ui.modelSort[1] < 0 ? " ↓" : " ↑") : "")));
+  const draw = () => {
+    paintHead();
+    const q = ui.modelQuery.trim().toLowerCase(), [sk, sd] = ui.modelSort;
+    let rows = S.models.filter(m => (!q || (m.id + " " + (m.family || "")).toLowerCase().includes(q)) && (!ui.modelCat || effCat(m) === ui.modelCat) && (!ui.modelAccess || m.access === ui.modelAccess));
+    const val = m => sk === "category" ? CATS.indexOf(effCat(m)) : m[sk];
+    rows = rows.sort((a, b) => { const x = val(a), y = val(b); if (x == null && y == null) return 0; if (x == null) return 1; if (y == null) return -1; return (x < y ? -1 : x > y ? 1 : 0) * sd || a.id.localeCompare(b.id); });
+    tbody.replaceChildren(...rows.slice(0, 400).map(modelRow));
+    if (!rows.length) tbody.append(h("tr", {}, h("td", {colSpan: cols.length, class: "empty"}, S.models.length ? "No model matches these filters." : "No models yet. Add a key on the Providers tab or point Maestro at a model server you already run, then run discovery.")));
+    meta.textContent = rows.length + " of " + S.models.length + (rows.length > 400 ? " (first 400)" : "");
+  };
+  const sel = (label, opts, get, set) => h("select", {"aria-label": label, onchange: e => { set(e.target.value); draw(); }}, h("option", {value: ""}, label), opts.map(o => h("option", {value: o[0], selected: get() === o[0]}, o[1])));
+  draw();
+  return h("div", {class: "card"}, h("div", {class: "head"}, h("h2", {}, "Models"),
+    h("input", {type: "search", placeholder: "Search models", value: ui.modelQuery, oninput: e => { ui.modelQuery = e.target.value; draw(); }}),
+    sel("All categories", CATS.map(c => [c, c]), () => ui.modelCat, v => ui.modelCat = v), sel("All access", Object.entries(accessLabel), () => ui.modelAccess, v => ui.modelAccess = v),
+    h("span", {class: "spacer"}), meta, discoverBtn()),
+    h("div", {class: "tablewrap", style: "max-height:calc(100vh - 210px)"}, h("table", {}, h("thead", {}, head), tbody)));
+}
+function modelRow(m) {
+  const auto = m.access === "local" ? "local" : m.category;
+  const dd = h("select", {"aria-label": "Category for " + m.id, class: m.cat_override ? "changed" : "", onchange: async e => { const v = e.target.value || null;
+      if (await act(() => api("/api/models/" + encodeURIComponent(m.id), "POST", {category: v}), v ? "Pinned " + m.model + " to " + v : "Back to automatic category")) { await refresh(false); } }},
+    h("option", {value: "", selected: !m.cat_override}, "auto · " + auto), CATS.map(c => h("option", {value: c, selected: m.cat_override === c}, c)));
+  const on = h("label", {class: "switch", title: m.enabled ? "Enabled: Maestro may route here" : "Disabled"}, h("input", {type: "checkbox", checked: m.enabled, "aria-label": "Enable " + m.id, onchange: async e => {
+      const v = e.target.checked; if (!(await act(() => api("/api/models/" + encodeURIComponent(m.id), "POST", {enabled: v})))) { e.target.checked = !v; return; }
+      m.enabled = v; tr.classList.toggle("off", !v); await refresh(false); }}), h("i"));
+  const basisTip = m.benchmarks && m.benchmarks.length ? "Benchmarks: " + m.benchmarks.join(", ") : m.basis === "prior" ? "No benchmarks: estimated from size, price, release date and context" : "";
+  const tr = h("tr", {class: m.enabled ? "" : "off"}, h("td", {}, on),
+    h("td", {class: "id", title: m.id}, m.id, m.access === "api" ? null : h("span", {class: "pill", style: "margin-left:6px;font-family:var(--sans)"}, accessLabel[m.access] || m.access)), h("td", {}, dd),
+    h("td", {class: "nowrap"}, m.G != null ? [h("span", {class: "bar-mini"}, h("i", {style: "width:" + Math.round(m.G * 100) + "%"})), fmt.score(m.G)] : h("span", {class: "faint"}, "unscored")),
+    h("td", {class: "nowrap"}, jobsTop(m).map(([j, v]) => h("span", {class: "chip"}, j + " ", h("b", {}, fmt.score(v))))),
+    h("td", {class: "nowrap num"}, m.access === "api" ? fmt.price(m.cost_in) + " · " + fmt.price(m.cost_out) : h("span", {class: "faint"}, m.access === "local" ? "free" : "flat")),
+    h("td", {class: "num"}, fmt.ctx(m.context)),
+    h("td", {class: "nowrap"}, h("span", {class: "pill " + (m.tools_ok ? "good" : ""), title: m.tools_ok ? "Can use tools" : "No tool calls (subscription CLI)", style: m.tools_ok ? "" : "opacity:.6"}, m.tools_ok ? "tools" : "no tools"), " ",
+      h("span", {class: "pill " + (m.vision ? "good" : ""), title: m.vision ? "Accepts images" : m.vision === false ? "Text only" : "Unknown", style: m.vision ? "" : "opacity:.6"}, m.vision ? "vision" : m.vision === false ? "no vision" : "vision ?")),
+    h("td", {}, m.basis ? h("span", {class: "pill", title: basisTip}, m.basis) : "–"), h("td", {}, miniQuota(m.quota)));
+  return tr;
+}
+
+/* ---------- Routing ---------- */
+function routing() {
+  const cfg = S.config, def = S.default_ladder, cur = Object.assign({}, def, cfg.ladder || {});
+  if (!ui.ladderDraft) ui.ladderDraft = JSON.parse(JSON.stringify(cur));
+  const draft = ui.ladderDraft, changed = () => S.jobs.some(j => draft[j].join() !== cur[j].join());
+  const save = h("button", {class: "btn primary", disabled: true, onclick: async () => { const over = {}; S.jobs.forEach(j => { if (draft[j].join() !== def[j].join()) over[j] = draft[j]; });
+      if (await act(() => api("/api/config", "POST", {ladder: over}), "Ladder saved")) { ui.ladderDraft = null; await refresh(); } }}, "Save ladder");
+  const sync = () => { save.disabled = !changed(); };
+  sync();
+  const cell = (j, d) => { const s = h("select", {"aria-label": j + " difficulty " + d, class: draft[j][d] !== def[j][d] ? "changed" : "", onchange: e => { draft[j][d] = e.target.value; s.className = draft[j][d] !== def[j][d] ? "changed" : ""; sync(); }},
+      ["local", "fast", "standard", "strong", "frontier"].map(c => h("option", {value: c, selected: draft[j][d] === c}, c))); return h("td", {}, s); };
+  const seg = (key, opts) => h("div", {class: "seg"}, opts.map(o => h("button", {"aria-pressed": String(cfg[key]) === String(o[0]) ? "true" : "false", onclick: async () => { if (await act(() => api("/api/config", "POST", {[key]: o[0]}))) refresh(); }}, o[1])));
+  const local = S.models.filter(m => m.access === "local"), pins = (cfg.models || {}).local || {};
+  const agree = h("div", {class: "body small", id: "alpha-body"}, h("span", {class: "faint"}, "loading…"));
+  api("/api/alpha").then(a => drawAlpha(agree, a)).catch(() => {});
+  return [h("div", {class: "grid g2", style: "margin-bottom:14px"},
+    h("div", {class: "card"}, h("div", {class: "body field"}, h("label", {}, "Decider"), seg("decider", [["ladder", "Ladder"], ["utility", "Expected utility (S1)"]]),
+      h("span", {class: "hint"}, "Ladder: the table below picks a category, then the cheapest good-enough model. Expected utility: S1 estimates how hard the task is and every model is priced by success chance, dollars, quota and waiting time. The other one runs in the shadow and is logged."),
+      h("label", {class: "row", style: "margin-top:6px;font-weight:500"}, h("span", {class: "switch"}, h("input", {type: "checkbox", checked: !!cfg.private, onchange: async e => { if (!(await act(() => api("/api/config", "POST", {private: e.target.checked})))) e.target.checked = !e.target.checked; }}), h("i")), "Private: only local models see prompts"))),
+    h("div", {class: "card"}, h("div", {class: "head"}, h("h2", {}, "Shadow agreement"), h("span", {class: "hint"}, "last 14 days")), agree)),
+    h("div", {class: "grid g3", style: "margin-bottom:14px"},
+    h("div", {class: "card"}, h("div", {class: "body field"}, h("label", {}, "Objective"), seg("objective", [["balanced", "Balanced"], ["cost", "Cheapest"], ["quality", "Best"]]),
+      h("span", {class: "hint"}, "Among models good enough for the job: balanced and cheapest rank by price (cheapest more strictly); best ranks by strength first."))),
+    h("div", {class: "card"}, h("div", {class: "body field"}, h("label", {}, "Highest category"), seg("max_tier", [["fast", "fast"], ["standard", "standard"], ["strong", "strong"], ["frontier", "frontier"]]),
+      h("span", {class: "hint"}, "Never route to a cloud model above this. Pin a model with the category menu on the Models tab to override."))),
+    h("div", {class: "card"}, h("div", {class: "body field"}, h("label", {}, "Local models"), seg("prefer_local", [[true, "Prefer local"], [false, "Cloud only"]]),
+      h("span", {class: "hint"}, "Prefer models on your machine or network when they are strong enough. Free and private."),
+      h("label", {class: "row", style: "margin-top:6px;font-weight:500"}, h("span", {class: "switch"}, h("input", {type: "checkbox", checked: !!cfg.log_prompts, onchange: async e => { if (!(await act(() => api("/api/config", "POST", {log_prompts: e.target.checked})))) e.target.checked = !e.target.checked; }}), h("i")), "Keep the first 120 characters of prompts in the activity log")))),
+    h("div", {class: "card", style: "margin-bottom:14px"}, h("div", {class: "head"}, h("h2", {}, "Ladder"), h("span", {class: "hint"}, "the category each job gets at each difficulty (0 easy … 3 very hard)"), h("span", {class: "spacer"}),
+      h("button", {class: "btn", onclick: () => { ui.ladderDraft = JSON.parse(JSON.stringify(def)); render(); }}, "Reset to defaults"), save),
+      h("div", {class: "tablewrap"}, h("table", {class: "ladder"}, h("thead", {}, h("tr", {}, h("th", {}, "Job"), [0, 1, 2, 3].map(d => h("th", {}, "Difficulty " + d)))),
+        h("tbody", {}, S.jobs.map(j => h("tr", {}, h("td", {}, h("b", {}, j)), [0, 1, 2, 3].map(d => cell(j, d)))))))),
+    h("div", {class: "grid g2"},
+      h("div", {class: "card"}, h("div", {class: "head"}, h("h2", {}, "Local pins")), h("div", {class: "body"},
+        local.length ? [h("p", {class: "hint", style: "margin-top:0"}, "Pin which local model serves a category. It is then rated as the highest category you pin it to."),
+          h("dl", {class: "kv"}, CATS.flatMap(c => [h("dt", {}, catPill(c)), h("dd", {}, h("select", {"aria-label": "Local model for " + c, onchange: async e => { const p = Object.assign({}, pins); if (e.target.value) p[c] = e.target.value; else delete p[c];
+              if (await act(() => api("/api/config", "POST", {models: Object.assign({}, cfg.models || {}, {local: p})}), "Pin saved")) refresh(); }},
+            h("option", {value: ""}, "automatic"), local.map(m => h("option", {value: m.id, selected: pins[c] === m.id}, m.id))))]))]
+        : h("div", {class: "empty"}, "No local models found. Start Ollama, vLLM or LM Studio, or add an endpoint under ", h("code", {}, "local_endpoints"), " in the config."))),
+      h("div", {class: "card"}, h("div", {class: "head"}, h("h2", {}, "How a model is picked")), h("div", {class: "body small", style: "display:grid;gap:8px"},
+        h("div", {}, "1. ", h("b", {}, "Classify"), " the last user message into a job and difficulty (offline rules, or Jev if ", h("code", {}, "TYPESAFE_API_KEY"), " is set)."),
+        h("div", {}, "2. ", h("b", {}, "Filter"), " to enabled models that can take the request: tools, vision, context, quota, and your highest category."),
+        h("div", {}, "3. ", h("b", {}, "Floor"), ": the model's score for this job must reach the category's floor: ", CATS.slice(1).map(c => h("span", {style: "margin-right:10px"}, catPill(c, " " + S.floors[c].toFixed(2)))), "."),
+        h("div", {}, "4. ", h("b", {}, "Rank"), " by expected cost, then quota headroom, then observed latency. Near-limit models go last."),
+        h("div", {}, "5. ", h("b", {}, "Try"), " the best; on a 429, 5xx or timeout before the first byte, the next (up to three). Tool turns stay on the same model."),
+        h("div", {class: "muted"}, "With the expected-utility decider, steps 3 and 4 become one: S1 estimates the task's difficulty and each model's chance of success, and the model with the best value after price, quota, waiting time and the cost of a failure wins. A conversation stays on its model when switching would lose the prompt cache."))))];
+}
+
+function drawAlpha(el, a) {
+  const row = (k, x) => [h("dt", {}, k), h("dd", {}, x.n ? [h("b", {}, fmt.pct(x.rate)), " of " + x.n + " decisions agree"] : h("span", {class: "faint"}, "no shadow decisions yet"))];
+  const outs = Object.entries(a.outcomes || {});
+  el.replaceChildren(h("dl", {class: "kv"}, row("Proxy", a.proxy), row("Skill mode", a.skill),
+    h("dt", {}, "Outcomes"), h("dd", {}, outs.length ? outs.map(([k, n]) => h("span", {class: "chip"}, k + " ", h("b", {}, n))) : h("span", {class: "faint"}, "none yet: rate answers on the Activity tab")),
+    h("dt", {}, "Personal fit"), h("dd", {}, a.personal ? "from " + a.personal.n_outcomes + " outcomes, " + fmt.ago(a.personal.fitted_at) : h("span", {class: "faint"}, "not fitted yet (needs 10 outcomes)"))),
+    h("p", {class: "hint", style: "margin-bottom:0"}, "How often the decider you are not using would have picked the same model. The default flips to expected utility only after the release gate."));
+}
+async function rate(d, value) {
+  if (await act(() => api("/api/feedback", "POST", {id: d.id, value: value}), "Thanks: noted as " + value)) { d.rated = value; const t = $("#act-body"); if (t) drawActivity(t); }
+}
+
+/* ---------- Activity ---------- */
+async function pollActivity() {
+  if (ui.activity.paused || tab !== "activity") return;
+  try { const r = await api("/api/decisions?limit=100"); ui.activity.rows = r.decisions; const t = $("#act-body"); if (t) drawActivity(t); } catch (e) {}
+}
+function drawActivity(tbody) {
+  const rows = ui.activity.rows;
+  tbody.replaceChildren(...rows.flatMap(d => {
+    const open = ui.activity.open === d.id, ok = d.status < 400, att = d.attempts || [];
+    const main = h("tr", {style: "cursor:pointer", onclick: () => { ui.activity.open = open ? null : d.id; drawActivity(tbody); }},
+      h("td", {class: "nowrap muted", title: new Date(d.ts * 1000).toLocaleString()}, fmt.ago(d.ts)), h("td", {class: "mono small"}, d.requested.replace(/^maestro\//, "")),
+      h("td", {}, d.job ? h("span", {}, h("b", {}, d.job), h("span", {class: "faint"}, " d" + d.difficulty)) : "–"), h("td", {}, catPill(d.category)),
+      h("td", {class: "id", title: d.chosen || ""}, d.chosen || h("span", {class: "faint"}, "none")),
+      h("td", {class: "num", title: (d.candidates || []).join("\n")}, (d.candidates || []).length), h("td", {}, att.length > 1 ? h("span", {class: "pill warn", title: att.map(a => a.model + " → " + a.status).join("\n")}, (att.length - 1) + " fallback") : h("span", {class: "faint"}, "–")),
+      h("td", {class: "num nowrap"}, d.ttft_ms != null ? fmt.ms(d.ttft_ms) : "–", d.stream ? h("span", {class: "faint small"}, " · " + fmt.ms(d.latency_ms)) : null),
+      h("td", {class: "num nowrap hide-sm"}, fmt.tok(d.prompt_tokens) + " → " + fmt.tok(d.completion_tokens), d.usage_est ? h("span", {class: "faint", title: "estimated"}, "~") : ""),
+      h("td", {}, h("span", {class: "pill " + (ok ? "good" : "bad")}, d.status)),
+      h("td", {class: "nowrap", onclick: e => e.stopPropagation()}, ok ? (d.rated ? h("span", {class: "faint small"}, d.rated) :
+        [h("button", {class: "btn sm ghost", title: "The answer was right", onclick: () => rate(d, "good")}, "Good"),
+         h("button", {class: "btn sm ghost", title: "The answer was wrong: Maestro learns to route this kind of task higher", onclick: () => rate(d, "bad")}, "Bad")]) : null));
+    if (!open) return [main];
+    return [main, h("tr", {}, h("td", {colSpan: 11, style: "background:var(--surface-2)"}, h("div", {style: "display:grid;gap:6px"},
+      h("div", {}, h("b", {}, "Why: "), d.reason), d.prompt ? h("div", {}, h("b", {}, "Prompt: "), h("span", {class: "muted"}, d.prompt)) : null,
+      d.decider ? h("div", {class: "small"}, h("b", {}, "Decider: "), d.decider, d.p_success != null ? " · P(success) " + fmt.pct(d.p_success) : "",
+        d.shadow ? [" · the " + (d.decider === "utility" ? "ladder" : "utility decider") + " would have picked ", h("code", {}, d.shadow)] : "", " · decision ", h("code", {}, "#" + d.id)) : null,
+      h("div", {class: "small"}, h("b", {}, "Attempts: "), att.map(a => h("span", {class: "chip"}, a.model + " ", h("b", {}, a.status), a.error ? " · " + a.error : "", " · " + a.ms + " ms"))),
+      h("div", {class: "small muted"}, "Target category ", h("b", {}, d.cell || "–"), " · ", (d.candidates || []).length, " candidates considered: ", (d.candidates || []).slice(0, 8).join(", "), " · est. cost ", fmt.money(d.cost)))))];
+  }));
+  if (!rows.length) tbody.append(h("tr", {}, h("td", {colSpan: 11, class: "empty"}, "Nothing yet. Requests to /v1/chat/completions appear here as they happen.")));
+}
+function activity() {
+  const tbody = h("tbody", {id: "act-body"});
+  if (!ui.activity.rows.length) ui.activity.rows = S.decisions; drawActivity(tbody);
+  const pause = h("button", {class: "btn sm", onclick: () => { ui.activity.paused = !ui.activity.paused; pause.textContent = ui.activity.paused ? "Resume" : "Pause"; }}, ui.activity.paused ? "Resume" : "Pause");
+  return h("div", {class: "card"}, h("div", {class: "head"}, h("h2", {}, "Activity"), h("span", {class: "hint"}, "refreshes every 3 s · click a row for the reasoning"), h("span", {class: "spacer"}), pause),
+    h("div", {class: "tablewrap"}, h("table", {}, h("thead", {}, h("tr", {}, ["When", "Asked for", "Job", "Category", "Chosen", "Considered", "Fallbacks", "First byte", "Tokens in → out", "Status", "Rate"].map((t, i) => h("th", {class: i === 8 ? "hide-sm" : ""}, t)))), tbody)));
+}
+
+/* ---------- Try it ---------- */
+function tryit() {
+  const prompt = h("textarea", {placeholder: "Type a task, e.g. “Why does test_login fail with a KeyError in auth.py?”", rows: 4});
+  const system = h("input", {type: "text", placeholder: "System prompt (optional)", style: "width:100%"});
+  const tools = h("input", {type: "checkbox"}), image = h("input", {type: "checkbox"});
+  const model = h("select", {"aria-label": "Model"}, ["maestro/auto"].concat(CATS.map(c => "maestro/" + c), S.jobs.map(j => "maestro/" + j)).map(v => h("option", {value: v}, v)));
+  const out = h("div", {}), body = () => ({prompt: prompt.value, system: system.value, tools: tools.checked, image: image.checked, model: model.value});
+  const run = async (path, btn) => { if (!prompt.value.trim()) { toast("Type a prompt first", true); return; } btn.disabled = true; btn.prepend(h("span", {class: "spin"}));
+    const r = await act(() => api(path, "POST", body())); btn.disabled = false; btn.querySelector(".spin") && btn.querySelector(".spin").remove(); if (r) { ui.tryRes = r; drawTry(out); if (path === "/api/send") refresh(false); } };
+  const dry = h("button", {class: "btn primary", onclick: e => run("/api/route", e.currentTarget)}, "Dry run"), send = h("button", {class: "btn", title: "Actually calls the chosen model (uses your quota or money)", onclick: e => run("/api/send", e.currentTarget)}, "Send for real");
+  drawTry(out);
+  const examples = ["fix the failing test in auth.py", "tldr this email thread for me", "design a multi-region failover for our payments service", "what is a mutex?", "rename fooBar to foo_bar in utils.py"];
+  return [h("div", {class: "card", style: "margin-bottom:14px"}, h("div", {class: "head"}, h("h2", {}, "Try a prompt"), h("span", {class: "hint"}, "a dry run shows the decision without calling any model")),
+    h("div", {class: "body", style: "display:grid;gap:10px"}, prompt, h("div", {class: "row"}, h("span", {class: "hint"}, "Examples:"), examples.map(x => h("button", {class: "btn sm", onclick: () => { prompt.value = x; prompt.focus(); }}, x))), system, h("div", {class: "row"}, model,
+      h("label", {class: "row small"}, tools, "with tools"), h("label", {class: "row small"}, image, "with an image"), h("span", {class: "spacer"}), dry, send))), out];
+}
+function drawTry(out) {
+  out.replaceChildren(); const r = ui.tryRes; if (!r) return;
+  out.append(h("div", {class: "card"}, h("div", {class: "head"}, h("h2", {}, "Decision"), h("span", {class: "spacer"}), r.answer !== undefined ? h("span", {class: "pill " + (r.status < 400 ? "good" : "bad")}, "HTTP " + r.status) : null),
+    h("div", {class: "body", style: "display:grid;gap:12px"},
+      h("div", {class: "row"}, h("span", {class: "pill info"}, r.job + " · difficulty " + r.difficulty), h("span", {}, "wants ", catPill(r.cell)), h("span", {class: "muted"}, "→"), h("b", {class: "mono"}, r.chosen), catPill(r.category),
+        r.needs.length ? h("span", {class: "muted small"}, "needs " + r.needs.join(", ")) : null, r.classifier !== "rules" ? h("span", {class: "pill"}, r.classifier) : null),
+      h("div", {class: "muted"}, r.reason),
+      r.options && r.options.length ? h("div", {}, h("h3", {style: "margin-bottom:6px"}, "S1: expected utility (" + (r.decider === "utility" ? "deciding" : "shadow: would pick " + (r.shadow || "–")) + ")"),
+        r.posterior ? h("div", {class: "hint", style: "margin-bottom:6px"}, "difficulty b " + r.posterior.b[0].toFixed(1) + " ± " + r.posterior.b[1].toFixed(1) + " · " + r.posterior.group + " · " + Object.entries(r.posterior.job_p).map(([j, p]) => j + " " + fmt.pct(p)).join(", ")) : null,
+        h("div", {class: "tablewrap"}, h("table", {}, h("thead", {}, h("tr", {}, ["Model", "P(success)", "API $", "Quota $", "Seconds", "EU $"].map((t, i) => h("th", {class: i ? "right" : ""}, t)))),
+          h("tbody", {}, r.options.map(o => h("tr", {}, h("td", {class: "id", title: o.seat}, o.seat), h("td", {class: "num"}, fmt.pct(o.p)), h("td", {class: "num"}, fmt.money(o.usd)),
+            h("td", {class: "num"}, fmt.money(o.quota_usd)), h("td", {class: "num"}, o.secs), h("td", {class: "num"}, o.eu.toFixed(3)))))))) : null,
+      r.answer !== undefined ? h("div", {}, h("h3", {style: "margin-bottom:6px"}, "Answer"), h("div", {class: "code"}, r.status < 400 ? h("pre", {style: "white-space:pre-wrap;font-family:var(--sans);font-size:13.5px"}, r.answer || "(empty)") : h("pre", {}, r.error || "failed")),
+        h("div", {class: "hint"}, r.attempts.map(a => a.model + " → " + a.status + " (" + a.ms + " ms)").join("  ·  "), r.usage ? "  ·  " + r.usage.prompt_tokens + " in, " + r.usage.completion_tokens + " out tokens" : "")) : null,
+      h("div", {}, h("h3", {style: "margin-bottom:6px"}, "Candidates, best first"), h("div", {class: "tablewrap"}, h("table", {}, h("thead", {}, h("tr", {}, ["#", "Model", "Category", "Job score", "Cost / request", "Quota left", "Latency"].map((t, i) => h("th", {class: i > 2 ? "right" : ""}, t)))),
+        h("tbody", {}, r.candidates.map((c, i) => h("tr", {}, h("td", {class: "muted"}, i + 1), h("td", {class: "id", title: c.id}, c.id), h("td", {}, catPill(c.category)),
+          h("td", {class: "num"}, c.strength != null ? [h("span", {class: "bar-mini"}, h("i", {style: "width:" + Math.round(c.strength * 100) + "%"})), fmt.score(c.strength)] : "–"),
+          h("td", {class: "num"}, c.access === "local" ? "free" : c.access === "subscription-cli" ? "flat" : fmt.money(c.cost)), h("td", {class: "num"}, fmt.pct(c.headroom)), h("td", {class: "num"}, fmt.ms(c.latency_ms)))))))),
+      r.skipped_count ? h("details", {}, h("summary", {}, r.skipped_count + " models skipped"), h("ul", {class: "small muted"}, r.skipped.map(s => h("li", {}, h("code", {}, s.id), ": " + s.reason)))) : null)));
+}
+
+/* ---------- boot ---------- */
+function themeInit() {
+  const b = $("#theme"), saved = store.get("theme") || (() => { try { return localStorage.getItem("maestro-theme"); } catch (e) { return null; } })();
+  const apply = t => { if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); else document.documentElement.removeAttribute("data-theme"); b.textContent = t ? (t === "dark" ? "Dark" : "Light") : "Auto"; };
+  let cur = saved === "light" || saved === "dark" ? saved : ""; apply(cur);
+  b.addEventListener("click", () => { cur = cur === "" ? "light" : cur === "light" ? "dark" : ""; apply(cur); store.set("theme", cur); try { localStorage.setItem("maestro-theme", cur); } catch (e) {} });
+}
+async function boot() {
+  const m = /[#&]token=([^&]+)/.exec(location.hash);
+  if (m) { token = decodeURIComponent(m[1]); store.set("token", token); history.replaceState(null, "", location.pathname + location.search); }
+  token = token || store.get("token") || "";
+  if (!token) return showGate(false);
+  try { await refresh(false); } catch (e) { if (e.message !== "unauthorized") { $("#main").replaceChildren(h("div", {class: "empty"}, "Cannot reach the Maestro server: " + e.message)); } return; }
+  buildTabs(); const want = store.get("tab"); tab = TABS.some(t => t[0] === want) ? want : "overview"; go(tab);
+  clearInterval(timers.poll); timers.poll = setInterval(async () => { if (document.hidden || tab === "providers" || tab === "try" || tab === "routing" || tab === "models") return;
+    try { S = await api("/api/state"); status(); if (tab === "overview") render(); } catch (e) {} }, 10000);
+}
+themeInit(); buildTabs(); boot();
+</script>
+</body>
+</html>

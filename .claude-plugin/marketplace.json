@@ -1,0 +1,14 @@
+{
+  "name": "maestro",
+  "description": "Maestro: route each task to the right model you already have.",
+  "owner": {
+    "name": "this.live"
+  },
+  "plugins": [
+    {
+      "name": "maestro",
+      "source": "./",
+      "description": "Route each task to the right model you already have. A skill plus a single-file, zero-dependency router."
+    }
+  ]
+}

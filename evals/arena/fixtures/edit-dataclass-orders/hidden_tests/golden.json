@@ -1,0 +1,77 @@
+[
+  {
+    "id": "A-100",
+    "customer": "Ada Lovelace",
+    "status": "new",
+    "total_cents": 5248,
+    "items": [
+      {
+        "sku": "BOOK-1",
+        "qty": 2,
+        "price_cents": 1999
+      },
+      {
+        "sku": "PEN-4",
+        "qty": 10,
+        "price_cents": 125
+      }
+    ]
+  },
+  {
+    "id": "A-101",
+    "customer": "Grace Hopper",
+    "status": "shipped",
+    "total_cents": 4550,
+    "items": [
+      {
+        "sku": "LAMP-2",
+        "qty": 1,
+        "price_cents": 4550
+      }
+    ]
+  },
+  {
+    "id": "A-102",
+    "customer": "Alan Turing",
+    "status": "cancelled",
+    "total_cents": 1999,
+    "items": [
+      {
+        "sku": "BOOK-1",
+        "qty": 1,
+        "price_cents": 1999
+      }
+    ]
+  },
+  {
+    "id": "A-103",
+    "customer": "Grace Hopper",
+    "status": "new",
+    "total_cents": 2125,
+    "items": [
+      {
+        "sku": "PEN-4",
+        "qty": 3,
+        "price_cents": 125
+      },
+      {
+        "sku": "INK-9",
+        "qty": 2,
+        "price_cents": 875
+      }
+    ]
+  },
+  {
+    "id": "A-104",
+    "customer": "Ada Lovelace",
+    "status": "new",
+    "total_cents": 4550,
+    "items": [
+      {
+        "sku": "LAMP-2",
+        "qty": 1,
+        "price_cents": 4550
+      }
+    ]
+  }
+]

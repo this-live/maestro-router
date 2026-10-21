@@ -1,0 +1,1 @@
+add a `--json` flag to `todo list` that prints the items as a JSON array instead of the checkbox text, so I can pipe it into jq. each item should have the same fields as in the store file (`id`, `title`, `done`). it should respect `--all` the same way the text output does. text output stays the default.

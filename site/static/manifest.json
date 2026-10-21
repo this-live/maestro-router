@@ -1,0 +1,14 @@
+{
+  "name": "Maestro",
+  "short_name": "Maestro",
+  "description": "Free, open-source, local-first model router: route every task to the right model you already have.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0F2E",
+  "theme_color": "#0A0F2E",
+  "icons": [
+    {"src": "/static/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "/static/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "/static/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}
+  ]
+}

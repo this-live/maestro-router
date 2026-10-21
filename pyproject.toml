@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "maestro-router"
+version = "3.1.1"
+description = "Route each task to the right model you already have. Stdlib only, zero-dependency."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "Apache-2.0"}
+authors = [{name = "Bryce Murad"}]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["typesafe-sdk==0.7.2"]  # only for the Jev contract test
+
+[project.scripts]
+maestro-router = "maestro:main"
+
+[tool.setuptools]
+package-dir = {"" = "skills/maestro/scripts"}
+packages = ["maestro"]
+
+# The learned classifier weights and the provider registry live inside the package (that is also what `npx skills add` copies).
+[tool.setuptools.package-data]
+maestro = ["maestro_model.json", "data/*.json", "data/*.json.gz", "data/*.bin", "ui/*.html"]

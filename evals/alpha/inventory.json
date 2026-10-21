@@ -1,0 +1,25 @@
+{
+ "version": 1,
+ "_note": "Replay seats (S1 spec §9.1): Claude Code subagent seats at the four anchor tiers, priced at catalog API list prices (USD per million input / output tokens) for the dollar accounting. Only graded seats may appear here. `quota_inventory` adds a Codex seat for the quota-monotonicity scenarios of the CI gate.",
+ "harness": "claude-code",
+ "tiers": {
+  "haiku": {"model": "anthropic/claude-haiku-4-5", "seat_model": "haiku", "price": [1.0, 5.0], "category": "fast"},
+  "sonnet": {"model": "anthropic/claude-sonnet-5-5", "seat_model": "sonnet", "price": [2.0, 10.0], "category": "standard"},
+  "opus": {"model": "anthropic/claude-opus-5-5", "seat_model": "opus", "price": [4.0, 20.0], "category": "strong"},
+  "fable": {"model": "anthropic/claude-fable-5-1", "seat_model": "fable", "price": [10.0, 50.0], "category": "frontier"}
+ },
+ "latency_prior": {"fast": [0.6, 150], "standard": [0.9, 80], "strong": [1.5, 50], "frontier": [2.0, 40]},
+ "startup_s": 2.0,
+ "latency_usd_per_s": 0.002,
+ "inventory": {
+  "version": 2, "generated_at": 9000000000000.0, "api_keys": {}, "local_endpoints": [], "local_models": [],
+  "endpoints_sig": [], "hardware": {}, "warnings": [],
+  "harnesses": {"claude-code": {"cli": "claude", "path": "/usr/bin/claude", "creds_file": true, "available": "yes"}}
+ },
+ "quota_inventory": {
+  "version": 2, "generated_at": 9000000000000.0, "api_keys": {}, "local_endpoints": [], "local_models": [],
+  "endpoints_sig": [], "hardware": {}, "warnings": [],
+  "harnesses": {"claude-code": {"cli": "claude", "path": "/usr/bin/claude", "creds_file": true, "available": "yes"},
+                "codex": {"cli": "codex", "path": "/usr/bin/codex", "creds_file": true, "available": "yes"}}
+ }
+}

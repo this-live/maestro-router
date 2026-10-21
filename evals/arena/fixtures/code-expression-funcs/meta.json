@@ -1,0 +1,3 @@
+{"id": "code-expression-funcs", "job": "code", "difficulty_intent": 3, "language": "python", "timeout_s": 1200,
+ "test_cmd": "python3 -m unittest discover -s hidden_tests -t . -q",
+ "visible_test_cmd": "python3 -m unittest discover -s tests -t . -q", "needs_tools": true}

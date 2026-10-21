@@ -1,0 +1,8 @@
+order_id,customer,sku,qty,price_cents,status
+A-100,  Ada Lovelace,BOOK-1,2,1999,new
+A-100,  Ada Lovelace,PEN-4,10,125,new
+A-101,Grace Hopper,LAMP-2,1,4550,shipped
+A-102,Alan Turing,BOOK-1,1,1999,cancelled
+A-103,Grace Hopper,PEN-4,3,125,
+A-103,Grace Hopper,INK-9,2,875,
+A-104,Ada Lovelace,LAMP-2,1,4550,new

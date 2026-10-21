@@ -1,0 +1,40 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "maestro/evals/labels/schema.json",
+ "title": "Maestro S1 panel label, version 1 (spec §6.3): one row per item per labeler",
+ "description": "The labeler returns the fields from `job` to `rationale` (plus the batch key); label.py adds id, labeler, schema and rubric_sha. Extra rules not expressible here and enforced by label.py: job has at most 3 nonzero entries, every value a multiple of 0.1, summing to 1; rationale has at most 25 words. Labelers never see the generator hint, Maestro's prediction, other labels or the slice name.",
+ "type": "object",
+ "additionalProperties": false,
+ "required": ["id", "labeler", "schema", "rubric_sha", "job", "difficulty", "min_tier", "needs_tools", "self_contained",
+              "stakes", "detectable", "ambiguity", "output_tokens", "agent_turns", "rationale"],
+ "properties": {
+  "id": {"type": "string", "minLength": 1},
+  "labeler": {"type": "string", "enum": ["haiku", "sonnet", "opus", "fable", "fable-adj", "gold"]},
+  "schema": {"const": 1},
+  "rubric_sha": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+  "job": {
+   "type": "object",
+   "minProperties": 1,
+   "maxProperties": 3,
+   "additionalProperties": false,
+   "properties": {
+    "plan": {"type": "number", "minimum": 0, "maximum": 1}, "code": {"type": "number", "minimum": 0, "maximum": 1},
+    "debug": {"type": "number", "minimum": 0, "maximum": 1}, "review": {"type": "number", "minimum": 0, "maximum": 1},
+    "ops": {"type": "number", "minimum": 0, "maximum": 1}, "research": {"type": "number", "minimum": 0, "maximum": 1},
+    "data": {"type": "number", "minimum": 0, "maximum": 1}, "write": {"type": "number", "minimum": 0, "maximum": 1},
+    "edit": {"type": "number", "minimum": 0, "maximum": 1}, "summarize": {"type": "number", "minimum": 0, "maximum": 1},
+    "ask": {"type": "number", "minimum": 0, "maximum": 1}
+   }
+  },
+  "difficulty": {"type": "integer", "enum": [0, 1, 2, 3]},
+  "min_tier": {"type": "string", "enum": ["haiku", "sonnet", "opus", "fable", "none"]},
+  "needs_tools": {"type": "integer", "enum": [0, 1]},
+  "self_contained": {"type": "integer", "enum": [0, 1]},
+  "stakes": {"type": "integer", "enum": [0, 1, 2]},
+  "detectable": {"type": "integer", "enum": [0, 1]},
+  "ambiguity": {"type": "integer", "enum": [0, 1, 2]},
+  "output_tokens": {"type": "string", "enum": ["<100", "100-300", "300-1k", "1k-3k", ">3k"]},
+  "agent_turns": {"type": "string", "enum": ["0", "1-3", "4-10", "11-30", ">30"]},
+  "rationale": {"type": "string", "maxLength": 400}
+ }
+}

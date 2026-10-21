@@ -1,0 +1,15 @@
+{
+ "_note": "Copy to evals/arena/seats.json and edit (seats.json is optional). add: seats beyond what `arena.py seats` finds (an id that exists is replaced); remove: id globs to drop; judges: the default judge globs for the open suite (--judges overrides). Endpoint keys are named by env var (api_key_env), never written here.",
+ "add": [
+  {"id": "codex:gpt-6.1-sol@xhigh", "harness": "codex", "model": "gpt-6.1-sol", "effort": "xhigh"},
+  {"id": "local:spark/gpt-oss-120b", "harness": "local", "base_url": "http://spark.local:8000/v1", "served": "openai/gpt-oss-120b",
+   "model": "openai/gpt-oss-120b", "family": "openai"},
+  {"id": "opencode:spark/gpt-oss-120b", "harness": "opencode", "model": "spark/openai/gpt-oss-120b",
+   "endpoint": {"name": "spark", "base_url": "http://spark.local:8000/v1", "served": "openai/gpt-oss-120b", "api_key_env": "SPARK_API_KEY"}},
+  {"id": "hermes:spark/gpt-oss-120b", "harness": "hermes", "model": "spark/openai/gpt-oss-120b",
+   "endpoint": {"name": "spark", "base_url": "http://spark.local:8000/v1", "served": "openai/gpt-oss-120b"}},
+  {"id": "api:deepseek/deepseek-chat", "harness": "api", "provider": "deepseek", "model": "deepseek-chat"}
+ ],
+ "remove": ["claude-code:fable"],
+ "judges": ["codex:gpt-6.1-sol*", "gemini-cli:gemini-3.1-pro-preview", "local:spark/gpt-oss-120b", "claude-code:opus"]
+}

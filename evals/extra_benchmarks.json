@@ -1,0 +1,4513 @@
+{
+ "_note": "Benchmark rows read from official model cards (Hugging Face model pages and the gpt-oss model card paper) on 2026-09-30, for models whose models.dev entry has none or few. Only numbers printed in the card; `source` is the card, `variant` the setting the card states (or 'as tabulated in the X card' when the number is another vendor's evaluation of this model). Merged into the catalog by evals/build_catalog.py; a row already in models.dev with the same name and score wins.",
+ "alibaba/qwen3-next-80b-a3b-instruct": [
+  {
+   "name": "MMLU-Pro",
+   "score": 80.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct",
+   "variant": ""
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 72.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct",
+   "variant": "card says GPQA"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 69.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct",
+   "variant": ""
+  },
+  {
+   "name": "HMMT 2025",
+   "score": 54.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct",
+   "variant": ""
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 56.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct",
+   "variant": "v6 (25.02-25.05)"
+  },
+  {
+   "name": "Aider Polyglot",
+   "score": 49.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct",
+   "variant": ""
+  },
+  {
+   "name": "IFEval",
+   "score": 87.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench Retail",
+   "score": 57.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench Airline",
+   "score": 45.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench Telecom",
+   "score": 13.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct",
+   "variant": ""
+  }
+ ],
+ "alibaba/qwen3-next-80b-a3b-thinking": [
+  {
+   "name": "MMLU-Pro",
+   "score": 82.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Thinking",
+   "variant": ""
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 77.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Thinking",
+   "variant": "card says GPQA"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 87.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Thinking",
+   "variant": ""
+  },
+  {
+   "name": "HMMT 2025",
+   "score": 73.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Thinking",
+   "variant": ""
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 68.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Thinking",
+   "variant": "v6 (25.02-25.05)"
+  },
+  {
+   "name": "IFEval",
+   "score": 88.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Thinking",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench Retail",
+   "score": 67.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Thinking",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench Airline",
+   "score": 60.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Thinking",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench Telecom",
+   "score": 43.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Thinking",
+   "variant": ""
+  }
+ ],
+ "alibaba/qwen3.5-122b-a10b": [
+  {
+   "name": "MMLU-Pro",
+   "score": 86.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "IFEval",
+   "score": 93.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "IFBench",
+   "score": 76.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "AA-LCR",
+   "score": 66.9,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "LongBench",
+   "score": 60.2,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": "v2"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 25.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": "with CoT, no tools"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 86.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "HMMT",
+   "score": 91.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": "Feb 2025"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 72.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 49.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 78.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": "v6"
+  },
+  {
+   "name": "Codeforces",
+   "score": 2100,
+   "metric": "Elo",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench",
+   "score": 79.5,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 47.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": "with tools"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 63.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "WideSearch",
+   "score": 60.5,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  }
+ ],
+ "alibaba/qwen3.5-27b": [
+  {
+   "name": "SWE-Bench Verified",
+   "score": 75.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 69.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Pro",
+   "score": 51.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "internal agent scaffold;"
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 41.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Harbor/Terminus-2;"
+  },
+  {
+   "name": "Claw-Eval",
+   "score": 64.3,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Avg;"
+  },
+  {
+   "name": "SkillsBench",
+   "score": 27.2,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Avg5;"
+  },
+  {
+   "name": "NL2Repo",
+   "score": 27.3,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "τ³-Bench",
+   "score": 68.4,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "Tool-Decathlon",
+   "score": 31.5,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "MCP Mark",
+   "score": 36.3,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "MCP Atlas",
+   "score": 68.4,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "public set;"
+  },
+  {
+   "name": "WideSearch",
+   "score": 66.4,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "MMLU-Pro",
+   "score": 86.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 85.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "card says GPQA;"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 24.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 80.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "v6;"
+  },
+  {
+   "name": "HMMT",
+   "score": 92.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Feb 2025;"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 79.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "AIME 2026",
+   "score": 92.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "MMLU-Pro",
+   "score": 86.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "IFEval",
+   "score": 95.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "IFBench",
+   "score": 76.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "AA-LCR",
+   "score": 66.1,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "LongBench",
+   "score": 60.6,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": "v2"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 24.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": "with CoT, no tools"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 85.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "HMMT",
+   "score": 92.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": "Feb 2025"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 72.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 41.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 80.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": "v6"
+  },
+  {
+   "name": "Codeforces",
+   "score": 1899,
+   "metric": "Elo",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench",
+   "score": 79.0,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 48.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": "with tools"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 61.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "WideSearch",
+   "score": 61.1,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  }
+ ],
+ "alibaba/qwen3.5-35b-a3b": [
+  {
+   "name": "SWE-Bench Verified",
+   "score": 70.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 60.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Pro",
+   "score": 44.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "internal agent scaffold;"
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 40.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Harbor/Terminus-2;"
+  },
+  {
+   "name": "Claw-Eval",
+   "score": 65.4,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Avg;"
+  },
+  {
+   "name": "SkillsBench",
+   "score": 4.4,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Avg5;"
+  },
+  {
+   "name": "NL2Repo",
+   "score": 20.5,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "τ³-Bench",
+   "score": 68.9,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "Tool-Decathlon",
+   "score": 28.7,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "MCP Mark",
+   "score": 27.0,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "MCP Atlas",
+   "score": 62.4,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "public set;"
+  },
+  {
+   "name": "WideSearch",
+   "score": 59.1,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "MMLU-Pro",
+   "score": 85.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 84.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "card says GPQA;"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 22.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 74.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "v6;"
+  },
+  {
+   "name": "HMMT",
+   "score": 89.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Feb 2025;"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 76.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "AIME 2026",
+   "score": 91.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "MMLU-Pro",
+   "score": 85.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "IFEval",
+   "score": 91.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "IFBench",
+   "score": 70.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "AA-LCR",
+   "score": 58.5,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "LongBench",
+   "score": 59.0,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": "v2"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 22.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": "with CoT, no tools"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 84.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "HMMT",
+   "score": 89.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": "Feb 2025"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 69.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 40.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 74.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": "v6"
+  },
+  {
+   "name": "Codeforces",
+   "score": 2028,
+   "metric": "Elo",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench",
+   "score": 81.2,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 47.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": "with tools"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 61.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "WideSearch",
+   "score": 57.1,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B",
+   "variant": ""
+  }
+ ],
+ "alibaba/qwen3.5-9b": [
+  {
+   "name": "MMLU-Pro",
+   "score": 82.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-9B",
+   "variant": ""
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 81.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-9B",
+   "variant": ""
+  },
+  {
+   "name": "IFEval",
+   "score": 91.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-9B",
+   "variant": ""
+  },
+  {
+   "name": "IFBench",
+   "score": 64.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-9B",
+   "variant": ""
+  },
+  {
+   "name": "AA-LCR",
+   "score": 63.0,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-9B",
+   "variant": ""
+  },
+  {
+   "name": "LongBench",
+   "score": 55.2,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-9B",
+   "variant": "v2"
+  },
+  {
+   "name": "HMMT",
+   "score": 83.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-9B",
+   "variant": "Feb 2025"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 65.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.5-9B",
+   "variant": "v6"
+  }
+ ],
+ "alibaba/qwen3.6-35b-a3b": [
+  {
+   "name": "SWE-Bench Verified",
+   "score": 73.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 67.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Pro",
+   "score": 49.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "internal agent scaffold;"
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 51.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Harbor/Terminus-2;"
+  },
+  {
+   "name": "Claw-Eval",
+   "score": 68.7,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Avg;"
+  },
+  {
+   "name": "SkillsBench",
+   "score": 28.7,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Avg5;"
+  },
+  {
+   "name": "NL2Repo",
+   "score": 29.4,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "τ³-Bench",
+   "score": 67.2,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "Tool-Decathlon",
+   "score": 26.9,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "MCP Mark",
+   "score": 37.0,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "MCP Atlas",
+   "score": 62.8,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "public set;"
+  },
+  {
+   "name": "WideSearch",
+   "score": 60.1,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "MMLU-Pro",
+   "score": 85.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 86.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "card says GPQA;"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 21.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 80.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "v6;"
+  },
+  {
+   "name": "HMMT",
+   "score": 90.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Feb 2025;"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 78.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  },
+  {
+   "name": "AIME 2026",
+   "score": 92.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": ""
+  }
+ ],
+ "anthropic/claude-opus-4-5": [
+  {
+   "name": "Humanity's Last Exam",
+   "score": 30.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "no tools; as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 43.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "with tools; as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 92.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "HMMT",
+   "score": 92.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "Feb 2025; as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 78.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 87.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "MMLU-Pro",
+   "score": 89.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 80.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "SWE-Bench Pro",
+   "score": 55.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 77.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 59.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "SciCode",
+   "score": 49.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 82.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "v6; as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "CyberGym",
+   "score": 50.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "LongBench",
+   "score": 64.4,
+   "metric": "score",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "v2; as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "AA-LCR",
+   "score": 71.3,
+   "metric": "score",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 37.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 57.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "with context management; as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "WideSearch",
+   "score": 76.2,
+   "metric": "score",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "item-f1; as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "DeepSearchQA",
+   "score": 76.1,
+   "metric": "score",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  }
+ ],
+ "anthropic/claude-opus-4-5-20251101": [
+  {
+   "name": "Humanity's Last Exam",
+   "score": 30.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "no tools; as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 43.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "with tools; as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 92.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "HMMT",
+   "score": 92.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "Feb 2025; as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 78.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 87.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "MMLU-Pro",
+   "score": 89.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 80.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "SWE-Bench Pro",
+   "score": 55.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 77.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 59.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "SciCode",
+   "score": 49.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 82.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "v6; as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "CyberGym",
+   "score": 50.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "LongBench",
+   "score": 64.4,
+   "metric": "score",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "v2; as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "AA-LCR",
+   "score": 71.3,
+   "metric": "score",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 37.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 57.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "with context management; as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "WideSearch",
+   "score": 76.2,
+   "metric": "score",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "item-f1; as evaluated in the Kimi-K2.5 card (extended thinking)"
+  },
+  {
+   "name": "DeepSearchQA",
+   "score": 76.1,
+   "metric": "score",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (extended thinking)"
+  }
+ ],
+ "arcee-ai/trinity-large-thinking": [
+  {
+   "name": "IFBench",
+   "score": 52.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/arcee-ai/Trinity-Large-Thinking",
+   "variant": ""
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 76.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/arcee-ai/Trinity-Large-Thinking",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench Airline",
+   "score": 88.0,
+   "metric": "score",
+   "source": "https://huggingface.co/arcee-ai/Trinity-Large-Thinking",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench Telecom",
+   "score": 94.7,
+   "metric": "score",
+   "source": "https://huggingface.co/arcee-ai/Trinity-Large-Thinking",
+   "variant": ""
+  },
+  {
+   "name": "PinchBench",
+   "score": 91.9,
+   "metric": "score",
+   "source": "https://huggingface.co/arcee-ai/Trinity-Large-Thinking",
+   "variant": ""
+  },
+  {
+   "name": "AIME 2025",
+   "score": 96.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/arcee-ai/Trinity-Large-Thinking",
+   "variant": ""
+  },
+  {
+   "name": "MMLU-Pro",
+   "score": 83.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/arcee-ai/Trinity-Large-Thinking",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 63.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/arcee-ai/Trinity-Large-Thinking",
+   "variant": "mini-swe-agent-v2"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 98.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/arcee-ai/Trinity-Large-Thinking",
+   "variant": "headline figure in the card text"
+  }
+ ],
+ "deepseek/deepseek-reasoner": [
+  {
+   "name": "MMLU-Pro",
+   "score": 85.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 82.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 25.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "no tools; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 40.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "with tools; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 93.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "HMMT",
+   "score": 92.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "Feb 2025; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 78.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 83.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "v6; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 73.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 70.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 46.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 51.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 67.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "with context management; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "τ²-Bench",
+   "score": 85.3,
+   "metric": "score",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  }
+ ],
+ "deepseek/deepseek-v3.1": [
+  {
+   "name": "MMLU-Pro",
+   "score": 84.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V3.1",
+   "variant": "thinking"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 80.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V3.1",
+   "variant": "thinking"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 15.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V3.1",
+   "variant": "thinking, no tools"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 30.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V3.1",
+   "variant": "thinking"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 29.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V3.1",
+   "variant": "thinking, python + search"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 74.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V3.1",
+   "variant": "thinking, 2408-2505"
+  },
+  {
+   "name": "Codeforces",
+   "score": 2091,
+   "metric": "Elo",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V3.1",
+   "variant": "thinking"
+  },
+  {
+   "name": "Aider Polyglot",
+   "score": 76.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V3.1",
+   "variant": "thinking"
+  }
+ ],
+ "deepseek/deepseek-v3.2": [
+  {
+   "name": "MMLU-Pro",
+   "score": 85.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 82.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 25.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "no tools; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 40.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "with tools; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 93.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "HMMT",
+   "score": 92.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "Feb 2025; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 78.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 83.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "v6; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 73.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 70.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 46.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 51.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 67.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "with context management; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "τ²-Bench",
+   "score": 85.3,
+   "metric": "score",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  }
+ ],
+ "deepseek/deepseek-v4-flash-0423": [
+  {
+   "name": "MMLU-Pro",
+   "score": 86.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+   "variant": "Max"
+  },
+  {
+   "name": "SimpleQA-Verified",
+   "score": 34.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+   "variant": "Max"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 88.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+   "variant": "Max"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 34.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+   "variant": "Max, no tools"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 91.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+   "variant": "Max"
+  },
+  {
+   "name": "Codeforces",
+   "score": 3052,
+   "metric": "Elo",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+   "variant": "Max"
+  },
+  {
+   "name": "HMMT",
+   "score": 94.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+   "variant": "Max, Feb 2026"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 88.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+   "variant": "Max"
+  },
+  {
+   "name": "MRCR",
+   "score": 78.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+   "variant": "Max, 1M"
+  },
+  {
+   "name": "CorpusQA",
+   "score": 60.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+   "variant": "Max, 1M"
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 56.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+   "variant": "Max"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 79.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+   "variant": "Max"
+  },
+  {
+   "name": "SWE-Bench Pro",
+   "score": 52.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+   "variant": "Max"
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 73.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+   "variant": "Max"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 73.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+   "variant": "Max"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 45.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+   "variant": "Max, with tools"
+  },
+  {
+   "name": "MCP Atlas",
+   "score": 69.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+   "variant": "Max"
+  },
+  {
+   "name": "GDPval-AA",
+   "score": 1395,
+   "metric": "Elo",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+   "variant": "Max"
+  },
+  {
+   "name": "Toolathlon",
+   "score": 47.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+   "variant": "Max"
+  }
+ ],
+ "google/gemini-3-pro-preview": [
+  {
+   "name": "Humanity's Last Exam",
+   "score": 37.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "no tools; as evaluated in the Kimi-K2.5 card (high thinking)"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 45.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "with tools; as evaluated in the Kimi-K2.5 card (high thinking)"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 95.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (high thinking)"
+  },
+  {
+   "name": "HMMT",
+   "score": 97.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "Feb 2025; as evaluated in the Kimi-K2.5 card (high thinking)"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 83.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (high thinking)"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 91.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (high thinking)"
+  },
+  {
+   "name": "MMLU-Pro",
+   "score": 90.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (high thinking)"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 76.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (high thinking)"
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 65.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (high thinking)"
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 54.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (high thinking)"
+  },
+  {
+   "name": "SciCode",
+   "score": 56.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (high thinking)"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 87.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "v6; as evaluated in the Kimi-K2.5 card (high thinking)"
+  },
+  {
+   "name": "CyberGym",
+   "score": 39.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (high thinking)"
+  },
+  {
+   "name": "LongBench",
+   "score": 68.2,
+   "metric": "score",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "v2; as evaluated in the Kimi-K2.5 card (high thinking)"
+  },
+  {
+   "name": "AA-LCR",
+   "score": 65.3,
+   "metric": "score",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (high thinking)"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 37.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (high thinking)"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 59.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "with context management; as evaluated in the Kimi-K2.5 card (high thinking)"
+  },
+  {
+   "name": "WideSearch",
+   "score": 57.0,
+   "metric": "score",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "item-f1; as evaluated in the Kimi-K2.5 card (high thinking)"
+  },
+  {
+   "name": "DeepSearchQA",
+   "score": 63.2,
+   "metric": "score",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (high thinking)"
+  }
+ ],
+ "google/gemma-4-12b-it": [
+  {
+   "name": "MMLU-Pro",
+   "score": 77.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": ""
+  },
+  {
+   "name": "AIME 2026",
+   "score": 77.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "no tools"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 72.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "v6"
+  },
+  {
+   "name": "Codeforces",
+   "score": 1659,
+   "metric": "Elo",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": ""
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 78.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench",
+   "score": 69.0,
+   "metric": "score",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "average over 3 domains"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 5.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "no tools"
+  },
+  {
+   "name": "MRCR",
+   "score": 43.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "v2, 8 needle, 128k average"
+  }
+ ],
+ "google/gemma-4-26b-a4b-it": [
+  {
+   "name": "SWE-Bench Verified",
+   "score": 17.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 17.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "SWE-Bench Pro",
+   "score": 13.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "internal agent scaffold; as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 34.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Harbor/Terminus-2; as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "Claw-Eval",
+   "score": 58.8,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Avg; as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "SkillsBench",
+   "score": 12.3,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Avg5; as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "NL2Repo",
+   "score": 11.6,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "τ³-Bench",
+   "score": 59.0,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "Tool-Decathlon",
+   "score": 12.0,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "MCP Mark",
+   "score": 14.2,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "MCP Atlas",
+   "score": 50.0,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "public set; as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "WideSearch",
+   "score": 38.3,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "MMLU-Pro",
+   "score": 82.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 82.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "card says GPQA; as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 8.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 77.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "v6; as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "HMMT",
+   "score": 91.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Feb 2025; as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 74.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "AIME 2026",
+   "score": 88.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "MMLU-Pro",
+   "score": 82.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": ""
+  },
+  {
+   "name": "AIME 2026",
+   "score": 88.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "no tools"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 77.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "v6"
+  },
+  {
+   "name": "Codeforces",
+   "score": 1718,
+   "metric": "Elo",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": ""
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 82.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench",
+   "score": 68.2,
+   "metric": "score",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "average over 3 domains"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 8.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "no tools"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 17.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "with search"
+  },
+  {
+   "name": "MRCR",
+   "score": 44.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "v2, 8 needle, 128k average"
+  }
+ ],
+ "google/gemma-4-31b-it": [
+  {
+   "name": "SWE-Bench Verified",
+   "score": 52.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 51.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "SWE-Bench Pro",
+   "score": 35.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "internal agent scaffold; as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 42.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Harbor/Terminus-2; as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "Claw-Eval",
+   "score": 48.5,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Avg; as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "SkillsBench",
+   "score": 23.6,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Avg5; as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "NL2Repo",
+   "score": 15.5,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "τ³-Bench",
+   "score": 67.5,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "Tool-Decathlon",
+   "score": 21.2,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "MCP Mark",
+   "score": 18.1,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "MCP Atlas",
+   "score": 57.2,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "public set; as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "WideSearch",
+   "score": 35.2,
+   "metric": "score",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "MMLU-Pro",
+   "score": 85.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 84.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "card says GPQA; as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 19.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 80.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "v6; as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "HMMT",
+   "score": 88.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "Feb 2025; as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 74.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "AIME 2026",
+   "score": 89.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+   "variant": "as evaluated in the Qwen3.6-35B-A3B card"
+  },
+  {
+   "name": "MMLU-Pro",
+   "score": 85.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": ""
+  },
+  {
+   "name": "AIME 2026",
+   "score": 89.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "no tools"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 80.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "v6"
+  },
+  {
+   "name": "Codeforces",
+   "score": 2150,
+   "metric": "Elo",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": ""
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 84.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench",
+   "score": 76.9,
+   "metric": "score",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "average over 3 domains"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 19.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "no tools"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 26.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "with search"
+  },
+  {
+   "name": "MRCR",
+   "score": 66.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "v2, 8 needle, 128k average"
+  }
+ ],
+ "google/gemma-4-E2B-it": [
+  {
+   "name": "MMLU-Pro",
+   "score": 60.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": ""
+  },
+  {
+   "name": "AIME 2026",
+   "score": 37.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "no tools"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 44.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "v6"
+  },
+  {
+   "name": "Codeforces",
+   "score": 633,
+   "metric": "Elo",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": ""
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 43.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench",
+   "score": 24.5,
+   "metric": "score",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "average over 3 domains"
+  },
+  {
+   "name": "MRCR",
+   "score": 19.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "v2, 8 needle, 128k average"
+  }
+ ],
+ "google/gemma-4-E4B-it": [
+  {
+   "name": "MMLU-Pro",
+   "score": 69.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": ""
+  },
+  {
+   "name": "AIME 2026",
+   "score": 42.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "no tools"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 52.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "v6"
+  },
+  {
+   "name": "Codeforces",
+   "score": 940,
+   "metric": "Elo",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": ""
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 58.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench",
+   "score": 42.2,
+   "metric": "score",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "average over 3 domains"
+  },
+  {
+   "name": "MRCR",
+   "score": 25.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/google/gemma-4-31B-it",
+   "variant": "v2, 8 needle, 128k average"
+  }
+ ],
+ "minimax/MiniMax-M2": [
+  {
+   "name": "SWE-Bench Verified",
+   "score": 69.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "as tabulated in the MiniMax-M2.1 card"
+  },
+  {
+   "name": "Multi-SWE-Bench",
+   "score": 36.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "as tabulated in the MiniMax-M2.1 card"
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 56.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "as tabulated in the MiniMax-M2.1 card"
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 30.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "as tabulated in the MiniMax-M2.1 card"
+  },
+  {
+   "name": "Toolathlon",
+   "score": 16.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "as tabulated in the MiniMax-M2.1 card"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 44.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "as tabulated in the MiniMax-M2.1 card"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 56.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "with context management; as tabulated in the MiniMax-M2.1 card"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 78.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "as tabulated in the MiniMax-M2.1 card"
+  },
+  {
+   "name": "MMLU-Pro",
+   "score": 82.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "as tabulated in the MiniMax-M2.1 card"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 78.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "as tabulated in the MiniMax-M2.1 card"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 12.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "no tools; as tabulated in the MiniMax-M2.1 card"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 83.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "as tabulated in the MiniMax-M2.1 card"
+  },
+  {
+   "name": "SciCode",
+   "score": 36.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "as tabulated in the MiniMax-M2.1 card"
+  },
+  {
+   "name": "IFBench",
+   "score": 72.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "as tabulated in the MiniMax-M2.1 card"
+  },
+  {
+   "name": "AA-LCR",
+   "score": 61.0,
+   "metric": "score",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "as tabulated in the MiniMax-M2.1 card"
+  },
+  {
+   "name": "τ²-Bench Telecom",
+   "score": 87.0,
+   "metric": "score",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "as tabulated in the MiniMax-M2.1 card"
+  },
+  {
+   "name": "VIBE",
+   "score": 67.5,
+   "metric": "score",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "average; as tabulated in the MiniMax-M2.1 card"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 69.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2",
+   "variant": "OpenHands/R2E-Gym scaffold"
+  },
+  {
+   "name": "Multi-SWE-Bench",
+   "score": 36.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 56.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2",
+   "variant": ""
+  },
+  {
+   "name": "Terminal-Bench",
+   "score": 46.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2",
+   "variant": "v1, claude-code scaffold"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 44.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2",
+   "variant": ""
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 31.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2",
+   "variant": "with tools"
+  },
+  {
+   "name": "τ²-Bench",
+   "score": 77.2,
+   "metric": "score",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2",
+   "variant": ""
+  }
+ ],
+ "minimax/MiniMax-M2.1": [
+  {
+   "name": "SWE-Bench Verified",
+   "score": 74.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": ""
+  },
+  {
+   "name": "Multi-SWE-Bench",
+   "score": 49.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 72.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": ""
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 47.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": ""
+  },
+  {
+   "name": "Toolathlon",
+   "score": 43.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": ""
+  },
+  {
+   "name": "BrowseComp",
+   "score": 47.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": ""
+  },
+  {
+   "name": "BrowseComp",
+   "score": 62.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "with context management"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 83.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": ""
+  },
+  {
+   "name": "MMLU-Pro",
+   "score": 88.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": ""
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 83.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": ""
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 22.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "no tools"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 81.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": ""
+  },
+  {
+   "name": "SciCode",
+   "score": 41.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": ""
+  },
+  {
+   "name": "IFBench",
+   "score": 70.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": ""
+  },
+  {
+   "name": "AA-LCR",
+   "score": 62.0,
+   "metric": "score",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench Telecom",
+   "score": 87.0,
+   "metric": "score",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": ""
+  },
+  {
+   "name": "VIBE",
+   "score": 88.6,
+   "metric": "score",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.1",
+   "variant": "average"
+  }
+ ],
+ "minimax/MiniMax-M2.5": [
+  {
+   "name": "SWE-Bench Verified",
+   "score": 80.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.5",
+   "variant": ""
+  },
+  {
+   "name": "Multi-SWE-Bench",
+   "score": 51.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.5",
+   "variant": ""
+  },
+  {
+   "name": "BrowseComp",
+   "score": 76.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.5",
+   "variant": "with context management"
+  }
+ ],
+ "minimax/MiniMax-M2.5-highspeed": [
+  {
+   "name": "SWE-Bench Verified",
+   "score": 80.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.5",
+   "variant": ""
+  },
+  {
+   "name": "Multi-SWE-Bench",
+   "score": 51.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.5",
+   "variant": ""
+  },
+  {
+   "name": "BrowseComp",
+   "score": 76.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.5",
+   "variant": "with context management"
+  }
+ ],
+ "minimax/MiniMax-M2.7": [
+  {
+   "name": "SWE-Bench Pro",
+   "score": 56.22,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 76.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7",
+   "variant": ""
+  },
+  {
+   "name": "Multi-SWE-Bench",
+   "score": 52.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7",
+   "variant": ""
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 57.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7",
+   "variant": ""
+  },
+  {
+   "name": "NL2Repo",
+   "score": 39.8,
+   "metric": "score",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7",
+   "variant": ""
+  },
+  {
+   "name": "GDPval-AA",
+   "score": 1495,
+   "metric": "Elo",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7",
+   "variant": ""
+  },
+  {
+   "name": "Toolathlon",
+   "score": 46.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7",
+   "variant": ""
+  },
+  {
+   "name": "MLE-Bench",
+   "score": 66.6,
+   "metric": "medal rate",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7",
+   "variant": "Lite, 22 competitions"
+  },
+  {
+   "name": "VIBE-Pro",
+   "score": 55.6,
+   "metric": "score",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7",
+   "variant": ""
+  }
+ ],
+ "minimax/MiniMax-M2.7-highspeed": [
+  {
+   "name": "SWE-Bench Pro",
+   "score": 56.22,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 76.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7",
+   "variant": ""
+  },
+  {
+   "name": "Multi-SWE-Bench",
+   "score": 52.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7",
+   "variant": ""
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 57.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7",
+   "variant": ""
+  },
+  {
+   "name": "NL2Repo",
+   "score": 39.8,
+   "metric": "score",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7",
+   "variant": ""
+  },
+  {
+   "name": "GDPval-AA",
+   "score": 1495,
+   "metric": "Elo",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7",
+   "variant": ""
+  },
+  {
+   "name": "Toolathlon",
+   "score": 46.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7",
+   "variant": ""
+  },
+  {
+   "name": "MLE-Bench",
+   "score": 66.6,
+   "metric": "medal rate",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7",
+   "variant": "Lite, 22 competitions"
+  },
+  {
+   "name": "VIBE-Pro",
+   "score": 55.6,
+   "metric": "score",
+   "source": "https://huggingface.co/MiniMaxAI/MiniMax-M2.7",
+   "variant": ""
+  }
+ ],
+ "mistral/devstral-2512": [
+  {
+   "name": "SWE-Bench Verified",
+   "score": 72.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 61.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512",
+   "variant": ""
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 32.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512",
+   "variant": ""
+  }
+ ],
+ "mistral/devstral-medium-latest": [
+  {
+   "name": "SWE-Bench Verified",
+   "score": 72.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 61.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512",
+   "variant": ""
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 32.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512",
+   "variant": ""
+  }
+ ],
+ "mistral/devstral-small-2": [
+  {
+   "name": "SWE-Bench Verified",
+   "score": 68.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512",
+   "variant": "Devstral Small 2 row of the Devstral 2 card"
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 55.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512",
+   "variant": ""
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 22.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512",
+   "variant": ""
+  }
+ ],
+ "mistral/mistral-medium-2604": [
+  {
+   "name": "τ³-Bench Telecom",
+   "score": 91.4,
+   "metric": "score",
+   "source": "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 77.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B",
+   "variant": ""
+  }
+ ],
+ "mistral/mistral-medium-latest": [
+  {
+   "name": "τ³-Bench Telecom",
+   "score": 91.4,
+   "metric": "score",
+   "source": "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 77.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B",
+   "variant": ""
+  }
+ ],
+ "mistral/mistral-small-2603": [
+  {
+   "name": "AA-LCR",
+   "score": 72,
+   "metric": "score",
+   "source": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603",
+   "variant": "reasoning on; card reports 0.72"
+  }
+ ],
+ "mistral/mistral-small-latest": [
+  {
+   "name": "AA-LCR",
+   "score": 72,
+   "metric": "score",
+   "source": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603",
+   "variant": "reasoning on; card reports 0.72"
+  }
+ ],
+ "moonshotai/kimi-k2-thinking": [
+  {
+   "name": "MMLU-Pro",
+   "score": 84.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 84.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 23.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "no tools; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 44.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "with tools; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 94.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "HMMT",
+   "score": 89.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "Feb 2025; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 78.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 83.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "v6; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 71.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 61.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 35.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 60.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "with context management; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "τ²-Bench",
+   "score": 74.3,
+   "metric": "score",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  }
+ ],
+ "moonshotai/kimi-k2-thinking-turbo": [
+  {
+   "name": "MMLU-Pro",
+   "score": 84.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 84.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 23.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "no tools; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 44.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "with tools; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 94.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "HMMT",
+   "score": 89.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "Feb 2025; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 78.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 83.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "v6; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 71.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 61.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 35.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 60.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "with context management; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "τ²-Bench",
+   "score": 74.3,
+   "metric": "score",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  }
+ ],
+ "moonshotai/kimi-k2.5": [
+  {
+   "name": "Humanity's Last Exam",
+   "score": 30.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "no tools"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 50.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "with tools"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 96.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": ""
+  },
+  {
+   "name": "HMMT",
+   "score": 95.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "Feb 2025"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 81.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": ""
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 87.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": ""
+  },
+  {
+   "name": "MMLU-Pro",
+   "score": 87.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 76.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Pro",
+   "score": 50.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 73.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": ""
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 50.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": ""
+  },
+  {
+   "name": "SciCode",
+   "score": 48.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": ""
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 85.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "v6"
+  },
+  {
+   "name": "CyberGym",
+   "score": 41.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": ""
+  },
+  {
+   "name": "LongBench",
+   "score": 61.0,
+   "metric": "score",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "v2"
+  },
+  {
+   "name": "AA-LCR",
+   "score": 70.0,
+   "metric": "score",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": ""
+  },
+  {
+   "name": "BrowseComp",
+   "score": 60.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": ""
+  },
+  {
+   "name": "BrowseComp",
+   "score": 74.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "with context management"
+  },
+  {
+   "name": "WideSearch",
+   "score": 72.7,
+   "metric": "score",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "item-f1"
+  },
+  {
+   "name": "DeepSearchQA",
+   "score": 77.1,
+   "metric": "score",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": ""
+  }
+ ],
+ "nex-agi/nex-n2-pro": [
+  {
+   "name": "BrowseComp",
+   "score": 83.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nex-agi/Nex-N2-Pro",
+   "variant": ""
+  },
+  {
+   "name": "GDPval",
+   "score": 1585,
+   "metric": "Elo",
+   "source": "https://huggingface.co/nex-agi/Nex-N2-Pro",
+   "variant": ""
+  },
+  {
+   "name": "Toolathlon",
+   "score": 51.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nex-agi/Nex-N2-Pro",
+   "variant": ""
+  },
+  {
+   "name": "WildClawBench",
+   "score": 53.5,
+   "metric": "score",
+   "source": "https://huggingface.co/nex-agi/Nex-N2-Pro",
+   "variant": ""
+  },
+  {
+   "name": "WideSearch",
+   "score": 75.6,
+   "metric": "score",
+   "source": "https://huggingface.co/nex-agi/Nex-N2-Pro",
+   "variant": ""
+  },
+  {
+   "name": "τ³-Bench",
+   "score": 71.1,
+   "metric": "score",
+   "source": "https://huggingface.co/nex-agi/Nex-N2-Pro",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Pro",
+   "score": 58.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nex-agi/Nex-N2-Pro",
+   "variant": ""
+  },
+  {
+   "name": "Terminal-Bench 2.1",
+   "score": 75.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nex-agi/Nex-N2-Pro",
+   "variant": ""
+  },
+  {
+   "name": "DeepSWE",
+   "score": 33.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nex-agi/Nex-N2-Pro",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 80.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nex-agi/Nex-N2-Pro",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Atlas Codebase QnA",
+   "score": 37.9,
+   "metric": "score",
+   "source": "https://huggingface.co/nex-agi/Nex-N2-Pro",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Atlas Refactoring",
+   "score": 32.9,
+   "metric": "score",
+   "source": "https://huggingface.co/nex-agi/Nex-N2-Pro",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Atlas Test Writing",
+   "score": 40.0,
+   "metric": "score",
+   "source": "https://huggingface.co/nex-agi/Nex-N2-Pro",
+   "variant": ""
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 90.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nex-agi/Nex-N2-Pro",
+   "variant": ""
+  },
+  {
+   "name": "IFEval",
+   "score": 94.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nex-agi/Nex-N2-Pro",
+   "variant": ""
+  },
+  {
+   "name": "Apex",
+   "score": 36.5,
+   "metric": "score",
+   "source": "https://huggingface.co/nex-agi/Nex-N2-Pro",
+   "variant": ""
+  }
+ ],
+ "nvidia/nemotron-3-nano-30b-a3b": [
+  {
+   "name": "MMLU-Pro",
+   "score": 78.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+   "variant": ""
+  },
+  {
+   "name": "AIME 2025",
+   "score": 89.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+   "variant": "no tools"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 99.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+   "variant": "with tools"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 73.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+   "variant": "card says GPQA; no tools"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 68.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+   "variant": "v6"
+  },
+  {
+   "name": "SciCode",
+   "score": 33.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+   "variant": "subtask"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 10.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+   "variant": "no tools"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 15.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+   "variant": "with tools"
+  },
+  {
+   "name": "Terminal-Bench Hard",
+   "score": 8.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+   "variant": "hard subset"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 38.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+   "variant": "OpenHands"
+  },
+  {
+   "name": "τ²-Bench Airline",
+   "score": 48.0,
+   "metric": "score",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench Retail",
+   "score": 56.9,
+   "metric": "score",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench Telecom",
+   "score": 42.2,
+   "metric": "score",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+   "variant": ""
+  },
+  {
+   "name": "IFBench",
+   "score": 71.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+   "variant": "prompt"
+  },
+  {
+   "name": "AA-LCR",
+   "score": 35.9,
+   "metric": "score",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+   "variant": ""
+  }
+ ],
+ "nvidia/nemotron-3-super-120b-a12b": [
+  {
+   "name": "MMLU-Pro",
+   "score": 83.73,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+   "variant": ""
+  },
+  {
+   "name": "AIME 2025",
+   "score": 90.21,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+   "variant": "no tools"
+  },
+  {
+   "name": "HMMT",
+   "score": 93.67,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+   "variant": "Feb 2025, no tools"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 79.23,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+   "variant": "card says GPQA; no tools"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 81.19,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+   "variant": "v5 2024-07 to 2024-12"
+  },
+  {
+   "name": "SciCode",
+   "score": 42.05,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+   "variant": "subtask"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 18.26,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+   "variant": "no tools"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 22.82,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+   "variant": "with tools"
+  },
+  {
+   "name": "Terminal-Bench Hard",
+   "score": 25.78,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+   "variant": "hard subset"
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 31.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+   "variant": "Core 2.0, Harbor"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 60.47,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+   "variant": "OpenHands"
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 45.78,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+   "variant": "OpenHands"
+  },
+  {
+   "name": "τ²-Bench Airline",
+   "score": 56.25,
+   "metric": "score",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench Retail",
+   "score": 62.83,
+   "metric": "score",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench Telecom",
+   "score": 64.36,
+   "metric": "score",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+   "variant": ""
+  },
+  {
+   "name": "BrowseComp",
+   "score": 31.28,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+   "variant": "with search"
+  },
+  {
+   "name": "IFBench",
+   "score": 72.56,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+   "variant": "prompt"
+  },
+  {
+   "name": "AA-LCR",
+   "score": 58.31,
+   "metric": "score",
+   "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16",
+   "variant": ""
+  }
+ ],
+ "openai/gpt-5.2": [
+  {
+   "name": "Humanity's Last Exam",
+   "score": 34.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "no tools; as evaluated in the Kimi-K2.5 card (xhigh)"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 45.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "with tools; as evaluated in the Kimi-K2.5 card (xhigh)"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 100,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (xhigh)"
+  },
+  {
+   "name": "HMMT",
+   "score": 99.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "Feb 2025; as evaluated in the Kimi-K2.5 card (xhigh)"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 86.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (xhigh)"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 92.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (xhigh)"
+  },
+  {
+   "name": "MMLU-Pro",
+   "score": 86.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (xhigh)"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 80.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (xhigh)"
+  },
+  {
+   "name": "SWE-Bench Pro",
+   "score": 55.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (xhigh)"
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 72.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (xhigh)"
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 54.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (xhigh)"
+  },
+  {
+   "name": "SciCode",
+   "score": 52.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (xhigh)"
+  },
+  {
+   "name": "LongBench",
+   "score": 54.5,
+   "metric": "score",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "v2; as evaluated in the Kimi-K2.5 card (xhigh)"
+  },
+  {
+   "name": "AA-LCR",
+   "score": 72.3,
+   "metric": "score",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (xhigh)"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 65.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (xhigh)"
+  },
+  {
+   "name": "DeepSearchQA",
+   "score": 71.3,
+   "metric": "score",
+   "source": "https://huggingface.co/moonshotai/Kimi-K2.5",
+   "variant": "as evaluated in the Kimi-K2.5 card (xhigh)"
+  }
+ ],
+ "openai/gpt-oss-120b": [
+  {
+   "name": "GPQA Diamond",
+   "score": 80.1,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning, no tools"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 14.9,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning, no tools"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 19.0,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning, with tools"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 92.5,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning, no tools"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 97.9,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning, with tools"
+  },
+  {
+   "name": "MMLU",
+   "score": 90.0,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 62.4,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning"
+  },
+  {
+   "name": "τ-Bench Retail",
+   "score": 67.8,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning"
+  },
+  {
+   "name": "τ-Bench Airline",
+   "score": 49.2,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning"
+  },
+  {
+   "name": "Aider Polyglot",
+   "score": 44.4,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning"
+  },
+  {
+   "name": "Codeforces",
+   "score": 2463,
+   "metric": "Elo",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning, no tools"
+  },
+  {
+   "name": "HealthBench",
+   "score": 57.6,
+   "metric": "score",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning"
+  }
+ ],
+ "openai/gpt-oss-20b": [
+  {
+   "name": "GPQA Diamond",
+   "score": 71.5,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning, no tools"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 10.9,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning, no tools"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 17.3,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning, with tools"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 91.7,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning, no tools"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 98.7,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning, with tools"
+  },
+  {
+   "name": "MMLU",
+   "score": 85.3,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 60.7,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning"
+  },
+  {
+   "name": "τ-Bench Retail",
+   "score": 54.8,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning"
+  },
+  {
+   "name": "τ-Bench Airline",
+   "score": 38.0,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning"
+  },
+  {
+   "name": "Aider Polyglot",
+   "score": 34.2,
+   "metric": "accuracy",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning"
+  },
+  {
+   "name": "Codeforces",
+   "score": 2230,
+   "metric": "Elo",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning, no tools"
+  },
+  {
+   "name": "HealthBench",
+   "score": 42.5,
+   "metric": "score",
+   "source": "https://arxiv.org/abs/2508.10925",
+   "variant": "high reasoning"
+  }
+ ],
+ "stepfun/step-3.5-flash": [
+  {
+   "name": "τ²-Bench",
+   "score": 88.2,
+   "metric": "score",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": ""
+  },
+  {
+   "name": "BrowseComp",
+   "score": 51.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": ""
+  },
+  {
+   "name": "BrowseComp",
+   "score": 69.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": "with context manager"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 97.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": ""
+  },
+  {
+   "name": "HMMT",
+   "score": 98.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": "Feb 2025"
+  },
+  {
+   "name": "HMMT",
+   "score": 94.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": "Nov 2025"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 85.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": ""
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 86.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": "v6"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 74.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": ""
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 51.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": ""
+  }
+ ],
+ "stepfun/step-3.5-flash-2603": [
+  {
+   "name": "τ²-Bench",
+   "score": 88.2,
+   "metric": "score",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": ""
+  },
+  {
+   "name": "BrowseComp",
+   "score": 51.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": ""
+  },
+  {
+   "name": "BrowseComp",
+   "score": 69.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": "with context manager"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 97.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": ""
+  },
+  {
+   "name": "HMMT",
+   "score": 98.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": "Feb 2025"
+  },
+  {
+   "name": "HMMT",
+   "score": 94.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": "Nov 2025"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 85.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": ""
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 86.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": "v6"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 74.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": ""
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 51.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": ""
+  }
+ ],
+ "thinkingmachines/inkling": [
+  {
+   "name": "Humanity's Last Exam",
+   "score": 29.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/thinkingmachines/Inkling",
+   "variant": "text only"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 46.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/thinkingmachines/Inkling",
+   "variant": "with tools"
+  },
+  {
+   "name": "AIME 2026",
+   "score": 97.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/thinkingmachines/Inkling",
+   "variant": "effort 0.99"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 87.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/thinkingmachines/Inkling",
+   "variant": "effort 0.99"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 77.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/thinkingmachines/Inkling",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Pro",
+   "score": 54.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/thinkingmachines/Inkling",
+   "variant": "public"
+  },
+  {
+   "name": "Terminal-Bench 2.1",
+   "score": 63.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/thinkingmachines/Inkling",
+   "variant": "best harness"
+  },
+  {
+   "name": "GDPval-AA",
+   "score": 1233,
+   "metric": "Elo",
+   "source": "https://huggingface.co/thinkingmachines/Inkling",
+   "variant": "v2"
+  },
+  {
+   "name": "MCP Atlas",
+   "score": 74.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/thinkingmachines/Inkling",
+   "variant": ""
+  },
+  {
+   "name": "τ³-Bench Banking",
+   "score": 23.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/thinkingmachines/Inkling",
+   "variant": ""
+  }
+ ],
+ "xiaomi/mimo-v2-flash": [
+  {
+   "name": "τ²-Bench",
+   "score": 80.3,
+   "metric": "score",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": "as tabulated in the Step-3.5-Flash card"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 45.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": "as tabulated in the Step-3.5-Flash card"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 58.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": "with context manager; as tabulated in the Step-3.5-Flash card"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 94.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": "as tabulated in the Step-3.5-Flash card"
+  },
+  {
+   "name": "HMMT",
+   "score": 84.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": "Feb 2025; as tabulated in the Step-3.5-Flash card"
+  },
+  {
+   "name": "HMMT",
+   "score": 91.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": "Nov 2025; as tabulated in the Step-3.5-Flash card"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 80.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": "as tabulated in the Step-3.5-Flash card"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 80.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": "v6; as tabulated in the Step-3.5-Flash card"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 73.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": "as tabulated in the Step-3.5-Flash card"
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 38.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/stepfun-ai/Step-3.5-Flash",
+   "variant": "as tabulated in the Step-3.5-Flash card"
+  }
+ ],
+ "zhipuai/glm-4.6": [
+  {
+   "name": "MMLU-Pro",
+   "score": 83.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 81.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 17.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "no tools; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 30.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "with tools; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 93.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "HMMT",
+   "score": 89.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "Feb 2025; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 73.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 82.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "v6; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 68.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 53.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 24.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 45.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "BrowseComp",
+   "score": 57.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "with context management; as tabulated in the GLM-4.7 card"
+  },
+  {
+   "name": "τ²-Bench",
+   "score": 75.2,
+   "metric": "score",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "as tabulated in the GLM-4.7 card"
+  }
+ ],
+ "zhipuai/glm-4.7": [
+  {
+   "name": "MMLU-Pro",
+   "score": 84.3,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": ""
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 85.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": ""
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 24.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "no tools"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 42.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "with tools"
+  },
+  {
+   "name": "AIME 2025",
+   "score": 95.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": ""
+  },
+  {
+   "name": "HMMT",
+   "score": 97.1,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "Feb 2025"
+  },
+  {
+   "name": "IMOAnswerBench",
+   "score": 82.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": ""
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 84.9,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "v6"
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 73.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Multilingual",
+   "score": 66.7,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": ""
+  },
+  {
+   "name": "Terminal-Bench 2.0",
+   "score": 41.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": ""
+  },
+  {
+   "name": "BrowseComp",
+   "score": 52.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": ""
+  },
+  {
+   "name": "BrowseComp",
+   "score": 67.5,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": "with context management"
+  },
+  {
+   "name": "τ²-Bench",
+   "score": 87.4,
+   "metric": "score",
+   "source": "https://huggingface.co/zai-org/GLM-4.7",
+   "variant": ""
+  }
+ ],
+ "zhipuai/glm-4.7-flash": [
+  {
+   "name": "AIME 2025",
+   "score": 91.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7-Flash",
+   "variant": ""
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 75.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7-Flash",
+   "variant": "card says GPQA"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 64.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7-Flash",
+   "variant": "v6"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 14.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7-Flash",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 59.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7-Flash",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench",
+   "score": 79.5,
+   "metric": "score",
+   "source": "https://huggingface.co/zai-org/GLM-4.7-Flash",
+   "variant": ""
+  },
+  {
+   "name": "BrowseComp",
+   "score": 42.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7-Flash",
+   "variant": ""
+  }
+ ],
+ "zhipuai/glm-4.7-flashx": [
+  {
+   "name": "AIME 2025",
+   "score": 91.6,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7-Flash",
+   "variant": ""
+  },
+  {
+   "name": "GPQA Diamond",
+   "score": 75.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7-Flash",
+   "variant": "card says GPQA"
+  },
+  {
+   "name": "LiveCodeBench",
+   "score": 64.0,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7-Flash",
+   "variant": "v6"
+  },
+  {
+   "name": "Humanity's Last Exam",
+   "score": 14.4,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7-Flash",
+   "variant": ""
+  },
+  {
+   "name": "SWE-Bench Verified",
+   "score": 59.2,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7-Flash",
+   "variant": ""
+  },
+  {
+   "name": "τ²-Bench",
+   "score": 79.5,
+   "metric": "score",
+   "source": "https://huggingface.co/zai-org/GLM-4.7-Flash",
+   "variant": ""
+  },
+  {
+   "name": "BrowseComp",
+   "score": 42.8,
+   "metric": "accuracy",
+   "source": "https://huggingface.co/zai-org/GLM-4.7-Flash",
+   "variant": ""
+  }
+ ]
+}
