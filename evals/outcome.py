@@ -117,18 +117,23 @@ def main():
                 pass
     base = f"http://127.0.0.1:{args.port}"
     out = open(args.out, "a")
-    for task in tasks:
-        for model, tier in [("maestro/auto", None)] + POOL:
-            if (task["id"], model) in done:
-                continue
-            served, content, secs, err = chat(base, model, task["prompt"])
-            rec = {"task": task["id"], "job": task["job"], "difficulty": task["difficulty"],
-                   "model": model, "served_by": served, "tier": tier,
-                   "ok": grade(task["check"], content) if content is not None else False,
-                   "secs": secs, "err": err, "sample": (content or "")[:160]}
-            out.write(json.dumps(rec) + "\n")
-            out.flush()
-            print(rec["task"], model, "->", served, "ok" if rec["ok"] else "FAIL", secs, flush=True)
+    from concurrent.futures import ThreadPoolExecutor
+
+    def one(task, model, tier):
+        served, content, secs, err = chat(base, model, task["prompt"])
+        return {"task": task["id"], "job": task["job"], "difficulty": task["difficulty"],
+                "model": model, "served_by": served, "tier": tier,
+                "ok": grade(task["check"], content) if content is not None else False,
+                "secs": secs, "err": err, "sample": (content or "")[:160]}
+
+    with ThreadPoolExecutor(max_workers=5) as ex:
+        for task in tasks:
+            jobs = [(task, model, tier) for model, tier in [("maestro/auto", None)] + POOL
+                    if (task["id"], model) not in done]
+            for rec in ex.map(lambda j: one(*j), jobs):
+                out.write(json.dumps(rec) + "\n")
+                out.flush()
+                print(rec["task"], rec["model"], "->", rec["served_by"], "ok" if rec["ok"] else "FAIL", rec["secs"], flush=True)
     out.close()
 
     rows = [json.loads(l) for l in open(args.out)]
@@ -145,7 +150,7 @@ def main():
             continue
         judged += 1
         rt = tier_of[routed["served_by"]]
-        succ_tiers = [tier_of[m] for m, r in res.items() if m != "maestro/auto" and r["ok"]]
+        succ_tiers = [tier_of[m] for m, r in res.items() if m != "maestro/auto" and r["ok"] and r.get("served_by") == m]
         if routed["ok"] and (not succ_tiers or min(succ_tiers) >= rt):
             adequate += 1
         elif routed["ok"]:
