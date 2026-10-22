@@ -133,6 +133,57 @@ class Registry(unittest.TestCase):
         self.assertIn("gemini-3.1-pro-preview", P.cli_models("gemini"))
         self.assertEqual(P.cli_models("copilot"), [])
 
+    def test_pi_models_parse_list_models_output(self):
+        text = ("provider      model                       context  max-out  thinking  images\n"
+                "xai           grok-4.7                    256K     64K      yes       no\n"
+                "minimax       MiniMax-M3                  1M       128K     yes       yes\n"
+                "xai           grok-4.7                    256K     64K      yes       no\n"
+                "kimi-coding   kimi-k3                     1M       128K     yes       no\n")
+        self.assertEqual(P.parse_pi_models(text), ["xai/grok-4.7", "minimax/MiniMax-M3", "kimi-coding/kimi-k3"])
+        self.assertEqual(P.parse_pi_models(""), [])
+        self.assertEqual(P.parse_pi_models(None), [])
+        self.assertIn("pi", P.CLI_BY_ID)
+        self.assertTrue(P.CLI_BY_ID["pi"]["callable"])
+
+    def test_hermes_kimi_key_alias_enables_kimi_coding(self):
+        self.assertIn("KIMI_CODING_API_KEY", P.BY_ID["kimi-code-plan-cn"]["env"])
+        self.assertIn("KIMI_CODING_API_KEY", P.BY_ID["kimi-code-plan-global"]["env"])
+        self.assertIn(["KIMI_CODING_API_KEY"], [list(n) for n in P.BY_ID["kimi-code-plan-cn"]["need"]])
+
+
+class HarnessProviders(Tmp):
+    def test_names_only_never_values(self):
+        os.makedirs(os.path.join(self.tmp, ".pi", "agent"))
+        with open(os.path.join(self.tmp, ".pi", "agent", "auth.json"), "w") as f:
+            json.dump({"xai": {"token": "SECRET-TOKEN"}, "minimax": {"token": "SECRET2"}}, f)
+        with open(os.path.join(self.tmp, ".pi", "agent", "models.json"), "w") as f:
+            json.dump({"providers": {"sparky": {"baseUrl": "http://100.0.0.1:8000/v1", "api": "openai-completions",
+                                                "apiKey": "SECRET3"}}}, f)
+        os.makedirs(os.path.join(self.tmp, ".hermes"))
+        with open(os.path.join(self.tmp, ".hermes", "config.yaml"), "w") as f:
+            f.write("model:\n  provider: xai-oauth\n  default: grok-4.7\nproviders:\n"
+                    "  kimi-direct:\n    api: https://api.kimi.com/coding/v1\n    api_key: ${KIMI_CODING_API_KEY}\n"
+                    "    transport: anthropic\n  literal-one:\n    api_key: sk-literal-secret\n"
+                    "delegation:\n  dispatch_fallback_providers:\n    - xai-oauth\n    - kimi-direct\n")
+        rows = P.harness_providers(self.env(), self.tmp)
+        blob = json.dumps(rows)
+        for secret in ("SECRET-TOKEN", "SECRET2", "SECRET3", "sk-literal-secret"):
+            self.assertNotIn(secret, blob)
+        by = {(r["harness"], r["name"], r["via"]) for r in rows}
+        self.assertIn(("pi", "xai", "pi-auth"), by)
+        self.assertIn(("pi", "minimax", "pi-auth"), by)
+        self.assertIn(("pi", "sparky", "pi-models"), by)
+        self.assertIn(("hermes", "kimi-direct", "hermes-providers"), by)
+        self.assertIn(("hermes", "xai-oauth", "hermes-dispatch"), by)
+        self.assertIn(("hermes", "xai-oauth", "hermes-default"), by)
+        kimi = next(r for r in rows if r["name"] == "kimi-direct" and r["via"] == "hermes-providers")
+        self.assertEqual(kimi["key_env"], "KIMI_CODING_API_KEY")
+        self.assertEqual(kimi["base_url"], "https://api.kimi.com/coding/v1")
+        self.assertEqual(kimi["transport"], "anthropic")
+
+    def test_missing_files_are_empty(self):
+        self.assertEqual(P.harness_providers(self.env(), self.tmp), [])
+
 
 class Keys(Tmp):
     def test_env_beats_keys_file_and_values_stay_out_of_presence_checks(self):

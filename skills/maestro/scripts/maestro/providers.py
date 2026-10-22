@@ -85,6 +85,9 @@ OPT_IN_ONLY = ("github-copilot", "gitlab", "huggingface", "amazon-bedrock", "goo
 NO_LISTING = {"azure": "set providers.azure.models in config.json (listing deployments needs ARM)"}
 STATIC_MODELS = {"perplexity": ("sonar", "sonar-pro", "sonar-reasoning-pro", "sonar-deep-research")}  # no listing endpoint
 API_KEY_HEADER = ("azure",)   # sent as `api-key: KEY` instead of a Bearer token
+# Extra key variables harnesses already use for the same endpoint (Hermes sets KIMI_CODING_API_KEY for the Kimi
+# coding endpoint), so a key exported for another harness enables the provider here with no re-entry.
+ENV_ALIASES = {"kimi-code-plan-cn": ("KIMI_CODING_API_KEY",), "kimi-code-plan-global": ("KIMI_CODING_API_KEY",)}
 QUOTA_PROBES = {"openrouter": "openrouter", "deepseek": "deepseek"}
 
 
@@ -96,7 +99,7 @@ def _spec(pid, raw):
     api, style = API_OVERRIDES.get(pid, (raw.get("api"), None))
     style = style or _style(raw.get("npm"), api)
     params = tuple(dict.fromkeys(list(raw.get("params") or []) + list(EXTRA_PARAMS.get(pid, ()))))
-    keys = tuple(e for e in raw.get("env") or [] if e not in params)
+    keys = tuple(dict.fromkeys([e for e in raw.get("env") or [] if e not in params] + list(ENV_ALIASES.get(pid, ()))))
     over = {}
     for ov, ids in raw.get("o") or []:
         over.update((mid, ov) for mid in ids)
@@ -133,6 +136,8 @@ CLI_PROVIDERS = [
      "env": ("COPILOT_GITHUB_TOKEN",), "callable": False},
     {"id": "cursor-agent", "name": "Cursor Agent", "seat": "cursor-agent", "exes": ("cursor-agent", "agent"), "files": (),
      "presence_only": True, "callable": False},
+    {"id": "pi", "name": "Pi (harness providers)", "seat": "pi", "exes": ("pi",), "files": (".pi/agent/auth.json",),
+     "callable": True},
 ]
 for _c in CLI_PROVIDERS:
     _c.update(style="cli", access="subscription-cli")
@@ -165,6 +170,30 @@ def cli_models(cli_id):
         if c and c[0] not in out:
             out.append(c[0])
     return out
+
+
+def parse_pi_models(text):
+    """Model names ("provider/model") from `pi --list-models` output: a header row, then one model per line with the
+    provider first. Only models Pi itself lists as available are returned, so this reflects what Pi can call."""
+    out = []
+    for line in (text or "").splitlines():
+        parts = line.split()
+        if len(parts) < 2 or parts[0] == "provider" or "/" in parts[1]:
+            continue
+        name = "%s/%s" % (parts[0], parts[1])
+        if name not in out:
+            out.append(name)
+    return out
+
+
+def pi_models(exe, env):
+    """The models Pi can call right now (`pi --list-models`); empty on any failure (Pi stays merely detected)."""
+    try:
+        r = subprocess.run([exe, "--list-models"], capture_output=True, text=True, timeout=20, env=env,
+                           stdin=subprocess.DEVNULL)
+    except (OSError, subprocess.SubprocessError):
+        return []
+    return parse_pi_models(r.stdout or "") if r.returncode == 0 else []
 
 
 def resolve(provider):
@@ -541,7 +570,8 @@ def detect_cli(spec, env, user_home, which, platform=None, run=None):
     entry = {"id": spec["id"], "name": spec["name"], "access": "subscription-cli", "style": "cli", "status": "missing",
              "reason": "", "models": [], "key_source": None, "seat": spec["seat"], "cli_path": exe}
     if exe and why and spec["callable"]:
-        entry.update(status="connected", reason="logged in (%s)" % why, models=cli_models(spec["id"]))
+        models = pi_models(exe, env) if spec["id"] == "pi" else cli_models(spec["id"])
+        entry.update(status="connected", reason="logged in (%s)" % why, models=models)
     elif exe and why:
         entry.update(status="detected", reason="found (%s); no non-interactive client yet" % why)
     elif why:
@@ -615,6 +645,68 @@ def _verify(e, env, home, cfg, timeout):
         return e["id"], None, str(err), err.status
 
 
+def harness_providers(env=None, user_home=None):
+    """Providers other harnesses already carry, by name only: Pi's authenticated providers (~/.pi/agent/auth.json
+    keys and models.json provider names) and Hermes' providers/dispatch (~/.hermes/config.yaml). Credential values
+    are never read: an `api_key:` line contributes only the ${ENV_VAR} it references, never a literal value."""
+    env = os.environ if env is None else env
+    user_home = user_home or core._user_home(env)
+    out = []
+    try:
+        auth = json.load(open(os.path.join(user_home, ".pi", "agent", "auth.json")))
+        if isinstance(auth, dict):
+            for name in auth:
+                out.append({"harness": "pi", "name": str(name), "via": "pi-auth"})
+    except (OSError, ValueError):
+        pass
+    try:
+        pi = json.load(open(os.path.join(user_home, ".pi", "agent", "models.json")))
+        for name, prov in (pi.get("providers") or {}).items():
+            if isinstance(prov, dict):
+                row = {"harness": "pi", "name": str(name), "via": "pi-models"}
+                if isinstance(prov.get("baseUrl"), str):
+                    row["base_url"] = prov["baseUrl"]
+                if isinstance(prov.get("api"), str):
+                    row["transport"] = prov["api"]
+                out.append(row)
+    except (OSError, ValueError):
+        pass
+    try:
+        text = open(os.path.join(user_home, ".hermes", "config.yaml")).read()
+    except OSError:
+        text = ""
+    if text:
+        block = re.search(r"^providers:\n((?:[ ].*\n?)+)", text, re.M)
+        cur = None
+        if block:
+            for line in block.group(1).splitlines():
+                m = re.match(r"^  ([A-Za-z0-9_.-]+):\s*$", line)
+                if m:
+                    cur = {"harness": "hermes", "name": m.group(1), "via": "hermes-providers"}
+                    out.append(cur)
+                    continue
+                f = re.match(r"^    (api|base_url|transport):\s*(\S+)\s*$", line)
+                if cur is not None and f:
+                    cur["base_url" if f.group(1) in ("api", "base_url") else "transport"] = f.group(2)
+                    continue
+                k = re.match(r"^    api_key:\s*\$\{?([A-Za-z_][A-Za-z0-9_]*)\}?\s*$", line)
+                if cur is not None and k:
+                    cur["key_env"] = k.group(1)
+        for m in re.finditer(r"dispatch_fallback_providers:\n((?:\s*- .*\n?)+)", text):
+            for item in re.findall(r"-\s*([A-Za-z0-9_.-]+)\s*$", m.group(1), re.M):
+                out.append({"harness": "hermes", "name": item, "via": "hermes-dispatch"})
+        m = re.search(r"^model:\n(?:[ ].*\n?)*?^  provider:\s*(\S+)\s*$", text, re.M)
+        if m:
+            out.append({"harness": "hermes", "name": m.group(1), "via": "hermes-default"})
+    seen, dedup = set(), []
+    for row in out:
+        key = (row["harness"], row["name"], row["via"])
+        if key not in seen:
+            seen.add(key)
+            dedup.append(row)
+    return dedup
+
+
 def detect_all(env=None, home=None, cfg=None, inventory=None, list_live=True, which=None, platform=None, run=None,
                timeout=LIST_TIMEOUT, write=True):
     """The provider inventory: API providers (key present -> listed live unless list_live=False), subscription CLIs and
@@ -644,6 +736,7 @@ def detect_all(env=None, home=None, cfg=None, inventory=None, list_live=True, wh
     entries += [detect_cli(c, env, user_home, which, platform, run) for c in CLI_PROVIDERS]
     entries += _local_entries(inv, cfg, env)
     out = {"version": 1, "generated_at": time.time(), "verified": bool(list_live), "providers": entries,
+           "harness_providers": harness_providers(env, user_home),
            "warnings": [w for w in (keys_file_problem(home),) if w]}
     if write:
         core._write_json(os.path.join(home, PROVIDERS_FILE), out)
@@ -667,6 +760,13 @@ def summary_lines(pv):
                                                     e["status"], e["reason"], n, via))
     absent = sum(1 for e in pv["providers"] if e["access"] == "api" and e["status"] == "missing")
     lines.append("  %d other API providers have no key (`maestro-router keys list --all`, `maestro-router keys set <provider>`)" % absent)
+    hp = pv.get("harness_providers") or []
+    if hp:
+        lines.append("harness providers (carried by Pi/Hermes on this machine; Pi ones are callable via the pi seat):")
+        for row in hp:
+            extra = " ".join(x for x in (row.get("base_url") or "", row.get("transport") or "",
+                                         ("$" + row["key_env"]) if row.get("key_env") else "") if x)
+            lines.append("  %-8s %-24s %s%s" % (row["harness"], row["name"], row["via"], (" " + extra) if extra else ""))
     lines += ["warning: " + w for w in pv.get("warnings") or []]
     return lines
 

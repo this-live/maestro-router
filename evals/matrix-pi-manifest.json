@@ -1,0 +1,19 @@
+{
+ "run": "pi-harness-providers",
+ "date": "2026-10-21",
+ "hostname": "jarvis",
+ "serve": "maestro-router 3.5.0 sandbox (MAESTRO_HOME=/tmp/maestro-pi-test, port 18961)",
+ "providers": [
+  "cli:pi/kimi-coding/k3",
+  "cli:pi/meta/muse-wonder-1.0",
+  "cli:pi/minimax/MiniMax-M3",
+  "cli:pi/xai/grok-4.7",
+  "kimi-code-plan-cn/k3"
+ ],
+ "tasks": 33,
+ "rolls": 2,
+ "rows": 330,
+ "results_sha256": "324410b48784551bcd0baec770322b6fd902f8d44e6837d36ff62c5b2794c111",
+ "strict_attribution": true,
+ "quota_errors": 0
+}

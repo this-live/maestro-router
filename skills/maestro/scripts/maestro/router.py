@@ -27,7 +27,7 @@ import sys
 import time
 import zlib
 
-VERSION = "3.4.1"
+VERSION = "3.5.0"
 TIERS = ("fast", "standard", "strong", "frontier")        # the cloud ladder, weakest first
 CELLS = ("local",) + TIERS                                # what a ladder cell can hold
 CATEGORIES = CELLS + ("specialist",)                      # what a decision's `category` can be

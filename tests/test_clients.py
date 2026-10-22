@@ -520,6 +520,29 @@ class CliClient(Base):
             self.assertNotIn("-rm -rf /", C._cli_argv(cli, cli, "m", "-rm -rf /", set())[0])
             self.assertNotIn("--yolo", C._cli_argv(cli, cli, "m", "x", caps)[0])
 
+    def test_pi_seat_splits_provider_model_prompt_on_stdin(self):
+        rec = 'for a in "$@"; do echo "$a"; done > %s.pi; cat > %s.pi.stdin; echo "pi answer"' % (self.log, self.log)
+        fake_cli(self.bin, "pi", rec)
+        req = {"messages": [{"role": "user", "content": "what is 2+2 SECRET-PROMPT"}]}
+        body = self.cli("pi", req, model="xai/grok-4.7")[2]
+        self.assertEqual(body["choices"][0]["message"]["content"], "pi answer")
+        args = read(self.log + ".pi").split("\n")[:-1]
+        self.assertEqual(args[args.index("--provider") + 1], "xai")
+        self.assertEqual(args[args.index("--model") + 1], "grok-4.7")
+        for flag in ("-p", "--no-tools", "--no-extensions", "--no-skills", "--no-prompt-templates", "--no-session"):
+            self.assertIn(flag, args)
+        self.assertNotIn("SECRET-PROMPT", " ".join(args))
+        self.assertIn("SECRET-PROMPT", read(self.log + ".pi.stdin"))
+
+    def test_pi_argv_locks_tools_down(self):
+        argv, stdin = C._cli_argv("pi", "pi", "minimax/MiniMax-M3", "-rm -rf /")
+        self.assertEqual(argv[argv.index("--provider") + 1], "minimax")
+        self.assertEqual(argv[argv.index("--model") + 1], "MiniMax-M3")
+        for flag in ("--no-tools", "--no-extensions", "--no-skills", "--no-prompt-templates", "--no-session"):
+            self.assertIn(flag, argv)
+        self.assertNotIn("-rm -rf /", argv)
+        self.assertEqual(stdin, "-rm -rf /")
+
     def test_gemini_is_refused_when_its_restricting_flags_cannot_be_confirmed(self):
         req = {"messages": [{"role": "user", "content": "x"}]}
         fake_cli(self.bin, "gemini", 'case "$1" in --help) echo "usage: gemini -p"; exit 0;; esac; echo ran > %s.ran; echo answer'

@@ -172,14 +172,21 @@ def build_models(cat, ctx, inv, cfg, home, hw=None):
         elif access == "subscription-cli":
             vendor = CLI_VENDOR.get(pid)
             for name in p["models"]:
+                # Pi models are "provider/model" from Pi's own catalog: resolve scores on the bare model name, and
+                # keep quota per Pi provider (a Grok seat and a MiniMax seat behind Pi are separate subscriptions).
+                bare = name.rsplit("/", 1)[-1] if pid == "pi" else name
                 lab, how, pent = (catalog.resolve(cat, vendor, name) if vendor else (None, "none", None))
                 if not lab:
-                    lab = catalog.resolve_alias(cat, name)
+                    lab = catalog.resolve_alias(cat, bare)
                     how = "alias" if lab else "none"
-                rec = catalog.rec_of(cat, lab, None, name) if lab else catalog.rec_local(name)
+                rec = catalog.rec_of(cat, lab, None, bare) if lab else catalog.rec_local(bare)
                 res = score.score_lab(ctx, cat, lab) if lab else score.score_rec(ctx, rec)
-                e = _entry(pid, name, "subscription-cli", "cli", rec, res, lab, how, None, home,
-                           {"id": "cli:%s/%s" % (pid, name), "tools_ok": False})
+                extra = {"id": "cli:%s/%s" % (pid, name), "tools_ok": False}
+                qid = None
+                if pid == "pi" and "/" in name:
+                    qid = "pi-" + name.split("/", 1)[0]
+                    extra["qp"] = qid
+                e = _entry(pid, name, "subscription-cli", "cli", rec, res, lab, how, None, home, extra, quota_id=qid)
                 out.append((e, pid))
         else:
             for name in p["models"]:

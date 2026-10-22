@@ -37,6 +37,34 @@ Per-job (locals): Nemotron measured 1.00 on ask/code/data/debug/ops,
 Qwen: 1.00 ask/code/debug, 0.83 ops, 0.50 data/write, 0.33
 edit/review/summarize, 0.00 plan/research.
 
+## Harness-native providers (2026-10-21, jarvis, v3.5.0)
+
+The providers people actually run inside Pi/Hermes, measured through
+the new Pi seat (same rig, same 33 tasks, 2 rolls; raw rows
+`evals/matrix-pi-results.jsonl`, manifest `evals/matrix-pi-manifest.json`).
+Burn: 66 short calls per provider (330 total) against the owner's Pi
+subscriptions / Kimi coding plan; zero quota, HTTP or timeout failures
+— every failure below is a wrong answer.
+
+| Provider | Success | Wilson 95% | p50 | p95 | Notes |
+|---|---|---|---|---|---|
+| cli:pi/kimi-coding/k3 (via Pi) | 58/66 = 88% | [78, 94] | 6.5s | 12.6s | best of this set |
+| cli:pi/minimax/MiniMax-M3 (via Pi) | 57/66 = 86% | [76, 93] | 3.9s | 17.2s | |
+| kimi-code-plan-cn/k3 (direct API) | 57/66 = 86% | [76, 93] | 6.8s | 21.4s | same model as Pi row; consistent |
+| cli:pi/xai/grok-4.7 (via Pi) | 56/66 = 85% | [74, 92] | 2.8s | 18.0s | |
+| cli:pi/meta/muse-wonder-1.0 (via Pi) | 53/66 = 80% | [69, 88] | 2.8s | 11.4s | weakest here |
+
+Reachability (jarvis): Pi carries xai, minimax, meta, kimi-coding,
+anthropic and openai-codex (all callable via the seat); Hermes
+dispatches xai-oauth/kimi-direct/minimax-oauth (surfaced by `detect`,
+not separately callable — Maestro reaches the same subscriptions
+through Pi or direct API). Direct API keys present: only Kimi
+(`KIMI_CODING_API_KEY`); xAI/MiniMax/Meta/OpenRouter have no API key on
+the fleet — owner-only additions, not needed while Pi seats work.
+Note the catalog prior underrates Kimi K3 (G 0.34, "fast") against its
+measured 86-88%: priors are a starting point, the matrix is the
+evidence, and per-model overrides remain the correction path.
+
 ## Findings that changed the product
 
 1. **Codex seats race under parallelism.** Concurrent Codex calls

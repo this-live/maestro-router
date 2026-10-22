@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.5.0 (2026-10-21): harness-native providers (Pi seat)
+- **New seat: Pi.** When Pi is installed and logged in, Maestro adds a `pi` subscription-CLI seat whose models are Pi's own authenticated providers (`pi --list-models`): on the reference machine that is xAI/Grok, MiniMax, Meta (Muse Spark/Wonder), Kimi Coding, Anthropic and OpenAI Codex — the providers people actually run inside Pi/Hermes, not just Claude/Codex/Gemini CLIs. Calls run `pi -p --no-tools --no-extensions --no-skills --no-prompt-templates --no-session --provider <p> --model <m>` with the prompt on stdin, temp cwd, chat-only like every CLI seat; quota is tracked per Pi provider (`pi-xai`, `pi-minimax`, …), and catalog scores resolve on the bare model name.
+- **Detect now surfaces harness-carried providers.** `detect` reports Pi's authenticated provider names and Hermes' providers/dispatch/default (names, base URLs, transports, and `${ENV_VAR}` references only — credential values are never read), so the pool a Pi/Hermes session actually has is visible instead of assumed.
+- **Hermes' Kimi key works directly.** `KIMI_CODING_API_KEY` (what Hermes exports for api.kimi.com/coding) is accepted for the `kimi-code-plan-cn`/`kimi-code-plan-global` API providers, so that endpoint is callable without the Pi seat too.
+
 ## 3.4.1 (2026-10-21)
 - **Fix: serve serializes subscription CLI seats.** The provider matrix (docs/MATRIX.md) found that parallel calls to the same CLI seat corrupt its on-disk caches — Codex fails with "EOF while parsing" reading its models cache under concurrency — causing 502s, cooldowns and silent reroutes. `attempt()` now holds a per-seat semaphore for subscription seats (one in-flight call per seat); local and API upstreams stay parallel.
 

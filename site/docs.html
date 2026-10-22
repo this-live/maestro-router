@@ -58,12 +58,12 @@
         <div class="code"><pre><span class="p">$ </span>claude plugin marketplace add this-live/maestro-router
 <span class="p">$ </span>claude plugin install maestro@maestro</pre></div>
         <p class="small">The skills installer and the plugin marketplace track the repository's default branch; the skills installer has no option to pin a release.</p>
-        <div class="code-title">pip (gives you the <code>maestro-router</code> command; not on PyPI yet, so install from GitHub, pinned to the v3.4.1 release)</div>
-        <div class="code"><pre><span class="p">$ </span>pip install https://github.com/this-live/maestro-router/releases/download/v3.4.1/maestro_router-3.4.1-py3-none-any.whl
+        <div class="code-title">pip (gives you the <code>maestro-router</code> command; not on PyPI yet, so install from GitHub, pinned to the v3.5.0 release)</div>
+        <div class="code"><pre><span class="p">$ </span>pip install https://github.com/this-live/maestro-router/releases/download/v3.5.0/maestro_router-3.5.0-py3-none-any.whl
 <span class="c"># or from source:</span>
-<span class="p">$ </span>pip install git+https://github.com/this-live/maestro-router@v3.4.1
+<span class="p">$ </span>pip install git+https://github.com/this-live/maestro-router@v3.5.0
 <span class="c"># or, without installing:</span>
-<span class="p">$ </span>uvx --from git+https://github.com/this-live/maestro-router@v3.4.1 maestro-router route "fix the failing test"</pre></div>
+<span class="p">$ </span>uvx --from git+https://github.com/this-live/maestro-router@v3.5.0 maestro-router route "fix the failing test"</pre></div>
         <p class="small">The command is <code>maestro-router</code> because mobile.dev's Maestro (mobile UI testing) already uses <code>maestro</code>; add <code>alias maestro=maestro-router</code> to your shell profile if you want the short name.</p>
         <p>Then, for provider mode, the web UI and Hermes:</p>
         <div class="code"><pre><span class="c"># detect providers, add keys (hidden input), add model servers you already run, score every model, connect Hermes</span>

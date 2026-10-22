@@ -506,6 +506,17 @@ class ModelsJson(Home):
                          {"model", "hf_repo", "params_b", "quant", "mem_gb", "G", "category", "serve_cmd"})
         self.assertEqual(sorted(specs), sorted(ids))
 
+    def test_pi_models_keep_provider_and_get_own_quota_pool(self):
+        doc = providers_doc(cli_provider("pi", ["xai/grok-4.7", "minimax/MiniMax-M3", "kimi-coding/kimi-k3"]))
+        data, _, _ = self.run_discover(doc, hardware={})
+        ids = {m["id"]: m for m in data["models"]}
+        for mid, qp in (("cli:pi/xai/grok-4.7", "pi-xai"), ("cli:pi/minimax/MiniMax-M3", "pi-minimax"),
+                        ("cli:pi/kimi-coding/kimi-k3", "pi-kimi-coding")):
+            self.assertIn(mid, ids)
+            m = ids[mid]
+            self.assertEqual((m["access"], m["style"], m["tools_ok"], m["qp"]), ("subscription-cli", "cli", False, qp))
+        self.assertEqual(ids["cli:pi/xai/grok-4.7"]["model"], "xai/grok-4.7")
+
     def test_local_models_join_the_catalog_and_serve_a_tier(self):
         data, _, _ = self.run_discover(self.doc(), hardware={})
         ids = {m["id"]: m for m in data["models"]}

@@ -59,6 +59,13 @@ intact. Spawn workers for subtasks instead of switching the main model:
 - The main session's context grows by worker results, not worker transcripts.
   That is the point: switching workers is cheap because a capsule is small;
   switching the main session would re-send its entire history to a cold model.
+- Inside Pi or Hermes, workers can ride the providers those harnesses already
+  carry: when Pi is logged in, Maestro's `pi` seat dispatches through Pi's own
+  providers (Grok/xAI, MiniMax, Meta, Kimi, Anthropic, Codex) with tools off,
+  and `maestro-router detect` lists the Pi/Hermes provider pool by name. Any
+  OpenAI-compatible provider or endpoint (OpenRouter included) joins the same
+  pool the same way: add the key or endpoint, re-run `discover`, and it is
+  scored and routed like everything else.
 
 ## Notes
 

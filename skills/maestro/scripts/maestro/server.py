@@ -86,7 +86,9 @@ def _norm_model(m, cfg):
     """A models.json entry with every field the router reads present, plus `qp` (the provider name quota is kept under)."""
     mid = str(m["id"])
     access = m.get("access") or ("local" if mid.startswith("local:") else "subscription-cli" if mid.startswith("cli:") else "api")
-    if access == "local":
+    if m.get("qp"):
+        qp = str(m["qp"])  # an explicit quota pool (e.g. pi-xai) wins over the id-derived one
+    elif access == "local":
         qp = "local:" + mid[6:].split("/", 1)[0]
     elif access == "subscription-cli":
         qp = mid[4:].split("/", 1)[0] if mid.startswith("cli:") else m.get("provider") or ""
@@ -676,7 +678,8 @@ class App:
     def spec_for(self, m, cfg):
         """What `clients.complete` takes as its provider: a registry id, or a spec dict for a local endpoint."""
         if m["access"] != "local":
-            return m["qp"]
+            p = m.get("provider") or m["qp"]   # qp is the quota pool; Pi seats pool per provider (pi-xai) under provider "pi"
+            return p[4:] if p.startswith("cli:") else p
         pid = m["qp"]
         for e in (P.load_providers(self.home) or {}).get("providers") or []:
             if e["id"] == pid:

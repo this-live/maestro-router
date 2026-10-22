@@ -1038,6 +1038,24 @@ class Fallback_models(ServerCase):
         norm = S._norm_model(by["openai/y"], core.load_config(self.home))
         self.assertEqual(norm["cat_override"], "strong")
 
+    def test_spec_for_uses_provider_not_quota_pool(self):
+        app = S.App.__new__(S.App)
+        m = {"id": "cli:pi/xai/grok-4.7", "provider": "pi", "model": "xai/grok-4.7", "access": "subscription-cli",
+             "style": "cli", "qp": "pi-xai"}
+        self.assertEqual(app.spec_for(S._norm_model(m, {}), {}), "pi")
+        api = {"id": "openai/x", "provider": "openai", "model": "x", "access": "api", "style": "openai"}
+        self.assertEqual(app.spec_for(S._norm_model(api, {}), {}), "openai")
+
+    def test_explicit_qp_wins_for_pi_seats(self):
+        m = {"id": "cli:pi/xai/grok-4.7", "provider": "pi", "model": "xai/grok-4.7", "access": "subscription-cli",
+             "style": "cli", "qp": "pi-xai"}
+        norm = S._norm_model(m, {})
+        self.assertEqual(norm["qp"], "pi-xai")
+        self.assertEqual(norm["model"], "xai/grok-4.7")
+        plain = S._norm_model({"id": "cli:claude/sonnet", "provider": "claude", "model": "sonnet",
+                                "access": "subscription-cli", "style": "cli"}, {})
+        self.assertEqual(plain["qp"], "claude")
+
 
 class Ui(ServerCase):
     def test_root_serves_the_single_file_ui_with_all_six_tabs(self):

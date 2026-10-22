@@ -16,11 +16,11 @@ Two ways to use it:
 ## Install
 
 ```bash
-pip install https://github.com/this-live/maestro-router/releases/download/v3.4.1/maestro_router-3.4.1-py3-none-any.whl
+pip install https://github.com/this-live/maestro-router/releases/download/v3.5.0/maestro_router-3.5.0-py3-none-any.whl
 # or from source:
-pip install git+https://github.com/this-live/maestro-router@v3.4.1
+pip install git+https://github.com/this-live/maestro-router@v3.5.0
 # or run it without installing:
-uvx --from git+https://github.com/this-live/maestro-router@v3.4.1 maestro-router route "fix the failing test"
+uvx --from git+https://github.com/this-live/maestro-router@v3.5.0 maestro-router route "fix the failing test"
 ```
 
 Not on PyPI yet. The command is `maestro-router` because mobile.dev's Maestro (a mobile UI testing tool) already uses `maestro`; add `alias maestro=maestro-router` to your shell profile if you want the short name.

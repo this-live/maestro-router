@@ -444,6 +444,17 @@ def _cli_argv(cli_id, exe, model, prompt, caps=frozenset()):
         off = [x for f in CODEX_OFF for x in ("-c", "features.%s=false" % f)]
         return ([exe, "exec", "-m", model, "--sandbox", "read-only"] + off
                 + [f for f in ("--ignore-user-config", "--ephemeral") if f in caps] + ["--skip-git-repo-check"]), prompt
+    if cli_id == "pi":
+        # Model is "provider/model" (Pi's own provider catalog, authenticated by Pi itself). Print mode with every
+        # tool/extension/skill surface off: this seat is chat only, and Pi reads the prompt from stdin when no
+        # prompt argument is given.
+        prov, _, mid = model.partition("/")
+        argv = [exe, "-p", "--no-tools", "--no-extensions", "--no-skills", "--no-prompt-templates", "--no-session"]
+        if prov and mid:
+            argv += ["--provider", prov, "--model", mid]
+        elif model:
+            argv += ["--model", model]
+        return argv, prompt
     return ([exe, "-m", model] + (["--approval-mode", "default"] if "--approval-mode" in caps else [])
             + (["-e", "none"] if "--extensions" in caps else [])
             + (["--allowed-mcp-server-names", "maestro-none"] if "--allowed-mcp-server-names" in caps else [])
@@ -456,7 +467,8 @@ CLI_ENV_KEEP = ("PATH", "HOME", "USER", "LOGNAME", "SHELL", "TMPDIR", "TERM", "L
                 "HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY", "NO_PROXY", "http_proxy", "https_proxy", "all_proxy", "no_proxy",
                 "SSL_CERT_FILE", "SSL_CERT_DIR", "NODE_EXTRA_CA_CERTS", "REQUESTS_CA_BUNDLE",
                 "XDG_CONFIG_HOME", "XDG_DATA_HOME", "XDG_CACHE_HOME", "XDG_STATE_HOME", "XDG_RUNTIME_DIR")
-CLI_ENV_PREFIXES = {"claude": ("CLAUDE_", "ANTHROPIC_"), "codex": ("CODEX_", "OPENAI_"), "gemini": ("GEMINI_", "GOOGLE_")}
+CLI_ENV_PREFIXES = {"claude": ("CLAUDE_", "ANTHROPIC_"), "codex": ("CODEX_", "OPENAI_"), "gemini": ("GEMINI_", "GOOGLE_"),
+                    "pi": ("PI_",)}
 # Version-manager / launcher variables. CLIs are commonly installed through mise/asdf/volta/nvm/pyenv/rbenv shims or
 # wrapper scripts that need their manager's env to resolve the real binary; stripping it makes the shim re-resolve
 # (or hang) instead of running. These carry no provider credentials, so every CLI seat keeps them.
