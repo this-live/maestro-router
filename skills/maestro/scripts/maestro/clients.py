@@ -479,7 +479,11 @@ def _cli_text(cli_id, stdout):
     if j.get("is_error"):
         raise ValueError(P.scrub(j.get("result") or "claude reported an error"))
     u = j.get("usage") or {}
-    return (j.get("result") or "").strip(), _usage(u.get("input_tokens") or 0, u.get("output_tokens") or 0) if u else None
+    # Claude reports most of the prompt as cache tokens on warm seats; counting only
+    # input_tokens understates the context a seat actually processed (and what a switch
+    # away from it would re-send), so prompt tokens include cache creation + reads.
+    prompt_tokens = (u.get("input_tokens") or 0) + (u.get("cache_creation_input_tokens") or 0) + (u.get("cache_read_input_tokens") or 0)
+    return (j.get("result") or "").strip(), _usage(prompt_tokens, u.get("output_tokens") or 0) if u else None
 
 
 def complete_cli(spec, model, request, stream, env, timeout):

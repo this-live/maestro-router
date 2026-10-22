@@ -43,6 +43,23 @@ no daemon, no network on the default path. It returns JSON that says who runs th
 5. After you check a delegated result, record how it went with the decision's `decision_id`: `python3 <skill-dir>/scripts/maestro outcome <decision_id> pass|partial|fail` (add `--tests P/T` when tests ran). Maestro learns from these, locally. If it failed, `escalate_to` names the seat to try next.
 6. Tell the user briefly what was routed where, e.g. "Refactor: strong subagent. Docstrings: local model on spark. Tests: done inline." Use each decision's `reason` if the user asks why.
 
+## Main session + workers (the token-efficient shape)
+
+Keep the main session on one warm seat for the whole task: it holds the plan and
+the state, and it never switches models, so its context and prompt cache stay
+intact. Spawn workers for subtasks instead of switching the main model:
+
+- `maestro-router delegate "<subtask>" [--state <file>]` classifies the subtask,
+  routes it (cheap/local first when adequate), runs it in a fresh context whose
+  whole input is a capsule (optional state slice + subtask + a reply-with-only-
+  the-result contract), and prints only the distilled result. The receipt on
+  stderr names the model, attempts and capsule size.
+- Workers are stateless and disposable: a failed worker is retried or escalated
+  (`outcome <decision_id> fail`) without touching the main context.
+- The main session's context grows by worker results, not worker transcripts.
+  That is the point: switching workers is cheap because a capsule is small;
+  switching the main session would re-send its entire history to a cold model.
+
 ## Notes
 
 - `confidence` under 0.5 already escalated the category by one; `fallback` lists other seats if the first fails (if a `local` run errors, use the first fallback).

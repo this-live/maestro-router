@@ -27,7 +27,7 @@ import sys
 import time
 import zlib
 
-VERSION = "3.3.0"
+VERSION = "3.4.0"
 TIERS = ("fast", "standard", "strong", "frontier")        # the cloud ladder, weakest first
 CELLS = ("local",) + TIERS                                # what a ladder cell can hold
 CATEGORIES = CELLS + ("specialist",)                      # what a decision's `category` can be
@@ -1829,6 +1829,82 @@ def cmd_route(a):
     return 0
 
 
+DELEGATE_CONTRACT = "Reply with only the result. No explanation, no preamble, no transcript."
+
+
+def delegate_target(cand):
+    """Map a route decision (or fallback entry) to a clients.complete(provider, model) pair."""
+    seat, model = cand.get("seat"), cand.get("model") or ""
+    if model.startswith("local:"):
+        prov, _, name = model.partition("/")
+        return prov, name
+    return {"claude-code": "claude", "codex": "codex", "gemini-cli": "gemini"}.get(seat, seat), model
+
+
+def build_capsule(text, state="", contract=DELEGATE_CONTRACT, max_chars=12000):
+    """The context a worker gets: an optional state slice plus the subtask, never the
+    main session's history. Oversized state is tail-truncated with a marker."""
+    parts = []
+    if state:
+        if len(state) > max_chars:
+            state = state[:max_chars] + "\n[maestro: state truncated to %d chars]" % max_chars
+        parts.append("Context:\n" + state)
+    parts.append("Task:\n" + text)
+    if contract:
+        parts.append(contract)
+    return "\n\n".join(parts)
+
+
+def cmd_delegate(a):
+    """Spawn one stateless worker: classify the subtask, route it, run it, return only
+    the distilled result. The main session keeps its state and its warm seat; the
+    worker's whole context is the capsule, so switching models costs almost nothing."""
+    text = " ".join(a.task)
+    if text.strip() == "-":
+        text = sys.stdin.read()
+    if not text.strip():
+        print("maestro: empty task", file=sys.stderr)
+        return 2
+    state = ""
+    if a.state:
+        try:
+            state = open(a.state).read()
+        except OSError as e:
+            print("maestro: cannot read --state file: %s" % e, file=sys.stderr)
+            return 2
+    d = route(text, harness=a.harness, log=True)
+    from . import clients as C
+    prompt = build_capsule(text, state, "" if a.no_contract else DELEGATE_CONTRACT, a.max_capsule_chars)
+    home = maestro_home()
+    attempts = []
+    for cand in [d] + (d.get("fallback") or []):
+        provider, model = delegate_target(cand)
+        if not provider or not model:
+            continue
+        if (cand.get("model") or "").startswith("local:"):
+            # Local endpoints are not in the API provider registry; run_model speaks to them directly.
+            try:
+                content = run_model(cand["model"], prompt, None, load_config(home),
+                                    _read_json(os.path.join(home, "inventory.json")))
+                status = 200
+            except RuntimeError as e:
+                attempts.append({"provider": provider, "model": model, "status": str(e)[:80]})
+                continue
+        else:
+            status, _hdrs, out = C.complete(provider, model, {"messages": [{"role": "user", "content": prompt}]})
+            content = ((out.get("choices") or [{}])[0].get("message") or {}).get("content") or "" if status == 200 else ""
+        attempts.append({"provider": provider, "model": model, "status": status})
+        if status == 200:
+            print(content)
+            print(json.dumps({"worker": {"decision_id": d.get("decision_id"), "job": d.get("job"),
+                                         "category": d.get("category"), "model": "%s/%s" % (provider, model),
+                                         "seat": cand.get("seat"), "attempts": attempts,
+                                         "capsule_chars": len(prompt)}}, indent=None), file=sys.stderr)
+            return 0
+    print("maestro: all worker candidates failed: %s" % json.dumps(attempts), file=sys.stderr)
+    return 1
+
+
 def cmd_detect(a):
     home = maestro_home()
     found = []
@@ -2144,6 +2220,13 @@ def build_parser():
     r.add_argument("--json", action="store_const", const="json", dest="format", help="JSON output (default)")
     r.add_argument("--explain", action="store_true", help="include classifier signals, the tier walk, S1's posterior and the options")
     r.set_defaults(fn=cmd_route)
+    w = sub.add_parser("delegate", help="spawn one stateless worker for a subtask and print only its result")
+    w.add_argument("task", nargs="+", help='subtask text, or "-" to read stdin')
+    w.add_argument("--state", help="file with the state slice the worker needs (never your full history)")
+    w.add_argument("--harness", help="harness the worker runs in (default: auto)")
+    w.add_argument("--no-contract", action="store_true", help="do not append the reply-with-only-the-result contract")
+    w.add_argument("--max-capsule-chars", type=int, default=12000, help="truncate --state beyond this many chars")
+    w.set_defaults(fn=cmd_delegate)
     d = sub.add_parser("detect", help="find CLIs, keys, local and network models, and hardware")
     d.add_argument("--catalog", action="store_true", help="enrich with models.dev pricing tiers")
     d.add_argument("--scan", action="store_true", help="also probe this machine's /24 subnet for Ollama (11434) and OpenAI-compatible (8000) servers")

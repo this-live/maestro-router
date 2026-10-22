@@ -587,6 +587,14 @@ class CliClient(Base):
         self.cli("gemini", {"messages": [{"role": "user", "content": "x"}]})
         self.assertNotEqual(os.path.realpath(read(self.log + ".cwd").strip()), os.path.realpath(os.getcwd()))
 
+    def test_cli_text_counts_cache_tokens_in_prompt_usage(self):
+        out = json.dumps({"result": "ok", "usage": {"input_tokens": 2, "cache_creation_input_tokens": 2889,
+                                                    "cache_read_input_tokens": 649, "output_tokens": 4}})
+        text, usage = C._cli_text("claude", out)
+        self.assertEqual(text, "ok")
+        self.assertEqual(usage["prompt_tokens"], 2 + 2889 + 649)
+        self.assertEqual(usage["completion_tokens"], 4)
+
     def test_cli_env_keeps_launcher_vars_but_drops_other_providers_keys(self):
         env = {"PATH": "/usr/bin", "HOME": "/home/x", "MISE_SHELL": "bash", "__MISE_DIFF": "x",
                "ASDF_DIR": "/opt/asdf", "NVM_DIR": "/home/x/.nvm", "OPENAI_API_KEY": "sk-secret",
