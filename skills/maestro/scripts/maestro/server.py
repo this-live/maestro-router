@@ -385,6 +385,7 @@ class App:
     def __init__(self, home, env, jev_fetch=None):
         self.home, self.env, self.jev_fetch = home, env, jev_fetch
         self.db, self.db_lock, self.cfg_lock = open_db(home), threading.Lock(), threading.Lock()
+        self.seat_locks = {}
         self.aff, self.aff_lock = {}, threading.Lock()
         self.lat = {}   # model id -> smoothed time to first byte, ms
         self.cache = (None, None)
@@ -663,6 +664,14 @@ class App:
             ranked = [pick] + [c for c in ranked if c is not pick]
         return ranked, j, "jev chose %s (confidence %.2f)" % (j.jev["choice"], j.jev["confidence"])
 
+    def seat_lock(self, key):
+        """One in-flight call per subscription CLI seat. Parallel calls to the same
+        CLI race its on-disk caches (Codex's models cache corrupts with
+        'EOF while parsing' under concurrency, measured in the provider matrix),
+        so serve serializes each seat; local/API upstreams stay parallel."""
+        with self.cfg_lock:
+            return self.seat_locks.setdefault(key, threading.Semaphore(1))
+
     # ---- upstream
     def spec_for(self, m, cfg):
         """What `clients.complete` takes as its provider: a registry id, or a spec dict for a local endpoint."""
@@ -693,10 +702,16 @@ class App:
         """One upstream call. Returns (status, headers, out, first) where `first` is the first stream item for a stream. Streams are
         pulled once here so a failure before the first byte is an ordinary failed attempt."""
         t0 = time.time()
+        lock = self.seat_lock(m["qp"]) if m.get("access") == "subscription" else None
+        if lock:
+            lock.acquire()
         try:
             status, hdrs, out = C.complete(self.spec_for(m, cfg), m["model"], body, stream=stream, env=self.env, home=self.home, cfg=cfg)
         except Exception as e:  # a bug in one client must not take the request down
             status, hdrs, out = 502, {}, C.error_body("%s while calling %s" % (e.__class__.__name__, m["id"]), code=502)
+        finally:
+            if lock:
+                lock.release()
         first = None
         if 200 <= status < 300 and stream and isinstance(out, C.Stream):
             try:

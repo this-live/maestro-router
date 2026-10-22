@@ -96,7 +96,7 @@
           <li><strong>Agent loops stay on one model</strong> until a new user message arrives</li>
         </ul>
         <div class="code-title">Install from GitHub (not on PyPI yet)</div>
-        <div class="code"><pre><span class="p">$ </span>pip install https://github.com/this-live/maestro-router/releases/download/v3.4.0/maestro_router-3.4.0-py3-none-any.whl
+        <div class="code"><pre><span class="p">$ </span>pip install https://github.com/this-live/maestro-router/releases/download/v3.4.1/maestro_router-3.4.1-py3-none-any.whl
 <span class="p">$ </span>maestro-router setup
 <span class="p">$ </span>maestro-router serve --open</pre></div>
         <p class="foot small">Clients connect to <code>http://127.0.0.1:4545/v1</code>; <code>maestro-router hermes --install</code> sets up Hermes Agent.</p>
@@ -360,11 +360,11 @@
       <li>
         <h3>Install</h3>
         <p>As a command, or as a skill for your coding agent (both use the same code):</p>
-        <div class="code"><pre><span class="p">$ </span>pip install https://github.com/this-live/maestro-router/releases/download/v3.4.0/maestro_router-3.4.0-py3-none-any.whl
+        <div class="code"><pre><span class="p">$ </span>pip install https://github.com/this-live/maestro-router/releases/download/v3.4.1/maestro_router-3.4.1-py3-none-any.whl
 <span class="c"># or from source</span>
-<span class="p">$ </span>pip install git+https://github.com/this-live/maestro-router@v3.4.0
+<span class="p">$ </span>pip install git+https://github.com/this-live/maestro-router@v3.4.1
 <span class="c"># or run it without installing</span>
-<span class="p">$ </span>uvx --from git+https://github.com/this-live/maestro-router@v3.4.0 maestro-router route "fix the failing test"
+<span class="p">$ </span>uvx --from git+https://github.com/this-live/maestro-router@v3.4.1 maestro-router route "fix the failing test"
 <span class="c"># or, as a skill</span>
 <span class="p">$ </span>npx skills add this-live/maestro-router</pre></div>
         <p class="small">The command is <code>maestro-router</code> because mobile.dev's Maestro (mobile UI testing) already uses <code>maestro</code>; add <code>alias maestro=maestro-router</code> to your shell profile if you want the short name. The skill install tracks the repository's default branch; the skills installer has no option to pin a release.</p>

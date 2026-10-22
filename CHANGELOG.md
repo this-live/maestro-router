@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.4.1 (2026-10-21)
+- **Fix: serve serializes subscription CLI seats.** The provider matrix (docs/MATRIX.md) found that parallel calls to the same CLI seat corrupt its on-disk caches — Codex fails with "EOF while parsing" reading its models cache under concurrency — causing 502s, cooldowns and silent reroutes. `attempt()` now holds a per-seat semaphore for subscription seats (one in-flight call per seat); local and API upstreams stay parallel.
+
 ## 3.4.0 (2026-10-21): main session + workers
 - **New command `maestro-router delegate "<subtask>" [--state FILE]`.** Spawns one stateless worker: the subtask is classified and routed, executed in a fresh context whose entire input is a capsule (optional state slice, truncated at `--max-capsule-chars` with a marker, plus the subtask and a reply-with-only-the-result contract), and only the distilled result is printed; a JSON receipt (decision, model, attempts, capsule size) goes to stderr. Fallback candidates are tried in order. This is the token-efficient shape the skill now documents: the main session stays on one warm seat holding state, workers switch freely because a capsule is small, and the main context grows by results, not transcripts. Unit-tested (`tests/test_delegate.py`).
 - **Fix: Claude seat token usage now counts cache tokens.** `_cli_text` counted only `input_tokens`; on warm seats most of the prompt is cache creation/reads, so reported usage (and every cost/switching decision built on it) understated the context actually processed by ~100x on short replies. Prompt tokens now include cache creation + cache read tokens.
